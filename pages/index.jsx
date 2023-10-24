@@ -12,7 +12,7 @@ export default function HomePage({ newProducts }) {
       <Banner />
       <DivCenter>
         <Title>Nowe produkty</Title>
-      <ProductContainer products={newProducts} />
+        <ProductContainer products={newProducts} />
       </DivCenter>
     </Layout>
   );

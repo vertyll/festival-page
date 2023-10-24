@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../organism/CartContext";
 
-const Box= styled(Link)`
+const Box = styled(Link)`
   background-color: white;
   padding: 20px;
   height: 150px;
@@ -17,7 +17,7 @@ const Box= styled(Link)`
   text-decoration: none;
   color: inherit;
   border-radius: 30px;
-  
+
   img {
     max-width: 100%;
     max-height: 150px;

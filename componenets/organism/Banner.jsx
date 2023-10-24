@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
 
 const Title = styled.h1`
   margin: 0;
-  font-family: 'Concert One', sans-serif;
+  font-family: "Concert One", sans-serif;
 `;
 
 const Description = styled.p`
@@ -26,9 +26,7 @@ export default function Banner() {
   return (
     <StyledDiv>
       <Title>Sunset Festival</Title>
-      <Description>
-        Tutaj będzie jakiś opis
-      </Description>
+      <Description>Tutaj będzie jakiś opis</Description>
       <Button usage="primary" size="l">
         <svg
           xmlns="http://www.w3.org/2000/svg"

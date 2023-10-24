@@ -13,7 +13,7 @@ const StyledButton = styled.button`
     height: 24px;
     margin-right: 5px;
   }
-  
+
   &:hover {
     filter: brightness(0.85);
   }
@@ -31,8 +31,8 @@ const StyledButton = styled.button`
     `}
 
   ${(props) =>
-      props.usage === "quantity" &&
-      css`
+    props.usage === "quantity" &&
+    css`
       background-color: var(--main-white-smoke-color);
     `}
 
@@ -51,17 +51,13 @@ const StyledButton = styled.button`
     `}
 
   ${(props) =>
-      props.size === "s" &&
-      css`
+    props.size === "s" &&
+    css`
       padding: 4px 14px;
       font-size: 1rem;
     `}
 `;
 
 export default function Button({ children, ...props }) {
-  return (
-    <StyledButton {...props}>
-      {children}
-    </StyledButton>
-  );
+  return <StyledButton {...props}>{children}</StyledButton>;
 }

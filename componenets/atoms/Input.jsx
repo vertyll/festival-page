@@ -6,7 +6,7 @@ const StyledInput = styled.input`
   margin-bottom: 10px;
   border: 1px solid var(--main-night-color);
   border-radius: 30px;
-  box-sizing:border-box;
+  box-sizing: border-box;
 
   &:hover {
     border: 1px solid var(--main-medium-slate-blue-color);
@@ -14,5 +14,5 @@ const StyledInput = styled.input`
 `;
 
 export default function Input(props) {
-    return <StyledInput {...props} />
+  return <StyledInput {...props} />;
 }

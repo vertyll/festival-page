@@ -18,18 +18,18 @@ const StyledLink = styled(Link)`
   }
 
   ${(props) =>
-    props.usage === "special" && css`
-        background-color: var(--main-medium-slate-blue-color);
-        color: var(--main-maize-color);
-        border: 0;
-        border-radius: 30px;
-        padding: 12px 24px;
-        transition: 0.5s;
-    
+    props.usage === "special" &&
+    css`
+      background-color: var(--main-medium-slate-blue-color);
+      color: var(--main-maize-color);
+      border: 0;
+      border-radius: 30px;
+      padding: 12px 24px;
+      transition: 0.5s;
+
       &:hover {
         filter: brightness(0.85);
       }
-    
     `}
 `;
 
@@ -40,7 +40,7 @@ const StyledNav = styled.nav`
 `;
 
 export default function Navbar() {
-    const {cartProducts} = useContext(CartContext)
+  const { cartProducts } = useContext(CartContext);
   return (
     <StyledDiv>
       <StyledNav>
