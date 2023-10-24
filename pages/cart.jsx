@@ -7,8 +7,8 @@ import Layout from "@/componenets/templates/Layout";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import Button from "@/componenets/atoms/Button";
 import Table from "@/componenets/atoms/Table";
-import Input from "@/componenets/atoms/Input";
 import Title from "@/componenets/atoms/Title";
+import FieldInput from "@/componenets/molecules/FieldInput";
 
 const Wrapper = styled.div`
   display: grid;
@@ -61,11 +61,6 @@ const QuantityLabel = styled.span`
     display: inline-block;
     padding: 0 10px;
   }
-`;
-
-const PersonalInfoHolder = styled.div`
-  display: flex;
-  gap: 5px;
 `;
 
 const CityHolder = styled.div`
@@ -222,14 +217,16 @@ export default function CartPage() {
             {!!cartProducts?.length && (
               <Box>
                 <Title>Informacje o płatności</Title>
-                <Input
+                <FieldInput
+                  labelText="Imie"
                   type="text"
-                  placeholder="Imię"
+                  placeholder="Imie"
                   value={name}
                   name="name"
                   onChange={(e) => setName(e.target.value)}
                 />
-                <Input
+                <FieldInput
+                  labelText="Email"
                   type="text"
                   placeholder="Adres email"
                   value={email}
@@ -237,14 +234,16 @@ export default function CartPage() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <CityHolder>
-                  <Input
+                  <FieldInput
+                    labelText="Miasto"
                     type="text"
                     placeholder="Miasto"
                     value={city}
                     name="city"
                     onChange={(e) => setCity(e.target.value)}
                   />
-                  <Input
+                  <FieldInput
+                    labelText="Kod pocztowy"
                     type="text"
                     placeholder="Kod pocztowy"
                     value={postalCode}
@@ -252,14 +251,16 @@ export default function CartPage() {
                     onChange={(e) => setPostalCode(e.target.value)}
                   />
                 </CityHolder>
-                <Input
+                <FieldInput
+                  labelText="Ulica"
                   type="text"
                   placeholder="Ulica"
                   value={streetAddress}
                   name="streetAddress"
                   onChange={(e) => setStreetAddress(e.target.value)}
                 />
-                <Input
+                <FieldInput
+                  labelText="Państwo"
                   type="text"
                   placeholder="Państwo"
                   value={country}
