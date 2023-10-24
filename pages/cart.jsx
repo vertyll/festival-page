@@ -77,7 +77,6 @@ export default function CartPage() {
     const {cartProducts,addProduct,removeProduct,clearCart} = useContext(CartContext);
     const [products,setProducts] = useState([]);
     const [name,setName] = useState('');
-    const [surname,setSurname] = useState('');
     const [email,setEmail] = useState('');
     const [city,setCity] = useState('');
     const [postalCode,setPostalCode] = useState('');
@@ -111,7 +110,7 @@ export default function CartPage() {
     }
     async function goToPayment() {
         const response = await axios.post('/api/checkout', {
-            name, surname, email,city,postalCode,streetAddress,country,
+            name, email,city,postalCode,streetAddress,country,
             cartProducts,
         });
         if (response.data.url) {
@@ -199,18 +198,11 @@ export default function CartPage() {
                     {!!cartProducts?.length && (
                         <Box>
                             <Title>Informacje o płatności</Title>
-                            <PersonalInfoHolder>
                             <Input type="text"
                                    placeholder="Imię"
                                    value={name}
                                    name="name"
                                    onChange={e => setName(e.target.value)} />
-                            <Input type="text"
-                                   placeholder="Nazwisko"
-                                   value={surname}
-                                   name="surname"
-                                   onChange={e => setSurname(e.target.value)} />
-                            </PersonalInfoHolder>
                             <Input type="text"
                                    placeholder="Adres email"
                                    value={email}
