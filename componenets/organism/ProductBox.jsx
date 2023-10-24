@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../organism/CartContext";
 
-const Box = styled(Link)`
+const Box= styled(Link)`
   background-color: white;
   padding: 20px;
   height: 150px;
@@ -17,6 +17,7 @@ const Box = styled(Link)`
   text-decoration: none;
   color: inherit;
   border-radius: 30px;
+  
   img {
     max-width: 100%;
     max-height: 150px;
@@ -30,7 +31,7 @@ const Name = styled(Link)`
   color: inherit;
 `;
 
-const ProductInfoBox = styled.div`
+const ProductInfo = styled.div`
   margin-top: 10px;
 `;
 
@@ -38,25 +39,25 @@ const Price = styled.p``;
 
 const Wrapper = styled.div``;
 
-export default function ProductBox({ _id, name, images, description, price }) {
-  const url = "/product/" + _id;
+export default function ProductBox({ _id, name, images, price }) {
   const { addProduct } = useContext(CartContext);
+  const url = "/product/" + _id;
 
   return (
     <Wrapper>
       <Box href={url}>
         <img src={images[0]} alt="zdjęcie produktu"></img>
       </Box>
-      <ProductInfoBox>
+      <ProductInfo>
         <Name href={url}>{name}</Name>
         <Price>
           Cena: <b>{price}</b> zł
         </Price>
-        <Button onClick={() => addProduct(_id)} size="m" special="primary">
+        <Button onClick={() => addProduct(_id)} size="m" usage="primary">
           <IconCart />
           Dodaj do koszyka
         </Button>
-      </ProductInfoBox>
+      </ProductInfo>
     </Wrapper>
   );
 }

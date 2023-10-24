@@ -27,10 +27,9 @@ export default function Banner() {
     <StyledDiv>
       <Title>Sunset Festival</Title>
       <Description>
-        Tutaj jakiś teskt jakiś teskt jakiś teskt jakiś teskt jakiś teskt jakiś
-        teskt jakiś teskt jakiś teskt jakiś teskt jakiś teskt
+        Tutaj będzie jakiś opis
       </Description>
-      <Button special="primary" size="l">
+      <Button usage="primary" size="l">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

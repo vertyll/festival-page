@@ -1,14 +1,19 @@
-import NewProducts from "@/componenets/organism/NewProducts";
+import ProductContainer from "@/componenets/organism/ProductContainer";
 import Banner from "@/componenets/organism/Banner";
 import Layout from "@/componenets/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
+import DivCenter from "@/componenets/atoms/DivCenter";
+import Title from "@/componenets/atoms/Title";
 
 export default function HomePage({ newProducts }) {
   return (
     <Layout>
       <Banner />
-      <NewProducts products={newProducts} />
+      <DivCenter>
+        <Title>Nowe produkty</Title>
+      <ProductContainer products={newProducts} />
+      </DivCenter>
     </Layout>
   );
 }

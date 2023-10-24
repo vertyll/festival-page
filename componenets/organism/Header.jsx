@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   padding: 20px 0;
 `;
 
-const SeccondaryWrapper = styled.div`
+const SecondaryWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -30,9 +30,9 @@ export default function Header() {
     <StyledHeader>
       <Wrapper>
         <Logo href={"/"}>SUNSET FESTIVAL</Logo>
-        <SeccondaryWrapper>
+        <SecondaryWrapper>
           <Navbar />
-        </SeccondaryWrapper>
+        </SecondaryWrapper>
       </Wrapper>
     </StyledHeader>
   );

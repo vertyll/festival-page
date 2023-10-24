@@ -5,16 +5,13 @@ import ProductBox from "./ProductBox";
 const ProductGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 30px;
-  padding-top: 30px;
+  gap: 50px;
+  padding-top: 50px;
 `;
 
-const Title = styled.h2``;
-
-export default function NewProducts({ products }) {
+export default function ProductContainer({ products }) {
   return (
     <DivCenter>
-      <Title>Najnowsze produkty</Title>
       <ProductGrid>
         {products?.length > 0 &&
           products.map((product) => (

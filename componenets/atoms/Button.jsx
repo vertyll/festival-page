@@ -8,26 +8,32 @@ const StyledButton = styled.button`
   transition: 0.5s;
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
   svg {
     height: 24px;
     margin-right: 5px;
   }
-
-  cursor: pointer;
+  
   &:hover {
     filter: brightness(0.85);
   }
 
   ${(props) =>
-    props.special === "primary" &&
+    props.usage === "primary" &&
     css`
       background-color: var(--main-maize-color);
     `}
 
   ${(props) =>
-    props.special === "danger" &&
+    props.usage === "danger" &&
     css`
-      background-color: #ff0000;
+      background-color: var(--main-danger-color);
+    `}
+
+  ${(props) =>
+      props.usage === "quantity" &&
+      css`
+      background-color: var(--main-white-smoke-color);
     `}
 
   ${(props) =>
@@ -43,11 +49,18 @@ const StyledButton = styled.button`
       padding: 10px 25px;
       font-size: 1rem;
     `}
+
+  ${(props) =>
+      props.size === "s" &&
+      css`
+      padding: 4px 14px;
+      font-size: 1rem;
+    `}
 `;
 
-export default function Button({ onClick, children, ...props }) {
+export default function Button({ children, ...props }) {
   return (
-    <StyledButton onClick={onClick} {...props}>
+    <StyledButton {...props}>
       {children}
     </StyledButton>
   );

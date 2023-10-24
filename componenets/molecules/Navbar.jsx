@@ -18,18 +18,18 @@ const StyledLink = styled(Link)`
   }
 
   ${(props) =>
-    props.special &&
-    css`
-      transition: 0.5s;
+    props.usage === "special" && css`
+        background-color: var(--main-medium-slate-blue-color);
+        color: var(--main-maize-color);
+        border: 0;
+        border-radius: 30px;
+        padding: 12px 24px;
+        transition: 0.5s;
+    
       &:hover {
         filter: brightness(0.85);
       }
-      background-color: white;
-      color: black;
-      border: 0;
-      border-radius: 30px;
-      padding: 12px 24px;
-      transition: 0.5s;
+    
     `}
 `;
 
@@ -49,10 +49,10 @@ export default function Navbar() {
         <StyledLink href={"/categories"}>Kategorie</StyledLink>
         <StyledLink href={"/contact"}>Kontakt</StyledLink>
         <StyledLink href={"/map"}>Mapa</StyledLink>
-        <StyledLink special="true" href={"/account"}>
+        <StyledLink usage="special" href={"/account"}>
           Konto
         </StyledLink>
-        <StyledLink special="true" href={"/cart"}>
+        <StyledLink usage="special" href={"/cart"}>
           Koszyk ({cartProducts.length})
         </StyledLink>
       </StyledNav>
