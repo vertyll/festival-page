@@ -9,6 +9,7 @@ export function CartContextProvider({ children }) {
     if (cartProducts?.length > 0) {
       ls?.setItem("cart", JSON.stringify(cartProducts));
     }
+    ls.clear()
   }, [cartProducts, ls]);
   useEffect(() => {
     if (ls && ls.getItem("cart")) {
@@ -16,8 +17,14 @@ export function CartContextProvider({ children }) {
     }
   }, [ls]);
 
-  function addProduct(productId) {
-    setCartProducts((prev) => [...prev, productId]);
+  function addProduct(productId, properties = {}) {
+    setCartProducts((prev) => [
+      ...prev,
+      {
+        productId,
+        properties, // Zapisujemy właściwości produktu razem z jego identyfikatorem.
+      },
+    ]);
   }
 
   function removeProduct(productId) {
@@ -32,6 +39,7 @@ export function CartContextProvider({ children }) {
 
   function clearCart() {
     setCartProducts([]);
+    ls.clear();
   }
 
   return (

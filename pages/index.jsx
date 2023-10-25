@@ -5,28 +5,42 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import Title from "@/componenets/atoms/Title";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { WishedProduct } from "@/models/WishedProduct";
+import { getServerSession } from "next-auth";
 
-export default function HomePage({ newProducts }) {
+export default function HomePage({ newProducts, wishedNewProducts }) {
   return (
     <Layout>
       <Banner />
       <DivCenter>
         <Title>Nowe produkty</Title>
-        <ProductContainer products={newProducts} />
+        <ProductContainer
+          products={newProducts}
+          wishedProducts={wishedNewProducts}
+        />
       </DivCenter>
     </Layout>
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
   await mongooseConnect();
   const newProducts = await Product.find({}, null, {
     sort: { _id: -1 },
     limit: 8,
   });
+  const session = await getServerSession(ctx.req, ctx.res, authOptions);
+  const wishedNewProducts = session?.user
+    ? await WishedProduct.find({
+        userEmail: session.user.email,
+        product: newProducts.map((p) => p._id.toString()),
+      })
+    : [];
   return {
     props: {
       newProducts: JSON.parse(JSON.stringify(newProducts)),
+      wishedNewProducts: wishedNewProducts.map((i) => i.product.toString()),
     },
   };
 }

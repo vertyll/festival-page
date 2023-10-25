@@ -9,15 +9,19 @@ import Button from "@/componenets/atoms/Button";
 import Table from "@/componenets/atoms/Table";
 import Title from "@/componenets/atoms/Title";
 import FieldInput from "@/componenets/molecules/FieldInput";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 50px;
   margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -69,6 +73,7 @@ const CityHolder = styled.div`
 `;
 
 export default function CartPage() {
+  const { data: session } = useSession();
   const { cartProducts, addProduct, removeProduct, clearCart } =
     useContext(CartContext);
   const [products, setProducts] = useState([]);
@@ -79,6 +84,7 @@ export default function CartPage() {
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post("/api/cart", { ids: cartProducts }).then((response) => {
@@ -97,12 +103,41 @@ export default function CartPage() {
       clearCart();
     }
   }, [clearCart]);
+  useEffect(() => {
+    if (!session) {
+      return;
+    }
+    axios
+      .get("/api/address")
+      .then((response) => {
+        if (response.data) {
+          setName(response.data.name || "");
+          setEmail(response.data.email || "");
+          setCity(response.data.city || "");
+          setPostalCode(response.data.postalCode || "");
+          setStreetAddress(response.data.streetAddress || "");
+          setCountry(response.data.country || "");
+        } else {
+          console.error("No data returned from /api/address");
+        }
+      })
+      .catch((error) => {
+        console.error("An error occurred while fetching address data:", error);
+      });
+  }, [session]);
+
   function quanitityAdd(id) {
     addProduct(id);
   }
+
   function quantitySub(id) {
     removeProduct(id);
   }
+
+  function goToShop() {
+    router.push("/products");
+  }
+
   async function goToPayment() {
     const response = await axios.post("/api/checkout", {
       name,
@@ -117,6 +152,7 @@ export default function CartPage() {
       window.location = response.data.url;
     }
   }
+
   let total = 0;
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
@@ -153,6 +189,9 @@ export default function CartPage() {
                 <div>
                   <h1>Twój koszyk jest pusty</h1>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
+                  <Button usage="primary" size="m" onClick={goToShop}>
+                    Wróć do sklepu
+                  </Button>
                 </div>
               )}
               {products?.length > 0 && (
@@ -172,7 +211,7 @@ export default function CartPage() {
                           <ProductImage>
                             <img
                               src={product.images[0]}
-                              alt="zdjęcie produktu"
+                              alt=""
                             />
                           </ProductImage>
                         </td>

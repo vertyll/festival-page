@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const StyledHeader = styled.header`
   background-color: #222;
+  border-radius: 0 0 30px 30px;
 `;
 
 const Logo = styled(Link)`
