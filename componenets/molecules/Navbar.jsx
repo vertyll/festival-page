@@ -44,11 +44,7 @@ export default function Navbar() {
   return (
     <StyledDiv>
       <StyledNav>
-        <StyledLink href={"/lineup"}>Line up</StyledLink>
         <StyledLink href={"/products"}>Sklep</StyledLink>
-        <StyledLink href={"/categories"}>Kategorie</StyledLink>
-        <StyledLink href={"/contact"}>Kontakt</StyledLink>
-        <StyledLink href={"/map"}>Mapa</StyledLink>
         <StyledLink usage="special" href={"/account"}>
           Konto
         </StyledLink>

@@ -9,6 +9,7 @@ export function CartContextProvider({ children }) {
     if (cartProducts?.length > 0) {
       ls?.setItem("cart", JSON.stringify(cartProducts));
     }
+    // ls.clear();
   }, [cartProducts, ls]);
   useEffect(() => {
     if (ls && ls.getItem("cart")) {
@@ -64,8 +65,9 @@ export function CartContextProvider({ children }) {
   }
 
   function clearCart() {
-    setCartProducts([]);
-    ls.clear();
+    setCartProducts([], () => {
+      ls?.removeItem("cart"); // to będzie wywoływane po zaktualizowaniu stanu
+    });
   }
 
   return (
