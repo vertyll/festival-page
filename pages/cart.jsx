@@ -83,6 +83,7 @@ export default function CartPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [shippingPrice, setShippingPrice] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -100,8 +101,11 @@ export default function CartPage() {
     }
     if (window?.location.href.includes("success")) {
       setIsSuccess(true);
-      clearCart();
     }
+
+    axios.get("/api/settings?name=shippingPrice").then((response) => {
+      setShippingPrice(response.data?.value);
+    });
   }, [clearCart]);
   useEffect(() => {
     if (!session) {
@@ -242,14 +246,18 @@ export default function CartPage() {
                             </Button>
                           </td>
                           <td>
-                            {(cartProduct.quantity || 1) * product.price} zł zł
+                            {(cartProduct.quantity || 1) * product.price} zł
                           </td>
                         </tr>
                       );
                     })}
                     <tr>
+                      <td colSpan={3}>Dostawa:</td>
+                      <td>{shippingPrice} zł</td>
+                    </tr>
+                    <tr>
                       <td colSpan={3}>Razem:</td>
-                      <td>{totalPrice} zł</td>
+                      <td>{Number(totalPrice) + Number(shippingPrice)} zł</td>
                     </tr>
                   </tbody>
                 </Table>

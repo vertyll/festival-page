@@ -10,7 +10,6 @@ import ProductBox from "@/componenets/organism/ProductBox";
 import Tabs from "@/componenets/organism/Tabs";
 import SingleOrder from "@/componenets/organism/SingleOrder";
 import Spinner from "@/componenets/atoms/Spinner";
-import SingleBox from "@/componenets/atoms/SingleBox";
 import FieldInput from "@/componenets/molecules/FieldInput";
 
 const ColsWrapper = styled.div`
@@ -45,7 +44,12 @@ const StyledOrderDiv = styled.div`
   background-color: var(--main-white-smoke-color);
   padding: 20px;
   border-radius: 30px;
+`;
 
+const InfoBox = styled.div`
+  background-color: var(--light-color);
+  border-radius: 10px;
+  padding: 30px;
 `;
 
 export default function AccountPage() {
@@ -119,7 +123,7 @@ export default function AccountPage() {
           <ColsWrapper>
             <div>
               <RevealWrapper delay={0}>
-                <SingleBox>
+                <InfoBox>
                   <Tabs
                     tabs={["Zamówienia", "Ulubione"]}
                     active={activeTab}
@@ -178,12 +182,12 @@ export default function AccountPage() {
                       )}
                     </>
                   )}
-                </SingleBox>
+                </InfoBox>
               </RevealWrapper>
             </div>
             <div>
               <RevealWrapper delay={100}>
-                <SingleBox>
+                <InfoBox>
                   <h2>{session ? "Dane konta" : "Logowanie"}</h2>
                   {!addressLoaded && <Spinner fullWidth={true} />}
                   {addressLoaded && session && (
@@ -254,7 +258,7 @@ export default function AccountPage() {
                       Zaloguj się za pomocą Google
                     </Button>
                   )}
-                </SingleBox>
+                </InfoBox>
               </RevealWrapper>
             </div>
           </ColsWrapper>

@@ -3,6 +3,7 @@ import { Product } from "@/models/Product";
 import { Order } from "@/models/Order";
 import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import { Setting } from "@/models/Setting";
 const stripe = require("stripe")(process.env.STRIPE_SK);
 
 export default async function handler(req, res) {
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
     const productInfo = productsInfos.find(
       (p) => p._id.toString() === productDetail.productId
     );
-  
+
     if (productInfo) {
       let description = "Brak właściwości";
       if (productDetail.selectedProperties) {
@@ -42,7 +43,7 @@ export default async function handler(req, res) {
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");
       }
-  
+
       // Tutaj używamy 'quantity' z przekazanego obiektu 'productDetail'.
       line_items.push({
         quantity: productDetail.quantity || 1, // jeśli 'quantity' nie jest zdefiniowane, zakładamy, że wynosi 1
@@ -73,6 +74,8 @@ export default async function handler(req, res) {
     userEmail: session?.user?.email,
   });
 
+  const shippingPriceSetting = await Setting.findOne({ name: "shippingPrice" });
+
   // Tworzenie sesji Stripe Checkout.
   const stripeSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -82,6 +85,16 @@ export default async function handler(req, res) {
     success_url: `${process.env.PUBLIC_URL}/cart?success=1`,
     cancel_url: `${process.env.PUBLIC_URL}/cart?canceled=1`,
     metadata: { orderId: orderDoc._id.toString() },
+    allow_promotion_codes: true,
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          display_name: 'Cena dostawy',
+          type: "fixed_amount",
+          fixed_amount: { amount: Number(shippingPriceSetting.value) * 100, currency: "PLN" },
+        },
+      },
+    ],
   });
 
   // Odpowiedź serwera z adresem URL do przejścia na stronę płatności Stripe.
