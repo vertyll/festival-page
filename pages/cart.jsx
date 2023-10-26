@@ -77,6 +77,7 @@ export default function CartPage() {
   const { cartProducts, addProduct, removeProduct, clearCart } =
     useContext(CartContext);
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
@@ -125,13 +126,23 @@ export default function CartPage() {
         console.error("An error occurred while fetching address data:", error);
       });
   }, [session]);
+  useEffect(() => {
+    let newTotal = 0;
+    for (const product of products) {
+      const cartItem = cartProducts.find(
+        (item) => item.productId === product._id
+      );
+      newTotal += (cartItem?.quantity || 1) * product.price;
+    }
+    setTotalPrice(newTotal);
+  }, [cartProducts, products]);
 
-  function quanitityAdd(id) {
-    addProduct(id);
+  function quanitityAdd(product) {
+    addProduct(product.productId, product.selectedProperties, 1);
   }
 
-  function quantitySub(id) {
-    removeProduct(id);
+  function quantitySub(product) {
+    removeProduct(product.productId, product.selectedProperties, -1);
   }
 
   function goToShop() {
@@ -151,12 +162,6 @@ export default function CartPage() {
     if (response.data.url) {
       window.location = response.data.url;
     }
-  }
-
-  let total = 0;
-  for (const productId of cartProducts) {
-    const price = products.find((p) => p._id === productId)?.price || 0;
-    total += price;
   }
 
   if (isSuccess) {
@@ -205,49 +210,47 @@ export default function CartPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => (
-                      <tr key={product._id}>
-                        <td>
-                          <ProductImage>
-                            <img
-                              src={product.images[0]}
-                              alt=""
-                            />
-                          </ProductImage>
-                        </td>
-                        <td>{product.name}</td>
-                        <td>
-                          <Button
-                            size="s"
-                            usage="quantity"
-                            onClick={() => quantitySub(product._id)}
-                          >
-                            -
-                          </Button>
-                          <QuantityLabel>
-                            {
-                              cartProducts.filter((id) => id === product._id)
-                                .length
-                            }
-                          </QuantityLabel>
-                          <Button
-                            size="s"
-                            usage="quantity"
-                            onClick={() => quanitityAdd(product._id)}
-                          >
-                            +
-                          </Button>
-                        </td>
-                        <td>
-                          {cartProducts.filter((id) => id === product._id)
-                            .length * product.price}{" "}
-                          zł
-                        </td>
-                      </tr>
-                    ))}
+                    {products.map((product) => {
+                      const cartProduct =
+                        cartProducts.find(
+                          (item) => item.productId === product._id
+                        ) || {};
+                      return (
+                        <tr key={product._id}>
+                          <td>
+                            <ProductImage>
+                              <img src={product.images[0]} alt="" />
+                            </ProductImage>
+                          </td>
+                          <td>{product.name}</td>
+                          <td>
+                            <Button
+                              size="s"
+                              usage="quantity"
+                              onClick={() => quantitySub(cartProduct)}
+                            >
+                              -
+                            </Button>
+                            <QuantityLabel>
+                              {cartProduct.quantity || 1}{" "}
+                            </QuantityLabel>
+                            <Button
+                              size="s"
+                              usage="quantity"
+                              onClick={() => quanitityAdd(cartProduct)}
+                            >
+                              +
+                            </Button>
+                          </td>
+                          <td>
+                            {(cartProduct.quantity || 1) * product.price} zł zł
+                          </td>
+                        </tr>
+                      );
+                    })}
                     <tr>
                       <td colSpan={3}>Razem:</td>
-                      <td>{total} zł</td>
+                      <td>{totalPrice} zł</td>
                     </tr>
                   </tbody>
                 </Table>

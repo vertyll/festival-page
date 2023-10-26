@@ -34,27 +34,25 @@ export default async function handler(req, res) {
     const productInfo = productsInfos.find(
       (p) => p._id.toString() === productDetail.productId
     );
-
+  
     if (productInfo) {
-      // Tworzenie opisu z wybranych właściwości, jeśli istnieją.
       let description = "Brak właściwości";
-      if (productDetail.selectedProperty) {
-        description = Object.entries(productDetail.selectedProperty)
+      if (productDetail.selectedProperties) {
+        description = Object.entries(productDetail.selectedProperties)
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");
       }
-
-      // Dodaj produkt do listy elementów zamówienia.
+  
+      // Tutaj używamy 'quantity' z przekazanego obiektu 'productDetail'.
       line_items.push({
-        quantity: 1, // zakładając, że każdy wpis w cartProducts to jeden produkt.
+        quantity: productDetail.quantity || 1, // jeśli 'quantity' nie jest zdefiniowane, zakładamy, że wynosi 1
         price_data: {
           currency: "PLN",
           product_data: {
             name: productInfo.name,
-            // Dodajemy opis tylko jeśli istnieje (czyli produkt ma dodatkowe właściwości).
             ...(description && { description }),
           },
-          unit_amount: productInfo.price * 100, // Cena za jednostkę.
+          unit_amount: productInfo.price * 100, // Cena w groszach, ponieważ Stripe oczekuje wartości w najmniejszej jednostce waluty.
         },
       });
     }
