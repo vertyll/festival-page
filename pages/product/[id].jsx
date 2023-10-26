@@ -15,6 +15,7 @@ import { Category } from "@/models/Category";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  width: 600px;
   @media screen and (min-width: 768px) {
     grid-template-columns: 0.8fr 1.2fr;
   }
@@ -51,7 +52,7 @@ const PropertyButton = styled.button`
 
 const StyledDescriptionDiv = styled.div`
   display: flex;
-  max-width: 550px;
+  width: 550px;
   border-radius: 30px;
   background-color: var(--light-color);
   padding: 30px;
