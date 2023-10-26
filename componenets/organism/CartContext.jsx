@@ -4,18 +4,23 @@ export const CartContext = createContext({});
 
 export function CartContextProvider({ children }) {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); // Początkowy stan to pusta tablica
   useEffect(() => {
-    if (cartProducts?.length > 0) {
-      ls?.setItem("cart", JSON.stringify(cartProducts));
+    const cartItems = localStorage.getItem("cart");
+
+    if (cartItems) {
+      // Jeśli znaleziono elementy w koszyku, ustaw stan
+      setCartProducts(JSON.parse(cartItems));
     }
-    // ls.clear();
-  }, [cartProducts, ls]);
+  }, []); // Pusta tablica zależności oznacza, że ten efekt działa raz, podobnie jak componentDidMount
   useEffect(() => {
-    if (ls && ls.getItem("cart")) {
-      setCartProducts(JSON.parse(ls.getItem("cart")));
+    // Aktualizacja localStorage gdy zmienia się cartProducts
+    if (cartProducts.length > 0) {
+      localStorage.setItem("cart", JSON.stringify(cartProducts));
+    } else {
+      localStorage.removeItem("cart");
     }
-  }, [ls]);
+  }, [cartProducts]);
 
   function addProduct(productId, selectedProperties) {
     // Sprawdzenie, czy produkt już istnieje w koszyku
@@ -65,9 +70,7 @@ export function CartContextProvider({ children }) {
   }
 
   function clearCart() {
-    setCartProducts([], () => {
-      ls?.removeItem("cart"); // to będzie wywoływane po zaktualizowaniu stanu
-    });
+    setCartProducts([]);
   }
 
   return (
