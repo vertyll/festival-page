@@ -8,8 +8,10 @@ const StyledDiv = styled.div`
   justify-content: center;
   margin: 0 auto;
   padding: 20px 20px;
-  background-color: gray;
+  background-color: var(--gray-color);
   height: 500px;
+  margin-top: 50px;
+  border-radius: 30px;
 `;
 
 const Title = styled.h1`
@@ -18,7 +20,7 @@ const Title = styled.h1`
 `;
 
 const Description = styled.p`
-  color: #fff;
+  color: var(--light-text-color);
   font-size: 1rem;
 `;
 

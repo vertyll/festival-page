@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: #fff;
+  background-color: var(--light-color);
   border-radius: 30px;
   padding: 30px;
 `;

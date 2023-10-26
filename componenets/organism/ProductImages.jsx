@@ -16,16 +16,16 @@ const ImageButtons = styled.div`
   margin-top: 10px;
 `;
 const ImageButton = styled.div`
-  border: 2px solid #ccc;
+  border: 2px solid var(--border-color-for-image);
   ${(props) =>
     props.active
       ? `
-      border-color: #ccc;
+      border-color: var(--border-color-for-image);
     `
       : `
       border-color: transparent;
     `}
-  height: 40px;
+  height: 35px;
   padding: 2px;
   cursor: pointer;
   border-radius: 5px;

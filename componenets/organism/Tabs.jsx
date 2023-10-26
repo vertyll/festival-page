@@ -12,10 +12,10 @@ const StyledTab = styled.span`
     props.active
       ? `
     color:black;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--dark-text-color);
   `
       : `
-    color:#999;
+    color: var(--gray-color);
   `}
 `;
 

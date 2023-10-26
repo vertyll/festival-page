@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@300;400;500;700&display=swap");
 
 :root {
   --main-maize-color: #ffef5c;
@@ -9,4 +9,11 @@
   --main-plum-color: #fda8ea;
   --main-giants-orange-color: #ff5c2f;
   --main-danger-color: #ff2727;
+  --light-text-color: #fff;
+  --dark-text-color: #000;
+  --border-color-for-image: #ccc;
+  --gray-color: #858585;
+  --border-color-for-under: #cfcfcf;
+  --border-color-light: #cfcfcf;
+  --light-color: #fff;
 }

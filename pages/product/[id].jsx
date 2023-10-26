@@ -30,10 +30,41 @@ const Price = styled.span`
   font-size: 1.4rem;
 `;
 
+const PropertyButton = styled.button`
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: ${(props) =>
+    props.isSelected
+      ? "var(--main-deep-pink-color)"
+      : "var(--main-plum-color)"};
+  color: ${(props) => (props.isSelected ? "var(--light-text-color)" : "var(--dark-text-color)")};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--main-giants-orange-color);
+    color: var(--light-text-color);
+  }
+`;
+
+const StyledDescriptionDiv = styled.div`
+  display: flex;
+  max-width: 550px;
+  border-radius: 30px;
+  background-color: var(--light-color);
+  padding: 30px;
+`;
+
 export default function ProductPage({ product, categoryPath }) {
   const { addProduct } = useContext(CartContext);
   // W komponencie ProductPage, dodaj następujący stan:
   const [selectedProperty, setSelectedProperty] = useState({});
+
+  const allPropertiesSelected = product.properties.every((prop) =>
+    selectedProperty.hasOwnProperty(prop.name)
+  );
 
   const handlePropertySelection = (propertyName, option) => {
     setSelectedProperty((prev) => ({
@@ -61,16 +92,13 @@ export default function ProductPage({ product, categoryPath }) {
           <div key={index}>
             <strong>{prop.name}: </strong>
             {options.map((option, i) => (
-              <button
+              <PropertyButton
                 key={i}
-                style={{
-                  backgroundColor:
-                    selectedProperty[prop.name] === option ? "#add8e6" : "", // zmienia kolor tła, gdy opcja jest zaznaczona
-                }}
+                isSelected={selectedProperty[prop.name] === option}
                 onClick={() => handlePropertySelection(prop.name, option)}
               >
                 {option}
-              </button>
+              </PropertyButton>
             ))}
           </div>
         );
@@ -90,21 +118,31 @@ export default function ProductPage({ product, categoryPath }) {
             <Row>
               <Title>{product.name}</Title>
               <div>Kategoria: {renderCategoryPath()}</div>
-              <Price>Cena: {product.price} zł</Price>
               <div>
                 Właściwości:
                 <div>{renderCategoryProperties()}</div>{" "}
               </div>
+              <Price>Cena: {product.price} zł</Price>
               <Button
-                onClick={() => addProduct(product._id, selectedProperty)}
+                onClick={() => {
+                  if (allPropertiesSelected) {
+                    addProduct(product._id, selectedProperty);
+                  } else {
+                    alert("Wybierz wszystkie opcje przed dodaniem do koszyka.");
+                  }
+                }}
                 size="m"
                 usage="primary"
+                disabled={!allPropertiesSelected} // opcjonalnie, można dodać styl dla wyłączonego stanu w CSS
               >
                 <IconCart />
                 Dodaj do koszyka
               </Button>
             </Row>
           </ColWrapper>
+          <StyledDescriptionDiv>
+            {product.description}
+          </StyledDescriptionDiv>
         </DivCenter>
       </Layout>
     </>
