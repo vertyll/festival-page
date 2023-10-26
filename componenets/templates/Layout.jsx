@@ -3,6 +3,7 @@ import Footer from "../organism/Footer";
 import Header from "../organism/Header";
 
 const StyledDiv = styled.div`
+  min-height: 100vh;
   margin-top: 50px;
   margin-bottom: 50px;
 `;
