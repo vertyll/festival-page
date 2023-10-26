@@ -4,6 +4,9 @@ const SingleBox = styled.div`
   background-color: var(--light-color);
   border-radius: 10px;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default SingleBox;
