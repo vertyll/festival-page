@@ -6,11 +6,9 @@ const StyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   padding: 20px 20px;
   background-color: var(--gray-color);
   height: 500px;
-  margin-top: 50px;
   border-radius: 30px;
 `;
 

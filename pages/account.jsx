@@ -17,7 +17,6 @@ const ColsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 50px;
-  margin: 50px 0;
   p {
     margin: 5px;
   }

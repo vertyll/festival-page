@@ -1,10 +1,18 @@
+import styled from "styled-components";
+import Footer from "../organism/Footer";
 import Header from "../organism/Header";
+
+const StyledDiv = styled.div`
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
 
 export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <div>{children}</div>
+      <StyledDiv>{children}</StyledDiv>
+      <Footer />
     </>
   );
 }

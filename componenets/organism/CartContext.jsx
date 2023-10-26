@@ -3,7 +3,6 @@ const { createContext, useState, useEffect } = require("react");
 export const CartContext = createContext({});
 
 export function CartContextProvider({ children }) {
-  const ls = typeof window !== "undefined" ? window.localStorage : null;
   const [cartProducts, setCartProducts] = useState([]); // Początkowy stan to pusta tablica
   useEffect(() => {
     const cartItems = localStorage.getItem("cart");

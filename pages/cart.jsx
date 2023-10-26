@@ -16,7 +16,6 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 50px;
-  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
 
