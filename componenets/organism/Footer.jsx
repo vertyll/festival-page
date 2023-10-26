@@ -2,8 +2,8 @@ import styled from "styled-components";
 import FooterLinks from "../molecules/FooterLinks";
 
 const StyledFooter = styled.footer`
-  background-color: #222;
-  color: #fff;
+  background-color: var(--nav-color);
+  color: var(--light-text-color);
   margin: 0 auto;
   padding: 0 20px;
   height: 200px;

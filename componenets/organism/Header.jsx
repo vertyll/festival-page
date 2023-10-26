@@ -3,12 +3,12 @@ import Navbar from "../molecules/Navbar";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
-  background-color: #222;
+  background-color: var(--nav-color);
   border-radius: 0 0 30px 30px;
 `;
 
 const Logo = styled(Link)`
-  color: #fff;
+  color: var(--light-text-color);
   text-decoration: none;
   display: flex;
   align-items: center;
