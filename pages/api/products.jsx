@@ -4,7 +4,7 @@ import { Product } from "@/models/Product";
 export default async function handle(req, res) {
   await mongooseConnect();
 
-  const { categories, sort, phrase, ...filters } = req.query;
+  const { categories, sort, term, ...filters } = req.query;
   let [sortField, sortOrder] = (sort || "_id-desc").split("-");
 
   const productsQuery = {};
@@ -12,10 +12,10 @@ export default async function handle(req, res) {
     productsQuery.category = categories.split(",");
   }
 
-  if (phrase) {
+  if (term) {
     productsQuery["$or"] = [
-      { name: { $regex: phrase, $options: "i" } },
-      { description: { $regex: phrase, $options: "i" } },
+      { name: { $regex: term, $options: "i" } },
+      { description: { $regex: term, $options: "i" } },
     ];
   }
 
