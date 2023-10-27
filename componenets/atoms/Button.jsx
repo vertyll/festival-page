@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
   border: 0;
+  width: 100%;
+  max-width: max-content;
   border-radius: 30px;
   padding: 5px 15px;
   transition: 0.5s;

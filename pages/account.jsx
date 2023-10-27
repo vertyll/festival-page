@@ -75,7 +75,7 @@ const StyledDataDiv = styled.div`
 
   @media screen and (min-width: 600px) {
     margin: 30px;
-    padding: 20px;
+    padding: 20px 150px;
   }
 `;
 

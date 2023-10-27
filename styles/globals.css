@@ -8,7 +8,7 @@
   --main-medium-slate-blue-color: #886bf2;
   --main-plum-color: #fda8ea;
   --main-giants-orange-color: #ff5c2f;
-  --main-danger-color: #ff2727;
+  --main-danger-color: #ff1c1c;
   --light-text-color: #fff;
   --dark-text-color: #000;
   --border-color-for-image: #ccc;
@@ -17,4 +17,5 @@
   --border-color-light: #cfcfcf;
   --light-color: #fff;
   --nav-color: #222;
+  --error-bg-color: #ffb2b2;
 }
