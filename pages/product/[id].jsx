@@ -35,10 +35,10 @@ const Price = styled.span`
 `;
 
 const PropertyButton = styled.button`
-  padding: 10px;
+  padding: 15px;
   margin: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   background-color: ${(props) =>
     props.$isSelected
       ? "var(--main-deep-pink-color)"
