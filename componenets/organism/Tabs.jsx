@@ -2,11 +2,18 @@ import styled from "styled-components";
 
 const StyledTabs = styled.div`
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
   margin-bottom: 20px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 20px;
+    margin: 0 35px;
+  }
 `;
 const StyledTab = styled.span`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
   ${(props) =>
     props.$active

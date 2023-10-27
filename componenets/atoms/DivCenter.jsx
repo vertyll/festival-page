@@ -5,7 +5,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 10px 0 10px;
+  margin: 0 30px 0 30px;
 `;
 
 export default function DivCenter({ children }) {

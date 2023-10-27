@@ -11,13 +11,18 @@ import Title from "@/componenets/atoms/Title";
 import FieldInput from "@/componenets/molecules/FieldInput";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { validateFormValues } from "@/lib/validation/validation";
+import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 50px;
+  max-width: 1000px;
+  width: 100%;
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
   }
 `;
 
@@ -65,6 +70,7 @@ const QuantityLabel = styled.span`
 
 const CityHolder = styled.div`
   display: flex;
+  flex-direction: column;
   gap: 5px;
 `;
 
@@ -82,6 +88,8 @@ export default function CartPage() {
   const [country, setCountry] = useState("");
   const [shippingPrice, setShippingPrice] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+
   const router = useRouter();
   useEffect(() => {
     if (cartProducts.length > 0) {
@@ -149,6 +157,16 @@ export default function CartPage() {
   }
 
   async function goToPayment() {
+    const errors = validateFormValues(
+      { name, email, city, postalCode, streetAddress, country },
+      ["name", "email", "city", "postalCode", "streetAddress", "country"]
+    );
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     const response = await axios.post("/api/checkout", {
       name,
       email,
@@ -270,6 +288,9 @@ export default function CartPage() {
                   name="name"
                   onChange={(e) => setName(e.target.value)}
                 />
+                {validationErrors["name"] && (
+                  <ErrorDiv>{validationErrors["name"]}</ErrorDiv>
+                )}
                 <FieldInput
                   labelText="Email"
                   type="text"
@@ -278,6 +299,9 @@ export default function CartPage() {
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                {validationErrors["email"] && (
+                  <ErrorDiv>{validationErrors["email"]}</ErrorDiv>
+                )}
                 <CityHolder>
                   <FieldInput
                     labelText="Miasto"
@@ -287,6 +311,9 @@ export default function CartPage() {
                     name="city"
                     onChange={(e) => setCity(e.target.value)}
                   />
+                  {validationErrors["city"] && (
+                    <ErrorDiv>{validationErrors["city"]}</ErrorDiv>
+                  )}
                   <FieldInput
                     labelText="Kod pocztowy"
                     type="text"
@@ -295,6 +322,9 @@ export default function CartPage() {
                     name="postalCode"
                     onChange={(e) => setPostalCode(e.target.value)}
                   />
+                  {validationErrors["postalCode"] && (
+                    <ErrorDiv>{validationErrors["postalCode"]}</ErrorDiv>
+                  )}
                 </CityHolder>
                 <FieldInput
                   labelText="Ulica"
@@ -304,6 +334,9 @@ export default function CartPage() {
                   name="streetAddress"
                   onChange={(e) => setStreetAddress(e.target.value)}
                 />
+                {validationErrors["streetAddress"] && (
+                  <ErrorDiv>{validationErrors["streetAddress"]}</ErrorDiv>
+                )}
                 <FieldInput
                   labelText="Państwo"
                   type="text"
@@ -312,6 +345,9 @@ export default function CartPage() {
                   name="country"
                   onChange={(e) => setCountry(e.target.value)}
                 />
+                {validationErrors["country"] && (
+                  <ErrorDiv>{validationErrors["country"]}</ErrorDiv>
+                )}
                 <Button $size="m" $usage="primary" onClick={goToPayment}>
                   Zapłać
                 </Button>

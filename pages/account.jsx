@@ -11,6 +11,8 @@ import Tabs from "@/componenets/organism/Tabs";
 import SingleOrder from "@/componenets/organism/SingleOrder";
 import Spinner from "@/componenets/atoms/Spinner";
 import FieldInput from "@/componenets/molecules/FieldInput";
+import { validateFormValues } from "@/lib/validation/validation";
+import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 
 const Wrapper = styled.div`
   display: grid;
@@ -25,7 +27,7 @@ const CityHolder = styled.div`
   flex-direction: column;
 
   @media screen and (min-width: 600px) {
-    flex-direction: row;
+    flex-direction: column;
   }
 `;
 
@@ -35,13 +37,14 @@ const StyledWishedDiv = styled.div`
   gap: 20px;
   text-align: left;
   background-color: var(--main-white-smoke-color);
-  padding: 20px;
+  padding: 10px;
   border-radius: 30px;
-  margin: 30px;
+  margin: 5px;
 
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    margin: 30px;
   }
 `;
 
@@ -51,9 +54,14 @@ const StyledOrderDiv = styled.div`
   gap: 50px;
   text-align: left;
   background-color: var(--main-white-smoke-color);
-  padding: 20px;
+  padding: 10px;
   border-radius: 30px;
-  margin: 30px;
+  margin: 5px;
+
+  @media screen and (min-width: 768px) {
+    margin: 30px;
+    padding: 20px;
+  }
 `;
 
 const StyledDataDiv = styled.div`
@@ -61,20 +69,24 @@ const StyledDataDiv = styled.div`
   grid-template-columns: 1fr;
   text-align: left;
   background-color: var(--main-white-smoke-color);
-  padding: 20px;
+  padding: 10px;
   border-radius: 30px;
-  margin: 30px;
+  margin: 5px;
 
   @media screen and (min-width: 600px) {
     margin: 30px;
-    padding: 20px 100px;
+    padding: 20px;
   }
 `;
 
 const InfoBox = styled.div`
   background-color: var(--light-color);
-  padding: 20px;
+  padding: 20px 5px;
   border-radius: 30px;
+
+  @media screen and (min-width: 600px) {
+    padding: 20px;
+  }
 `;
 
 export default function AccountPage() {
@@ -91,6 +103,7 @@ export default function AccountPage() {
   const [wishedProducts, setWishedProducts] = useState([]);
   const [activeTab, setActiveTab] = useState("Orders");
   const [orders, setOrders] = useState([]);
+  const [validationErrors, setValidationErrors] = useState({});
 
   async function logout() {
     await signOut({
@@ -101,6 +114,16 @@ export default function AccountPage() {
     await signIn("google");
   }
   function saveAddress() {
+    const errors = validateFormValues(
+      { name, email, city, postalCode, streetAddress, country },
+      ["name", "email", "city", "postalCode", "streetAddress", "country"]
+    );
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     const data = { name, email, city, streetAddress, postalCode, country };
     axios.put("/api/address", data);
   }
@@ -216,6 +239,9 @@ export default function AccountPage() {
                           name="name"
                           onChange={(e) => setName(e.target.value)}
                         />
+                        {validationErrors["name"] && (
+                          <ErrorDiv>{validationErrors["name"]}</ErrorDiv>
+                        )}
                         <FieldInput
                           labelText="Email"
                           type="text"
@@ -224,6 +250,9 @@ export default function AccountPage() {
                           name="email"
                           onChange={(e) => setEmail(e.target.value)}
                         />
+                        {validationErrors["email"] && (
+                          <ErrorDiv>{validationErrors["email"]}</ErrorDiv>
+                        )}
                         <CityHolder>
                           <FieldInput
                             labelText="Miasto"
@@ -233,6 +262,9 @@ export default function AccountPage() {
                             name="city"
                             onChange={(e) => setCity(e.target.value)}
                           />
+                          {validationErrors["city"] && (
+                            <ErrorDiv>{validationErrors["city"]}</ErrorDiv>
+                          )}
                           <FieldInput
                             labelText="Kod pocztowy"
                             type="text"
@@ -241,6 +273,11 @@ export default function AccountPage() {
                             name="postalCode"
                             onChange={(e) => setPostalCode(e.target.value)}
                           />
+                          {validationErrors["postalCode"] && (
+                            <ErrorDiv>
+                              {validationErrors["postalCode"]}
+                            </ErrorDiv>
+                          )}
                         </CityHolder>
                         <FieldInput
                           labelText="Ulica"
@@ -250,6 +287,11 @@ export default function AccountPage() {
                           name="streetAddress"
                           onChange={(e) => setStreetAddress(e.target.value)}
                         />
+                        {validationErrors["streetAddress"] && (
+                          <ErrorDiv>
+                            {validationErrors["streetAddress"]}
+                          </ErrorDiv>
+                        )}
                         <FieldInput
                           labelText="Państwo"
                           type="text"
@@ -258,6 +300,9 @@ export default function AccountPage() {
                           name="country"
                           onChange={(e) => setCountry(e.target.value)}
                         />
+                        {validationErrors["country"] && (
+                          <ErrorDiv>{validationErrors["country"]}</ErrorDiv>
+                        )}
                         <Button
                           $usage="primary"
                           onClick={saveAddress}
