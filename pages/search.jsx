@@ -3,32 +3,36 @@ import Input from "@/componenets/atoms/Input";
 import ProductContainer from "@/componenets/organism/ProductContainer";
 import Layout from "@/componenets/templates/Layout";
 import axios from "axios";
+import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
-import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const [phrase, setPhrase] = useState("");
   const [products, setProducts] = useState([]);
-  const [debouncedSearch, setDebouncedSrarch] = useState(() => {});
+  const searchProducts = useCallback(
+    debounce((nextValue) => {
+      axios
+        .get("/api/products?phrase=" + encodeURIComponent(nextValue))
+        .then((response) => {
+          console.log(response.data)
+          setProducts(response.data);
+        })
+        .catch((error) => {
+          console.error("There was an issue fetching data: ", error);
+        });
+    }, 500),
+    []
+  );
   useEffect(() => {
-    if (phrase.length > 0) {
-      debouncedSearch();
+    if (phrase) {
+      searchProducts(phrase);
     } else {
       setProducts([]);
     }
-  }, [phrase]);
-  useEffect(() => {
-    setDebouncedSrarch(debounce(searchProducts, 500));
-  }, []);
-
-  function searchProducts() {
-    axios
-      .get("/api/products?phrase=" + encodeURIComponent(phrase))
-      .then((response) => {
-        console.log(response.data);
-        setProducts(response.data);
-      });
-  }
+    return () => {
+      searchProducts.cancel();
+    };
+  }, [phrase, searchProducts]);
 
   return (
     <Layout>
