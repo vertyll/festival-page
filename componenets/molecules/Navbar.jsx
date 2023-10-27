@@ -163,6 +163,9 @@ export default function Navbar() {
         )}
 
         <StyledNav $open={isMobileMenuOpen}>
+          <StyledLink href="/search">
+            <IconSearch />
+          </StyledLink>
           <StyledLink href="/products">Sklep</StyledLink>
           <StyledLink href="/account">Konto</StyledLink>
           <StyledLink href="/cart">Koszyk ({cartProducts.length})</StyledLink>
