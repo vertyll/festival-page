@@ -27,7 +27,7 @@ export default function Banner() {
     <StyledDiv>
       <Title>Sunset Festival</Title>
       <Description>Tutaj będzie jakiś opis</Description>
-      <Button usage="primary" size="l">
+      <Button $usage="primary" $size="l">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

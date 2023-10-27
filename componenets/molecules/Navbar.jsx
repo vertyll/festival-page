@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   }
 
   ${(props) =>
-    props.usage === "special" &&
+    props.$usage === "special" &&
     css`
       background-color: var(--main-medium-slate-blue-color);
       color: var(--main-maize-color);
@@ -45,10 +45,10 @@ export default function Navbar() {
     <StyledDiv>
       <StyledNav>
         <StyledLink href={"/products"}>Sklep</StyledLink>
-        <StyledLink usage="special" href={"/account"}>
+        <StyledLink $usage="special" href={"/account"}>
           Konto
         </StyledLink>
-        <StyledLink usage="special" href={"/cart"}>
+        <StyledLink $usage="special" href={"/cart"}>
           Koszyk ({cartProducts.length})
         </StyledLink>
       </StyledNav>

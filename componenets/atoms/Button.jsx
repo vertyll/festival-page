@@ -19,39 +19,39 @@ const StyledButton = styled.button`
   }
 
   ${(props) =>
-    props.usage === "primary" &&
+    props.$usage === "primary" &&
     css`
       background-color: var(--main-maize-color);
     `}
 
   ${(props) =>
-    props.usage === "danger" &&
+    props.$usage === "danger" &&
     css`
       background-color: var(--main-danger-color);
     `}
 
   ${(props) =>
-    props.usage === "quantity" &&
+    props.$usage === "quantity" &&
     css`
       background-color: var(--main-white-smoke-color);
     `}
 
   ${(props) =>
-    props.size === "l" &&
+    props.$size === "l" &&
     css`
       padding: 15px 35px;
       font-size: 1.2rem;
     `}
 
     ${(props) =>
-    props.size === "m" &&
+    props.$size === "m" &&
     css`
       padding: 10px 25px;
       font-size: 1rem;
     `}
 
   ${(props) =>
-    props.size === "s" &&
+    props.$size === "s" &&
     css`
       padding: 4px 14px;
       font-size: 1rem;

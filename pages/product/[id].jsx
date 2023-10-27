@@ -37,10 +37,10 @@ const PropertyButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: ${(props) =>
-    props.isSelected
+    props.$isSelected
       ? "var(--main-deep-pink-color)"
       : "var(--main-plum-color)"};
-  color: ${(props) => (props.isSelected ? "var(--light-text-color)" : "var(--dark-text-color)")};
+  color: ${(props) => (props.$isSelected ? "var(--light-text-color)" : "var(--dark-text-color)")};
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -95,7 +95,7 @@ export default function ProductPage({ product, categoryPath }) {
             {options.map((option, i) => (
               <PropertyButton
                 key={i}
-                isSelected={selectedProperty[prop.name] === option}
+                $isSelected={selectedProperty[prop.name] === option}
                 onClick={() => handlePropertySelection(prop.name, option)}
               >
                 {option}
@@ -132,8 +132,8 @@ export default function ProductPage({ product, categoryPath }) {
                     alert("Wybierz wszystkie opcje przed dodaniem do koszyka.");
                   }
                 }}
-                size="m"
-                usage="primary"
+                $size="m"
+                $usage="primary"
                 disabled={!allPropertiesSelected} // opcjonalnie, można dodać styl dla wyłączonego stanu w CSS
               >
                 <IconCart />

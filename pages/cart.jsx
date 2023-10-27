@@ -196,7 +196,7 @@ export default function CartPage() {
                 <div>
                   <h1>Twój koszyk jest pusty</h1>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
-                  <Button usage="primary" size="m" onClick={goToShop}>
+                  <Button $usage="primary" $size="m" onClick={goToShop}>
                     Wróć do sklepu
                   </Button>
                 </div>
@@ -227,8 +227,8 @@ export default function CartPage() {
                           <td>{product.name}</td>
                           <td>
                             <Button
-                              size="s"
-                              usage="quantity"
+                              $size="s"
+                              $usage="quantity"
                               onClick={() => quantitySub(cartProduct)}
                             >
                               -
@@ -237,8 +237,8 @@ export default function CartPage() {
                               {cartProduct.quantity || 1}{" "}
                             </QuantityLabel>
                             <Button
-                              size="s"
-                              usage="quantity"
+                              $size="s"
+                              $usage="quantity"
                               onClick={() => quanitityAdd(cartProduct)}
                             >
                               +
@@ -315,7 +315,7 @@ export default function CartPage() {
                   name="country"
                   onChange={(e) => setCountry(e.target.value)}
                 />
-                <Button size="m" usage="primary" onClick={goToPayment}>
+                <Button $size="m" $usage="primary" onClick={goToPayment}>
                   Zapłać
                 </Button>
               </Box>

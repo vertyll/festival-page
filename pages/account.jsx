@@ -242,19 +242,19 @@ export default function AccountPage() {
                         name="country"
                         onChange={(e) => setCountry(e.target.value)}
                       />
-                      <Button usage="primary" onClick={saveAddress} size="m">
+                      <Button $usage="primary" onClick={saveAddress} $size="m">
                         Zapisz
                       </Button>
                       <hr />
                     </>
                   )}
                   {session && (
-                    <Button usage="primary" onClick={logout} size="m">
+                    <Button $usage="primary" onClick={logout} $size="m">
                       Wyloguj
                     </Button>
                   )}
                   {!session && (
-                    <Button usage="primary" size="m" onClick={login}>
+                    <Button $usage="primary" $size="m" onClick={login}>
                       Zaloguj się za pomocą Google
                     </Button>
                   )}

@@ -38,14 +38,7 @@ const WishlistButton = styled.button`
   right: 0;
   background: transparent;
   cursor: pointer;
-  ${(props) =>
-    props.wished
-      ? `
-    color:red;
-  `
-      : `
-    color:black;
-  `}
+  color: ${(props) => (props.$wished ? "red" : "black")};
   svg {
     width: 16px;
   }
@@ -62,8 +55,7 @@ const ProductInfo = styled.div`
   margin-top: 10px;
 `;
 
-const Price = styled.p`
-`;
+const Price = styled.p``;
 
 const Wrapper = styled.div``;
 
@@ -97,7 +89,7 @@ export default function ProductBox({
     <Wrapper>
       <Box href={url}>
         <div>
-          <WishlistButton wished={isWished} onClick={addToWishlist}>
+          <WishlistButton $wished={isWished} onClick={addToWishlist}>
             {isWished ? <IconHeart /> : <IconHeartOutline />}
           </WishlistButton>
           <img src={images?.[0]} alt="" />
@@ -108,7 +100,7 @@ export default function ProductBox({
         <Price>
           Cena: <b>{price}</b> zł
         </Price>
-        <Button onClick={() => addProduct(_id)} size="m" usage="primary">
+        <Button onClick={() => addProduct(_id)} $size="m" $usage="primary">
           <IconCart />
           Dodaj do koszyka
         </Button>
