@@ -108,6 +108,9 @@ export default function AccountPage() {
     if (!session) {
       return;
     }
+    setAddressLoaded(false);
+    setWishlistLoaded(false);
+    setOrderLoaded(false);
     axios
       .get("/api/address")
       .then((response) => {
@@ -118,6 +121,7 @@ export default function AccountPage() {
           setPostalCode(response.data.postalCode || "");
           setStreetAddress(response.data.streetAddress || "");
           setCountry(response.data.country || "");
+          setAddressLoaded(true);
         } else {
           console.error("No data returned from /api/address");
         }
@@ -155,7 +159,7 @@ export default function AccountPage() {
                 />
                 {activeTab === "Zamówienia" && (
                   <>
-                    {!orderLoaded && <Spinner fullWidth={true} />}
+                    {!orderLoaded && <Spinner />}
                     {orderLoaded && (
                       <StyledOrderDiv
                         style={{
@@ -173,7 +177,7 @@ export default function AccountPage() {
                 )}
                 {activeTab === "Ulubione" && (
                   <>
-                    {!wishlistLoaded && <Spinner fullWidth={true} />}
+                    {!wishlistLoaded && <Spinner />}
                     {wishlistLoaded && (
                       <StyledWishedDiv
                         style={{
@@ -201,7 +205,7 @@ export default function AccountPage() {
                 )}
                 {activeTab === "Konto" && (
                   <>
-                    {!addressLoaded && <Spinner fullWidth={true} />}
+                    {!addressLoaded && <Spinner />}
                     {addressLoaded && session && (
                       <StyledDataDiv>
                         <FieldInput
