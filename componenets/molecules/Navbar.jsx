@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import styled, { css } from "styled-components";
 import { CartContext } from "../organism/CartContext";
 import IconHamburger from "../atoms/IconHamburger";
+import IconSearch from "../atoms/IconSearch";
 
 const StyledDiv = styled.div`
   max-width: 800px;
@@ -139,7 +140,12 @@ export default function Navbar() {
       <CenterDiv>
         <StyledNav>
           <StyledLink href="/products">Sklep</StyledLink>
-          <StyledLink href="/account" $usage="special">Konto</StyledLink>
+          <StyledLink href="/search">
+            <IconSearch />
+          </StyledLink>
+          <StyledLink href="/account" $usage="special">
+            Konto
+          </StyledLink>
           <StyledLink href="/cart" $usage="special">
             Koszyk ({cartProducts.length})
           </StyledLink>
@@ -159,9 +165,7 @@ export default function Navbar() {
         <StyledNav $open={isMobileMenuOpen}>
           <StyledLink href="/products">Sklep</StyledLink>
           <StyledLink href="/account">Konto</StyledLink>
-          <StyledLink href="/cart">
-            Koszyk ({cartProducts.length})
-          </StyledLink>
+          <StyledLink href="/cart">Koszyk ({cartProducts.length})</StyledLink>
         </StyledNav>
       </MobileMenuWrapper>
     </StyledDiv>
