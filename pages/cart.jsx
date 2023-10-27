@@ -277,6 +277,11 @@ export default function CartPage() {
                 </Table>
               )}
             </Box>
+            {!cartProducts?.length && (
+              <Box>
+                <div>Tutaj będzie obrazek</div>
+              </Box>
+            )}
             {!!cartProducts?.length && (
               <Box>
                 <Title>Informacje o płatności</Title>
