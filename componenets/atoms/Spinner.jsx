@@ -1,35 +1,28 @@
 import styled, { keyframes } from "styled-components";
 
-const Wrapper = styled.div`
-  ${(props) =>
-    props.fullWidth
-      ? `
-    display:block;
-    display:flex;
-    justify-content:center;
-  `
-      : `
-    border: 5xp solid blue;
-  `}
-`;
-
 const spin = keyframes`
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 `;
 
-const StyledSpinner = styled.div`
-  border: 0.25em solid rgba(255, 255, 255, 0.2);
-  border-top: 0.25em solid #3498db;
-  border-radius: 50%;
-  width: 2em;
-  height: 2em;
-  animation: ${spin} 2s linear infinite;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export default function Spinner({ fullWidth }) {
+const StyledSpinner = styled.div`
+  border: 0.70em solid var(--main-medium-slate-blue-color); // Szary kolor dla obwódki.
+  border-top: 0.70em solid var(--nav-color); // Czarny kolor dla górnego obramowania.
+  border-radius: 50%; // Sprawia, że spinner jest okrągły.
+  width: 4em;
+  height: 4em;
+  animation: ${spin} 0.6s linear infinite; // Zastosowanie animacji obrotu.
+`;
+
+export default function Spinner() {
   return (
-    <Wrapper fullWidth={fullWidth}>
+    <Wrapper>
       <StyledSpinner />
     </Wrapper>
   );
