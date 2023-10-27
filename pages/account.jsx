@@ -45,6 +45,7 @@ const StyledWishedDiv = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin: 30px;
+    padding: 10px;
   }
 `;
 
@@ -60,7 +61,7 @@ const StyledOrderDiv = styled.div`
 
   @media screen and (min-width: 768px) {
     margin: 30px;
-    padding: 20px;
+    padding: 10px;
   }
 `;
 
@@ -75,7 +76,7 @@ const StyledDataDiv = styled.div`
 
   @media screen and (min-width: 600px) {
     margin: 30px;
-    padding: 20px 150px;
+    padding: 10px 150px;
   }
 `;
 

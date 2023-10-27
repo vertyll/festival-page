@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import FooterLinks from "../molecules/FooterLinks";
+import FooterInfoLinks from "../molecules/FooterInfoLinks";
 
 const StyledFooter = styled.footer`
   background-color: var(--nav-color);
@@ -11,7 +11,6 @@ const StyledFooter = styled.footer`
 
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   padding: 20px 0;
 `;
@@ -20,7 +19,7 @@ export default function Footer() {
   return (
     <StyledFooter>
       <Wrapper>
-        <FooterLinks />
+        <FooterInfoLinks />
       </Wrapper>
     </StyledFooter>
   );
