@@ -12,28 +12,37 @@ import SingleOrder from "@/componenets/organism/SingleOrder";
 import Spinner from "@/componenets/atoms/Spinner";
 import FieldInput from "@/componenets/molecules/FieldInput";
 
-const ColsWrapper = styled.div`
+const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 50px;
-  p {
-    margin: 5px;
-  }
+  grid-template-columns: 1fr;
+  max-width: 750px;
+  width: 100%;
 `;
 
 const CityHolder = styled.div`
   display: flex;
   gap: 5px;
+  flex-direction: column;
+
+  @media screen and (min-width: 600px) {
+    flex-direction: row;
+  }
 `;
 
-const WishedProductsGrid = styled.div`
+const StyledWishedDiv = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   text-align: left;
   background-color: var(--main-white-smoke-color);
   padding: 20px;
   border-radius: 30px;
+  margin: 30px;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
 `;
 
 const StyledOrderDiv = styled.div`
@@ -44,12 +53,28 @@ const StyledOrderDiv = styled.div`
   background-color: var(--main-white-smoke-color);
   padding: 20px;
   border-radius: 30px;
+  margin: 30px;
+`;
+
+const StyledDataDiv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: left;
+  background-color: var(--main-white-smoke-color);
+  padding: 20px;
+  border-radius: 30px;
+  margin: 30px;
+
+  @media screen and (min-width: 600px) {
+    margin: 30px;
+    padding: 20px 100px;
+  }
 `;
 
 const InfoBox = styled.div`
   background-color: var(--light-color);
-  border-radius: 10px;
-  padding: 30px;
+  padding: 20px;
+  border-radius: 30px;
 `;
 
 export default function AccountPage() {
@@ -120,148 +145,139 @@ export default function AccountPage() {
     <>
       <Layout>
         <DivCenter>
-          <ColsWrapper>
-            <div>
-              <RevealWrapper delay={0}>
-                <InfoBox>
-                  <Tabs
-                    tabs={["Zamówienia", "Ulubione"]}
-                    active={activeTab}
-                    onChange={setActiveTab}
-                  />
-                  {activeTab === "Zamówienia" && (
-                    <>
-                      {!orderLoaded && <Spinner fullWidth={true} />}
-                      {orderLoaded && (
-                        <StyledOrderDiv
-                          style={{
-                            visibility:
-                              orders.length > 0 ? "visible" : "hidden",
-                          }}
-                        >
-                          {orders.length === 0 && (
-                            <p style={{ visibility: "visible" }}>
-                              Brak zamówień
-                            </p>
-                          )}
-                          {orders.length > 0 &&
-                            orders.map((o) => (
-                              <SingleOrder key={o._id} {...o} />
-                            ))}
-                        </StyledOrderDiv>
-                      )}
-                    </>
-                  )}
-                  {activeTab === "Ulubione" && (
-                    <>
-                      {!wishlistLoaded && <Spinner fullWidth={true} />}
-                      {wishlistLoaded && (
-                        <WishedProductsGrid
-                          style={{
-                            visibility:
-                              wishedProducts.length > 0 ? "visible" : "hidden",
-                          }}
-                        >
-                          {wishedProducts.length === 0 && (
-                            <p style={{ visibility: "visible" }}>
-                              Brak polubionych produktów
-                            </p>
-                          )}
-                          {wishedProducts.length > 0 &&
-                            wishedProducts.map((wp) => (
-                              <ProductBox
-                                key={wp._id}
-                                {...wp}
-                                wished={true}
-                                onRemoveFromWishlist={
-                                  productRemovedFromWishlist
-                                }
-                              />
-                            ))}
-                        </WishedProductsGrid>
-                      )}
-                    </>
-                  )}
-                </InfoBox>
-              </RevealWrapper>
-            </div>
-            <div>
-              <RevealWrapper delay={100}>
-                <InfoBox>
-                  <h2>{session ? "Dane konta" : "Logowanie"}</h2>
-                  {!addressLoaded && <Spinner fullWidth={true} />}
-                  {addressLoaded && session && (
-                    <>
-                      <FieldInput
-                        labelText="Imie"
-                        type="text"
-                        placeholder="Name"
-                        value={name}
-                        name="name"
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                      <FieldInput
-                        labelText="Email"
-                        type="text"
-                        placeholder="Email"
-                        value={email}
-                        name="email"
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                      <CityHolder>
+          <Wrapper>
+            <RevealWrapper delay={0}>
+              <InfoBox>
+                <Tabs
+                  tabs={["Zamówienia", "Ulubione", "Konto"]}
+                  active={activeTab}
+                  onChange={setActiveTab}
+                />
+                {activeTab === "Zamówienia" && (
+                  <>
+                    {!orderLoaded && <Spinner fullWidth={true} />}
+                    {orderLoaded && (
+                      <StyledOrderDiv
+                        style={{
+                          visibility: orders.length > 0 ? "visible" : "hidden",
+                        }}
+                      >
+                        {orders.length === 0 && (
+                          <p style={{ visibility: "visible" }}>Brak zamówień</p>
+                        )}
+                        {orders.length > 0 &&
+                          orders.map((o) => <SingleOrder key={o._id} {...o} />)}
+                      </StyledOrderDiv>
+                    )}
+                  </>
+                )}
+                {activeTab === "Ulubione" && (
+                  <>
+                    {!wishlistLoaded && <Spinner fullWidth={true} />}
+                    {wishlistLoaded && (
+                      <StyledWishedDiv
+                        style={{
+                          visibility:
+                            wishedProducts.length > 0 ? "visible" : "hidden",
+                        }}
+                      >
+                        {wishedProducts.length === 0 && (
+                          <p style={{ visibility: "visible" }}>
+                            Brak polubionych produktów
+                          </p>
+                        )}
+                        {wishedProducts.length > 0 &&
+                          wishedProducts.map((wp) => (
+                            <ProductBox
+                              key={wp._id}
+                              {...wp}
+                              wished={true}
+                              onRemoveFromWishlist={productRemovedFromWishlist}
+                            />
+                          ))}
+                      </StyledWishedDiv>
+                    )}
+                  </>
+                )}
+                {activeTab === "Konto" && (
+                  <>
+                    {!addressLoaded && <Spinner fullWidth={true} />}
+                    {addressLoaded && session && (
+                      <StyledDataDiv>
                         <FieldInput
-                          labelText="Miasto"
+                          labelText="Imie"
                           type="text"
-                          placeholder="City"
-                          value={city}
-                          name="city"
-                          onChange={(e) => setCity(e.target.value)}
+                          placeholder="Name"
+                          value={name}
+                          name="name"
+                          onChange={(e) => setName(e.target.value)}
                         />
                         <FieldInput
-                          labelText="Kod pocztowy"
+                          labelText="Email"
                           type="text"
-                          placeholder="Postal Code"
-                          value={postalCode}
-                          name="postalCode"
-                          onChange={(e) => setPostalCode(e.target.value)}
+                          placeholder="Email"
+                          value={email}
+                          name="email"
+                          onChange={(e) => setEmail(e.target.value)}
                         />
-                      </CityHolder>
-                      <FieldInput
-                        labelText="Ulica"
-                        type="text"
-                        placeholder="Street Address"
-                        value={streetAddress}
-                        name="streetAddress"
-                        onChange={(e) => setStreetAddress(e.target.value)}
-                      />
-                      <FieldInput
-                        labelText="Państwo"
-                        type="text"
-                        placeholder="Country"
-                        value={country}
-                        name="country"
-                        onChange={(e) => setCountry(e.target.value)}
-                      />
-                      <Button $usage="primary" onClick={saveAddress} $size="m">
-                        Zapisz
+                        <CityHolder>
+                          <FieldInput
+                            labelText="Miasto"
+                            type="text"
+                            placeholder="City"
+                            value={city}
+                            name="city"
+                            onChange={(e) => setCity(e.target.value)}
+                          />
+                          <FieldInput
+                            labelText="Kod pocztowy"
+                            type="text"
+                            placeholder="Postal Code"
+                            value={postalCode}
+                            name="postalCode"
+                            onChange={(e) => setPostalCode(e.target.value)}
+                          />
+                        </CityHolder>
+                        <FieldInput
+                          labelText="Ulica"
+                          type="text"
+                          placeholder="Street Address"
+                          value={streetAddress}
+                          name="streetAddress"
+                          onChange={(e) => setStreetAddress(e.target.value)}
+                        />
+                        <FieldInput
+                          labelText="Państwo"
+                          type="text"
+                          placeholder="Country"
+                          value={country}
+                          name="country"
+                          onChange={(e) => setCountry(e.target.value)}
+                        />
+                        <Button
+                          $usage="primary"
+                          onClick={saveAddress}
+                          $size="m"
+                        >
+                          Zapisz
+                        </Button>
+                      </StyledDataDiv>
+                    )}
+                    {session && (
+                      <Button $usage="primary" onClick={logout} $size="m">
+                        Wyloguj
                       </Button>
-                      <hr />
-                    </>
-                  )}
-                  {session && (
-                    <Button $usage="primary" onClick={logout} $size="m">
-                      Wyloguj
-                    </Button>
-                  )}
-                  {!session && (
-                    <Button $usage="primary" $size="m" onClick={login}>
-                      Zaloguj się za pomocą Google
-                    </Button>
-                  )}
-                </InfoBox>
-              </RevealWrapper>
-            </div>
-          </ColsWrapper>
+                    )}
+                    {!session && (
+                      <Button $usage="primary" $size="m" onClick={login}>
+                        Zaloguj się za pomocą Google
+                      </Button>
+                    )}
+                  </>
+                )}
+              </InfoBox>
+            </RevealWrapper>
+          </Wrapper>
         </DivCenter>
       </Layout>
     </>

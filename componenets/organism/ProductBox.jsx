@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import styled from "styled-components";
-import Button from "../atoms/Button";
-import IconCart from "../atoms/IconCart";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { CartContext } from "../organism/CartContext";
@@ -11,7 +9,7 @@ import axios from "axios";
 
 const Box = styled(Link)`
   background-color: white;
-  padding: 20px;
+  padding: 25px;
   height: 150px;
   text-align: center;
   display: flex;
@@ -100,10 +98,6 @@ export default function ProductBox({
         <Price>
           Cena: <b>{price}</b> zł
         </Price>
-        <Button onClick={() => addProduct(_id)} $size="m" $usage="primary">
-          <IconCart />
-          Dodaj do koszyka
-        </Button>
       </ProductInfo>
     </Wrapper>
   );

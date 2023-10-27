@@ -15,18 +15,21 @@ import { Category } from "@/models/Category";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  width: 600px;
+  max-width: 920px;
+  width: 100%;
   @media screen and (min-width: 768px) {
     grid-template-columns: 0.8fr 1.2fr;
   }
   gap: 40px;
-  margin: 40px 0;
+  margin: 40px 5px;
 `;
+
 const Row = styled.div`
   display: flex;
   gap: 20px;
   flex-direction: column;
 `;
+
 const Price = styled.span`
   font-size: 1.4rem;
 `;
@@ -40,19 +43,20 @@ const PropertyButton = styled.button`
     props.$isSelected
       ? "var(--main-deep-pink-color)"
       : "var(--main-plum-color)"};
-  color: ${(props) => (props.$isSelected ? "var(--light-text-color)" : "var(--dark-text-color)")};
+  color: ${(props) =>
+    props.$isSelected ? "var(--light-text-color)" : "var(--dark-text-color)"};
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--main-giants-orange-color);
+    background-color: var(--main-deep-pink-color);
     color: var(--light-text-color);
   }
 `;
 
 const StyledDescriptionDiv = styled.div`
   display: flex;
-  width: 550px;
+  max-width: 850px;
   border-radius: 30px;
   background-color: var(--light-color);
   padding: 30px;
@@ -141,9 +145,9 @@ export default function ProductPage({ product, categoryPath }) {
               </Button>
             </Row>
           </ColWrapper>
-          <StyledDescriptionDiv>
-            {product.description}
-          </StyledDescriptionDiv>
+          {product.description && (
+            <StyledDescriptionDiv>{product.description}</StyledDescriptionDiv>
+          )}
         </DivCenter>
       </Layout>
     </>
