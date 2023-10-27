@@ -7,31 +7,27 @@ export default async function handle(req, res) {
   const { categories, sort, phrase, ...filters } = req.query;
   let [sortField, sortOrder] = (sort || "_id-desc").split("-");
 
-  const productQuery = {};
+  const productsQuery = {};
   if (categories) {
-    productQuery.categories = categories.split(",");
+    productsQuery.category = categories.split(",");
   }
 
   if (phrase) {
-    productQuery["$or"] = [
-      {
-        name: { $regex: phrase, $options: "i" },
-      },
-      {
-        description: { $regex: phrase, $options: "i" },
-      },
+    productsQuery["$or"] = [
+      { title: { $regex: phrase, $options: "i" } },
+      { description: { $regex: phrase, $options: "i" } },
     ];
   }
 
   if (Object.keys(filters).length > 0) {
     Object.keys(filters).forEach((filterName) => {
-      productQuery["properties" + filterName] = filters[filterName];
+      productsQuery["properties." + filterName] = filters[filterName];
     });
   }
 
-  console.log(productQuery);
+  console.log(productsQuery);
   res.json(
-    await Product.find(productQuery, null, {
+    await Product.find(productsQuery, null, {
       sort: { [sortField]: sortOrder === "asc" ? 1 : -1 },
     })
   );
