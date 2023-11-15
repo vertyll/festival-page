@@ -6,7 +6,7 @@ const StyledFooter = styled.footer`
   color: var(--light-text-color);
   margin: 0 auto;
   padding: 0 20px;
-  height: 200px;
+  min-height: 20vh;
 `;
 
 const Wrapper = styled.div`

@@ -12,8 +12,8 @@ const Wrapper = styled.div`
 `;
 
 const StyledSpinner = styled.div`
-  border: 0.70em solid var(--main-medium-slate-blue-color); // Szary kolor dla obwódki.
-  border-top: 0.70em solid var(--nav-color); // Czarny kolor dla górnego obramowania.
+  border: 0.7em solid var(--main-medium-slate-blue-color); // Szary kolor dla obwódki.
+  border-top: 0.7em solid var(--nav-color); // Czarny kolor dla górnego obramowania.
   border-radius: 50%; // Sprawia, że spinner jest okrągły.
   width: 4em;
   height: 4em;

@@ -17,8 +17,15 @@ const MainContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin: 0 30px 0 30px;
-  gap: 50px;
+  margin: 0 30px;
+  gap: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+    gap: 10px;
+  }
 `;
 
 const LeftPanel = styled.div`
@@ -27,16 +34,24 @@ const LeftPanel = styled.div`
   border-radius: 30px;
   background-color: #fff;
   box-shadow: var(--default-box-shadow);
-  height: fit-content; /* Dopasuj wysokość do zawartości */
+  height: fit-content;
+
+  @media screen and (max-width: 768px) {
+    flex: 0 0 100%;
+  }
 `;
 
 const RightPanel = styled.div`
-  flex: 1; /* Zajmuje dostępną przestrzeń */
+  flex: 1;
   padding: 20px;
   border-radius: 30px;
   background-color: #fff;
   box-shadow: var(--default-box-shadow);
-  min-width: 0; /* Zapobiega rozciąganiu się poza ekran */
+  min-width: 0;
+
+  @media screen and (max-width: 768px) {
+    flex: 0 0 100%;
+  }
 `;
 
 const UserProfile = styled.div`
@@ -75,7 +90,7 @@ const StyledWishedDiv = styled.div`
   border-radius: 30px;
   margin: 5px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1000px) {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     margin: 30px;
@@ -110,7 +125,7 @@ const StyledDataDiv = styled.div`
 
   @media screen and (min-width: 600px) {
     margin: 30px;
-    padding: 10px 150px;
+    padding: 10px 20px;
   }
 `;
 
