@@ -10,6 +10,7 @@ const StyledDiv = styled.div`
   background-color: var(--gray-color);
   height: 500px;
   border-radius: 30px;
+  box-shadow: var(--default-box-shadow);
 `;
 
 const Title = styled.h1`

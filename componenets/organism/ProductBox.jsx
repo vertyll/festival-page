@@ -21,6 +21,7 @@ const Box = styled(Link)`
   color: inherit;
   border-radius: 30px;
   position: relative;
+  box-shadow: var(--default-box-shadow);
 
   img {
     max-width: 100%;

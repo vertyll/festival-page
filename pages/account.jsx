@@ -4,7 +4,6 @@ import { RevealWrapper } from "next-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/componenets/templates/Layout";
-import DivCenter from "@/componenets/atoms/DivCenter";
 import Button from "@/componenets/atoms/Button";
 import ProductBox from "@/componenets/organism/ProductBox";
 import Tabs from "@/componenets/organism/Tabs";
@@ -14,11 +13,46 @@ import FieldInput from "@/componenets/molecules/FieldInput";
 import { validateFormValues } from "@/lib/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  max-width: 750px;
-  width: 100%;
+const MainContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0 30px 0 30px;
+  gap: 50px;
+`;
+
+const LeftPanel = styled.div`
+  flex: 0 0 30%;
+  padding: 20px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: var(--default-box-shadow);
+  height: fit-content; /* Dopasuj wysokość do zawartości */
+`;
+
+const RightPanel = styled.div`
+  flex: 1; /* Zajmuje dostępną przestrzeń */
+  padding: 20px;
+  border-radius: 30px;
+  background-color: #fff;
+  box-shadow: var(--default-box-shadow);
+  min-width: 0; /* Zapobiega rozciąganiu się poza ekran */
+`;
+
+const UserProfile = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: var(--main-white-smoke-color);
+  padding: 10px;
+  border-radius: 30px;
+  margin-bottom: 15px;
+`;
+
+const ProfilePicture = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
 `;
 
 const CityHolder = styled.div`
@@ -170,10 +204,30 @@ export default function AccountPage() {
     });
   }
   return (
-    <>
-      <Layout>
-        <DivCenter>
-          <Wrapper>
+    <Layout>
+      <MainContainer>
+        {session ? (
+          <LeftPanel>
+            <h3>Profil</h3>
+            <UserProfile>
+              <ProfilePicture
+                src={session.user.image}
+                alt={session.user.name}
+              />
+              <div>{session.user.name}</div>
+            </UserProfile>
+            <Button $usage="primary" onClick={logout} $size="m">
+              Wyloguj
+            </Button>
+          </LeftPanel>
+        ) : (
+          <Button $usage="primary" $size="m" onClick={login}>
+            Zaloguj się za pomocą Google
+          </Button>
+        )}
+
+        {session && (
+          <RightPanel>
             <RevealWrapper delay={0}>
               <InfoBox>
                 <Tabs
@@ -313,23 +367,13 @@ export default function AccountPage() {
                         </Button>
                       </StyledDataDiv>
                     )}
-                    {session && (
-                      <Button $usage="primary" onClick={logout} $size="m">
-                        Wyloguj
-                      </Button>
-                    )}
-                    {!session && (
-                      <Button $usage="primary" $size="m" onClick={login}>
-                        Zaloguj się za pomocą Google
-                      </Button>
-                    )}
                   </>
                 )}
               </InfoBox>
             </RevealWrapper>
-          </Wrapper>
-        </DivCenter>
-      </Layout>
-    </>
+          </RightPanel>
+        )}
+      </MainContainer>
+    </Layout>
   );
 }

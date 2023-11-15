@@ -60,6 +60,7 @@ const StyledDescriptionDiv = styled.div`
   max-width: 850px;
   border-radius: 30px;
   background-color: var(--light-color);
+  box-shadow: var(--default-box-shadow);
   padding: 30px;
 `;
 
@@ -162,7 +163,12 @@ export default function ProductPage({ product, categoryPath }) {
             </Row>
           </ColWrapper>
           {product.description && (
-            <StyledDescriptionDiv>{product.description}</StyledDescriptionDiv>
+            <>
+              <div>
+                <h3>Opis produktu</h3>
+              </div>
+              <StyledDescriptionDiv>{product.description}</StyledDescriptionDiv>
+            </>
           )}
         </DivCenter>
       </Layout>

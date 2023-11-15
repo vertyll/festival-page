@@ -39,6 +39,7 @@ const Box = styled.div`
   background-color: var(--light-color);
   border-radius: 30px;
   padding: 30px;
+  box-shadow: var(--default-box-shadow);
 `;
 
 const ProductImage = styled.div`
