@@ -18,4 +18,7 @@
   --light-color: #fff;
   --nav-color: #222;
   --error-bg-color: #ffb2b2;
+  --alert-success-color: #7aff7ab0;
+  --alert-danger-color: #ffb2b2b0;
+  --alert-default-color: #858585b0;
 }

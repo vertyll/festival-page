@@ -11,6 +11,7 @@ import Button from "@/componenets/atoms/Button";
 import { CartContext } from "@/componenets/organism/CartContext";
 import { useContext, useState } from "react";
 import { Category } from "@/models/Category";
+import { Alert } from "@/componenets/atoms/Alert";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -64,8 +65,21 @@ const StyledDescriptionDiv = styled.div`
 
 export default function ProductPage({ product, categoryPath }) {
   const { addProduct } = useContext(CartContext);
-  // W komponencie ProductPage, dodaj następujący stan:
   const [selectedProperty, setSelectedProperty] = useState({});
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const alertDuration = 3000;
+
+  const handleAddToCartClick = () => {
+    if (allPropertiesSelected) {
+      addProduct(product._id, selectedProperty);
+      setAlertMessage("Produkt został dodany do koszyka.");
+      setShowAlert(true);
+    } else {
+      setAlertMessage("Wybierz wszystkie opcje przed dodaniem do koszyka.");
+      setShowAlert(true);
+    }
+  };
 
   const allPropertiesSelected = product.properties.every((prop) =>
     selectedProperty.hasOwnProperty(prop.name)
@@ -115,6 +129,14 @@ export default function ProductPage({ product, categoryPath }) {
   return (
     <>
       <Layout>
+        {showAlert && (
+          <Alert
+            message={alertMessage}
+            onClose={() => setShowAlert(false)}
+            duration={alertDuration}
+            type="success"
+          />
+        )}
         <DivCenter>
           <ColWrapper>
             <SingleBox>
@@ -129,16 +151,10 @@ export default function ProductPage({ product, categoryPath }) {
               </div>
               <Price>Cena: {product.price} zł</Price>
               <Button
-                onClick={() => {
-                  if (allPropertiesSelected) {
-                    addProduct(product._id, selectedProperty);
-                  } else {
-                    alert("Wybierz wszystkie opcje przed dodaniem do koszyka.");
-                  }
-                }}
+                onClick={handleAddToCartClick}
                 $size="m"
                 $usage="primary"
-                disabled={!allPropertiesSelected} // opcjonalnie, można dodać styl dla wyłączonego stanu w CSS
+                disabled={!allPropertiesSelected}
               >
                 <IconCart />
                 Dodaj do koszyka

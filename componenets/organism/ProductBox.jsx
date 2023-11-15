@@ -6,6 +6,8 @@ import { CartContext } from "../organism/CartContext";
 import IconHeart from "../atoms/IconHeart";
 import IconHeartOutline from "../atoms/IconHeartOutline";
 import axios from "axios";
+import { useSession } from "next-auth/react";
+import { Alert } from "../atoms/Alert";
 
 const Box = styled(Link)`
   background-color: white;
@@ -66,11 +68,24 @@ export default function ProductBox({
   onRemoveFromWishlist = () => {},
 }) {
   const { addProduct } = useContext(CartContext);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const alertDuration = 3000;
+  const { data: session } = useSession();
   const url = "/product/" + _id;
   const [isWished, setIsWished] = useState(wished);
-  function addToWishlist(ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
+  function addToWishlist(e, session) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!session) {
+      setAlertMessage(
+        "Musisz być zalogowany, aby dodać produkt do listy życzeń."
+      );
+      setShowAlert(true);
+      return;
+    }
+
     const nextValue = !isWished;
     if (nextValue === false && onRemoveFromWishlist) {
       onRemoveFromWishlist(_id);
@@ -85,9 +100,20 @@ export default function ProductBox({
 
   return (
     <Wrapper>
+      {showAlert && (
+        <Alert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+          duration={alertDuration}
+          type="danger"
+        />
+      )}
       <Box href={url}>
         <div>
-          <WishlistButton $wished={isWished} onClick={addToWishlist}>
+          <WishlistButton
+            $wished={isWished}
+            onClick={(e) => addToWishlist(e, session)}
+          >
             {isWished ? <IconHeart /> : <IconHeartOutline />}
           </WishlistButton>
           <img src={images?.[0]} alt="" />

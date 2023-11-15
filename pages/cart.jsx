@@ -26,6 +26,15 @@ const Wrapper = styled.div`
   }
 `;
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-height: 150px;
+  }
+`;
+
 const Box = styled.div`
   background-color: var(--light-color);
   border-radius: 30px;
@@ -279,7 +288,12 @@ export default function CartPage() {
             </Box>
             {!cartProducts?.length && (
               <Box>
-                <div>Tutaj będzie obrazek</div>
+                <ImageWrapper>
+                  <img
+                    src="https://nextjs-festival.s3.eu-north-1.amazonaws.com/shoppingbag1.png"
+                    alt="obrazek przedstawiający brak produktów w koszyku"
+                  />
+                </ImageWrapper>
               </Box>
             )}
             {!!cartProducts?.length && (
