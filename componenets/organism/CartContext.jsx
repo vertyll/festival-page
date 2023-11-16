@@ -22,25 +22,30 @@ export function CartContextProvider({ children }) {
   }, [cartProducts]);
 
   function addProduct(productId, selectedProperties) {
-    // Sprawdzenie, czy produkt już istnieje w koszyku
-    const existingProductIndex = cartProducts.findIndex(
-      (p) => p.productId === productId
-    );
+    setCartProducts((prevCartProducts) => {
+      // Sprawdzenie, czy istnieje produkt z takim samym productId i selectedProperties
+      const existingProductIndex = prevCartProducts.findIndex(
+        (p) =>
+          p.productId === productId &&
+          JSON.stringify(p.selectedProperties) ===
+            JSON.stringify(selectedProperties)
+      );
 
-    if (existingProductIndex !== -1) {
-      // Jeśli produkt już istnieje, zwiększ jego ilość
-      const updatedProducts = [...cartProducts];
-      updatedProducts[existingProductIndex].quantity += 1; // aktualizacja ilości
-      setCartProducts(updatedProducts);
-    } else {
-      // Jeśli to nowy produkt, dodaj go do koszyka z ilością 1
-      const newProduct = {
-        productId,
-        quantity: 1, // nowa właściwość: ilość
-        selectedProperty: selectedProperties,
-      };
-      setCartProducts((prev) => [...prev, newProduct]);
-    }
+      if (existingProductIndex !== -1) {
+        // Zwiększenie ilości dla istniejącego produktu
+        const updatedProducts = [...prevCartProducts];
+        updatedProducts[existingProductIndex].quantity += 1;
+        return updatedProducts;
+      } else {
+        // Dodanie nowego produktu do koszyka
+        const newProduct = {
+          productId,
+          selectedProperties,
+          quantity: 1,
+        };
+        return [...prevCartProducts, newProduct];
+      }
+    });
   }
 
   function removeProduct(productId) {

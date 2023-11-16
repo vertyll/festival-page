@@ -196,13 +196,15 @@ export default function CartPage() {
       <>
         <Layout>
           <DivCenter>
-            <Box>
-              <h1>Dziękujemy za złożone zamówienie</h1>
-              <p>
-                Wyślemy tobie powiadomienie email, kiedy twoje zamówienie będzie
-                gotowe
-              </p>
-            </Box>
+            <Wrapper>
+              <Box>
+                <h1>Dziękujemy za złożone zamówienie</h1>
+                <p>
+                  Wyślemy tobie powiadomienie email, kiedy twoje zamówienie
+                  będzie gotowe
+                </p>
+              </Box>
+            </Wrapper>
           </DivCenter>
         </Layout>
       </>
@@ -220,7 +222,7 @@ export default function CartPage() {
                   <h1>Twój koszyk jest pusty</h1>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
                   <Button $usage="primary" $size="m" onClick={goToShop}>
-                    Wróć do sklepu &#10140;
+                    Wróć do sklepu
                   </Button>
                 </div>
               )}
