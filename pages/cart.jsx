@@ -196,15 +196,13 @@ export default function CartPage() {
       <>
         <Layout>
           <DivCenter>
-            <Wrapper>
-              <Box>
-                <h1>Dziękujemy za złożone zamówienie</h1>
-                <p>
-                  Wyślemy tobie powiadomienie email, kiedy twoje zamówienie
-                  będzie gotowe
-                </p>
-              </Box>
-            </Wrapper>
+            <Box>
+              <h1>Dziękujemy za złożone zamówienie</h1>
+              <p>
+                Wyślemy tobie powiadomienie email, kiedy twoje zamówienie będzie
+                gotowe
+              </p>
+            </Box>
           </DivCenter>
         </Layout>
       </>
