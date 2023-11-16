@@ -5,8 +5,9 @@ const StyledTabs = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1200px) {
     flex-direction: row;
     gap: 20px;
     margin: 0 35px;

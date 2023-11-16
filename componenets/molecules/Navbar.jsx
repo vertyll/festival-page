@@ -34,6 +34,17 @@ const StyledLink = styled(Link)`
       }
     `}
 
+  ${(props) =>
+    props.$size === "bold" &&
+    css`
+      font-weight: bold;
+      font-size: 0.9em;
+
+      &:hover {
+        filter: brightness(0.85);
+      }
+    `}
+
   @media (max-width: 768px) {
     display: block;
     padding: 10px 20px;
@@ -139,8 +150,13 @@ export default function Navbar() {
     <StyledDiv>
       <CenterDiv>
         <StyledNav>
-          <StyledLink href="/products">Sklep</StyledLink>
-          <StyledLink href="/search">
+          <StyledLink href="/lineup" $size="bold">
+            LINE-UP
+          </StyledLink>
+          <StyledLink href="/products" $size="bold">
+            SKLEP
+          </StyledLink>
+          <StyledLink href="/search" $size="bold">
             <IconSearch />
           </StyledLink>
           <StyledLink href="/account" $usage="special">
@@ -163,12 +179,21 @@ export default function Navbar() {
         )}
 
         <StyledNav $open={isMobileMenuOpen}>
-          <StyledLink href="/search">
+          <StyledLink href="/search" $size="bold">
             <IconSearch />
           </StyledLink>
-          <StyledLink href="/products">Sklep</StyledLink>
-          <StyledLink href="/account">Konto</StyledLink>
-          <StyledLink href="/cart">Koszyk ({cartProducts.length})</StyledLink>
+          <StyledLink href="/lineup" $size="bold">
+            LINE-UP
+          </StyledLink>
+          <StyledLink href="/products" $size="bold">
+            Sklep
+          </StyledLink>
+          <StyledLink href="/account" $size="bold">
+            Konto
+          </StyledLink>
+          <StyledLink href="/cart" $size="bold">
+            Koszyk ({cartProducts.length})
+          </StyledLink>
         </StyledNav>
       </MobileMenuWrapper>
     </StyledDiv>
