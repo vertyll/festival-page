@@ -222,7 +222,7 @@ export default function CartPage() {
                   <h1>Twój koszyk jest pusty</h1>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
                   <Button $usage="primary" $size="m" onClick={goToShop}>
-                    Wróć do sklepu
+                    Wróć do sklepu &#10140;
                   </Button>
                 </div>
               )}
