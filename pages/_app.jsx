@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import { CartContextProvider } from "@/componenets/organism/CartContext";
 import { createGlobalStyle } from "styled-components";
 import { SessionProvider } from "next-auth/react";
+import ScrollToTop from "@/componenets/atoms/ScrollToTop";
 
 const GlobalStyles = createGlobalStyle`
   body{
@@ -22,6 +23,7 @@ export default function App({
       <SessionProvider session={session}>
         <CartContextProvider>
           <Component {...pageProps} />
+          <ScrollToTop />
         </CartContextProvider>
       </SessionProvider>
     </>
