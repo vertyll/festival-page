@@ -25,16 +25,16 @@ export default function FooterInfoLinks() {
   return (
     <Wrapper>
       <StyledP>Informacje:</StyledP>
-      <StyledLink href="/privacy-policy" passHref>
+      <StyledLink href="/privacypolicy" passHref>
         Polityka prywatności
       </StyledLink>
-      <StyledLink href="/terms-of-use" passHref>
+      <StyledLink href="/termsofuse" passHref>
         Warunki użytkowania
       </StyledLink>
       <StyledLink href="/regulations" passHref>
-        Regulamin
+        Regulamin sklepu
       </StyledLink>
-      <StyledLink href="/bag-policy" passHref>
+      <StyledLink href="/bagpolicy" passHref>
         Bag Policy
       </StyledLink>
     </Wrapper>

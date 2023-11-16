@@ -38,7 +38,7 @@ const LeftPanel = styled.div`
 
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -52,7 +52,7 @@ const RightPanel = styled.div`
 
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -69,7 +69,7 @@ const ProfilePicture = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 
 const CityHolder = styled.div`
@@ -227,10 +227,7 @@ export default function AccountPage() {
           <LeftPanel>
             <h3>Profil</h3>
             <UserProfile>
-              <ProfilePicture
-                src={session.user.image}
-                alt={session.user.name}
-              />
+              <ProfilePicture src={session.user.image} />
               <div>{session.user.name}</div>
             </UserProfile>
             <Button $usage="primary" onClick={logout} $size="m">
@@ -238,9 +235,11 @@ export default function AccountPage() {
             </Button>
           </LeftPanel>
         ) : (
-          <Button $usage="primary" $size="m" onClick={login}>
-            Zaloguj się za pomocą Google
-          </Button>
+          <>
+            <Button $usage="primary" $size="m" onClick={login}>
+              Zaloguj się za pomocą Google
+            </Button>
+          </>
         )}
 
         {session && (
