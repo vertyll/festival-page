@@ -85,6 +85,12 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 
+const SelectedPropertiesDiv = styled.div`
+  color: var(--gray-color);
+  font-weight: bold;
+  font-size: 0.9em;
+`;
+
 export default function CartPage() {
   const { data: session } = useSession();
   const { cartProducts, addProduct, removeProduct, clearCart } =
@@ -258,6 +264,12 @@ export default function CartPage() {
                         return null;
                       }
 
+                      const selectedPropertiesString = Object.entries(
+                        cartItem.selectedProperties
+                      )
+                        .map(([key, value]) => `${key}: ${value}`)
+                        .join(", ");
+
                       return (
                         <tr key={cartItem.uniqueKey}>
                           <td>
@@ -268,7 +280,12 @@ export default function CartPage() {
                               />
                             </ProductImage>
                           </td>
-                          <td>{fullProductData.name}</td>
+                          <td>
+                            {fullProductData.name}
+                            <SelectedPropertiesDiv>
+                              {selectedPropertiesString}
+                            </SelectedPropertiesDiv>
+                          </td>
                           <td>
                             <Button
                               $size="s"
