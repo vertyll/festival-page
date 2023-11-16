@@ -23,13 +23,11 @@ export function CartContextProvider({ children }) {
 
   function addProduct(productId, selectedProperties) {
     setCartProducts((prevCartProducts) => {
-      // Tworzenie unikalnego klucza dla produktu
       const uniqueKey = `${productId}-${JSON.stringify(selectedProperties)}`;
 
       // Sprawdzenie, czy istnieje już produkt o tym unikalnym kluczu
       const existingProductIndex = prevCartProducts.findIndex(
-        (p) =>
-          `${p.productId}-${JSON.stringify(p.selectedProperties)}` === uniqueKey
+        (item) => item.uniqueKey === uniqueKey
       );
 
       if (existingProductIndex !== -1) {
@@ -50,28 +48,30 @@ export function CartContextProvider({ children }) {
     });
   }
 
-  function removeProduct(productId) {
-    setCartProducts((prev) => {
-      const existingProductIndex = prev.findIndex(
-        (product) => product.productId === productId
+  function removeProduct(productId, selectedProperties) {
+    setCartProducts((prevCartProducts) => {
+      const uniqueKey = `${productId}-${JSON.stringify(selectedProperties)}`;
+      const existingProductIndex = prevCartProducts.findIndex(
+        (item) => item.uniqueKey === uniqueKey
       );
 
       if (existingProductIndex !== -1) {
-        const newCartProducts = [...prev];
+        const newCartProducts = [...prevCartProducts];
         const existingProduct = newCartProducts[existingProductIndex];
 
-        // Jeśli produkt ma ilość większą niż 1, zmniejszamy ilość
+        // Zmniejszenie ilości istniejącego produktu
         if (existingProduct.quantity > 1) {
           existingProduct.quantity -= 1;
         } else {
-          // Jeśli ilość wynosi 1, usuwamy produkt z koszyka
+          // Usunięcie produktu z koszyka, jeśli ilość wynosi 0
           newCartProducts.splice(existingProductIndex, 1);
         }
+
         return newCartProducts;
       }
 
-      // Jeśli produkt nie istnieje w koszyku, po prostu zwracamy poprzedni stan
-      return prev;
+      // Jeśli produkt nie istnieje w koszyku, zwracamy poprzedni stan
+      return prevCartProducts;
     });
   }
 

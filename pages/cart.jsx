@@ -104,9 +104,14 @@ export default function CartPage() {
   const router = useRouter();
   useEffect(() => {
     if (cartProducts.length > 0) {
-      axios.post("/api/cart", { ids: cartProducts }).then((response) => {
-        setProducts(response.data);
-      });
+      axios
+        .post("/api/cart", { ids: cartProducts })
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+        });
     } else {
       setProducts([]);
     }
@@ -146,21 +151,21 @@ export default function CartPage() {
   }, [session]);
   useEffect(() => {
     let newTotal = 0;
-    for (const product of products) {
-      const cartItem = cartProducts.find(
-        (item) => item.productId === product._id
-      );
-      newTotal += (cartItem?.quantity || 1) * product.price;
-    }
+    cartProducts.forEach((cartItem) => {
+      const product = products.find((p) => p._id === cartItem.productId);
+      if (product) {
+        newTotal += cartItem.quantity * product.price;
+      }
+    });
     setTotalPrice(newTotal);
   }, [cartProducts, products]);
 
-  function quanitityAdd(product) {
-    addProduct(product.productId, product.selectedProperties, 1);
+  function quantityAdd(cartItem) {
+    addProduct(cartItem.productId, cartItem.selectedProperties);
   }
 
-  function quantitySub(product) {
-    removeProduct(product.productId, product.selectedProperties, -1);
+  function quantitySub(cartItem) {
+    removeProduct(cartItem.productId, cartItem.selectedProperties);
   }
 
   function goToShop() {
@@ -197,15 +202,13 @@ export default function CartPage() {
       <>
         <Layout>
           <DivCenter>
-            <Wrapper>
-              <Box>
-                <h1>Dziękujemy za złożone zamówienie</h1>
-                <p>
-                  Wyślemy tobie powiadomienie email, kiedy twoje zamówienie
-                  będzie gotowe
-                </p>
-              </Box>
-            </Wrapper>
+            <Box>
+              <h1>Dziękujemy za złożone zamówienie</h1>
+              <p>
+                Wyślemy tobie powiadomienie email, kiedy twoje zamówienie będzie
+                gotowe
+              </p>
+            </Box>
           </DivCenter>
         </Layout>
       </>
@@ -238,40 +241,53 @@ export default function CartPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => {
-                      const cartProduct =
-                        cartProducts.find(
-                          (item) => item.productId === product._id
-                        ) || {};
+                    {cartProducts.map((cartItem) => {
+                      // Używaj uniqueKey z cartItem do znalezienia pełnych danych produktu
+                      const fullProductData = products.find(
+                        (product) => product._id === cartItem.productId
+                      );
+
+                      // Jeśli nie znaleziono pełnych danych produktu, nie renderuj wiersza
+                      if (!fullProductData) {
+                        console.log(
+                          "Nie znaleziono produktu dla productId:",
+                          cartItem.productId,
+                          "z selectedProperties:",
+                          cartItem.selectedProperties
+                        );
+                        return null;
+                      }
+
                       return (
-                        <tr key={product._id}>
+                        <tr key={cartItem.uniqueKey}>
                           <td>
                             <ProductImage>
-                              <img src={product.images[0]} alt="" />
+                              <img
+                                src={fullProductData.images[0]}
+                                alt={fullProductData.name}
+                              />
                             </ProductImage>
                           </td>
-                          <td>{product.name}</td>
+                          <td>{fullProductData.name}</td>
                           <td>
                             <Button
                               $size="s"
                               $usage="quantity"
-                              onClick={() => quantitySub(cartProduct)}
+                              onClick={() => quantitySub(cartItem)}
                             >
                               -
                             </Button>
-                            <QuantityLabel>
-                              {cartProduct.quantity || 1}{" "}
-                            </QuantityLabel>
+                            <QuantityLabel>{cartItem.quantity}</QuantityLabel>
                             <Button
                               $size="s"
                               $usage="quantity"
-                              onClick={() => quanitityAdd(cartProduct)}
+                              onClick={() => quantityAdd(cartItem)}
                             >
                               +
                             </Button>
                           </td>
                           <td>
-                            {(cartProduct.quantity || 1) * product.price} zł
+                            {cartItem.quantity * fullProductData.price} zł
                           </td>
                         </tr>
                       );
