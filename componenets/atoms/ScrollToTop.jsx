@@ -18,7 +18,7 @@ const StyledButton = styled.div`
   background-color: var(--main-medium-slate-blue-color);
   border-radius: 5px;
   transition: 0.5s;
-  display: ${({ show }) => (show ? "flex" : "none")};
+  display: ${({ $show }) => ($show ? "flex" : "none")};
 
   &:hover {
     color: var(--nav-color);
@@ -52,7 +52,7 @@ export default function ScrollToTop() {
   };
 
   return (
-    <StyledButton show={showButton} onClick={scrollToTop}>
+    <StyledButton $show={showButton} onClick={scrollToTop}>
       <IconTopArrow />
     </StyledButton>
   );
