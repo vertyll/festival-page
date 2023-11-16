@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     postalCode,
     streetAddress,
     country,
-    cartProducts, // Może zawierać produkty z lub bez właściwości.
+    cartProducts,
   } = req.body;
 
   await mongooseConnect();
@@ -38,8 +38,8 @@ export default async function handler(req, res) {
 
     if (productInfo) {
       let description = "Brak właściwości";
-      if (productDetail.selectedProperty) {
-        description = Object.entries(productDetail.selectedProperty)
+      if (productDetail.selectedProperties) {
+        description = Object.entries(productDetail.selectedProperties)
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");
       }
