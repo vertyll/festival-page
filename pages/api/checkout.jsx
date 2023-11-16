@@ -38,8 +38,8 @@ export default async function handler(req, res) {
 
     if (productInfo) {
       let description = "Brak właściwości";
-      if (productDetail.selectedProperties) {
-        description = Object.entries(productDetail.selectedProperties)
+      if (productDetail.selectedProperty) {
+        description = Object.entries(productDetail.selectedProperty)
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");
       }
@@ -89,9 +89,12 @@ export default async function handler(req, res) {
     shipping_options: [
       {
         shipping_rate_data: {
-          display_name: 'Cena dostawy',
+          display_name: "Cena dostawy",
           type: "fixed_amount",
-          fixed_amount: { amount: Number(shippingPriceSetting.value) * 100, currency: "PLN" },
+          fixed_amount: {
+            amount: Number(shippingPriceSetting.value) * 100,
+            currency: "PLN",
+          },
         },
       },
     ],
