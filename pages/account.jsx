@@ -231,13 +231,13 @@ export default function AccountPage() {
               <div>{session.user.name}</div>
             </UserProfile>
             <Button $usage="primary" onClick={logout} $size="m">
-              Wyloguj
+              Wyloguj &#8617;
             </Button>
           </LeftPanel>
         ) : (
           <>
             <Button $usage="primary" $size="m" onClick={login}>
-              Zaloguj się za pomocą Google
+              Logowanie Google &#8618;
             </Button>
           </>
         )}
