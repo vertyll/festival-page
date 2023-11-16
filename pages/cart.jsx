@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { validateFormValues } from "@/lib/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
+import IconCreditCart from "@/componenets/atoms/IconCreditCart";
 
 const Wrapper = styled.div`
   display: grid;
@@ -222,7 +223,7 @@ export default function CartPage() {
                   <h1>Twój koszyk jest pusty</h1>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
                   <Button $usage="primary" $size="m" onClick={goToShop}>
-                    Wróć do sklepu
+                    Wróć do sklepu &#8617;
                   </Button>
                 </div>
               )}
@@ -369,6 +370,7 @@ export default function CartPage() {
                   <ErrorDiv>{validationErrors["country"]}</ErrorDiv>
                 )}
                 <Button $size="m" $usage="primary" onClick={goToPayment}>
+                  <IconCreditCart />
                   Zapłać
                 </Button>
               </Box>
