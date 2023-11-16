@@ -8,6 +8,7 @@ const StyledOrder = styled.div`
   display: flex;
   gap: 50px;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Address = styled.div`
@@ -35,7 +36,9 @@ export default function SingleOrder({ line_items, createdAt, ...rest }) {
       <div>
         {line_items.map((item, index) => (
           <div key={index}>
-            <p>{item.quantity} x {item.price_data.product_data.name}</p>
+            <p>
+              {item.quantity} x {item.price_data.product_data.name}
+            </p>
             <p>{item.price_data.product_data.description}</p>
           </div>
         ))}
