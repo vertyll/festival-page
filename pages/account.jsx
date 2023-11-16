@@ -18,13 +18,13 @@ const MainContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   margin: 0 30px;
-  gap: 20px;
+  gap: 50px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
     margin: 0 15px;
-    gap: 10px;
+    gap: 50px;
   }
 `;
 
@@ -38,6 +38,7 @@ const LeftPanel = styled.div`
 
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
+    width: 80%;
   }
 `;
 
@@ -51,6 +52,7 @@ const RightPanel = styled.div`
 
   @media screen and (max-width: 768px) {
     flex: 0 0 100%;
+    width: 80%;
   }
 `;
 
