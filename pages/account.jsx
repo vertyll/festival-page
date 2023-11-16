@@ -379,7 +379,7 @@ export default function AccountPage() {
                           onClick={saveAddress}
                           $size="m"
                         >
-                          Zapisz
+                          Zapisz &#x2714;
                         </Button>
                       </StyledDataDiv>
                     )}
