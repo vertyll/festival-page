@@ -11,7 +11,7 @@ import { Alert } from "../atoms/Alert";
 
 const Box = styled(Link)`
   background-color: white;
-  padding: 25px;
+  padding: 30px 10px;
   height: 150px;
   text-align: center;
   display: flex;
