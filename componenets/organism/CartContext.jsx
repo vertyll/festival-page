@@ -23,22 +23,24 @@ export function CartContextProvider({ children }) {
 
   function addProduct(productId, selectedProperties) {
     setCartProducts((prevCartProducts) => {
-      // Sprawdzenie, czy istnieje produkt z takim samym productId i selectedProperties
+      // Tworzenie unikalnego klucza dla produktu
+      const uniqueKey = `${productId}-${JSON.stringify(selectedProperties)}`;
+
+      // Sprawdzenie, czy istnieje już produkt o tym unikalnym kluczu
       const existingProductIndex = prevCartProducts.findIndex(
         (p) =>
-          p.productId === productId &&
-          JSON.stringify(p.selectedProperties) ===
-            JSON.stringify(selectedProperties)
+          `${p.productId}-${JSON.stringify(p.selectedProperties)}` === uniqueKey
       );
 
       if (existingProductIndex !== -1) {
-        // Zwiększenie ilości dla istniejącego produktu
+        // Zwiększenie ilości istniejącego produktu
         const updatedProducts = [...prevCartProducts];
         updatedProducts[existingProductIndex].quantity += 1;
         return updatedProducts;
       } else {
-        // Dodanie nowego produktu do koszyka
+        // Dodanie nowego produktu do koszyka z unikalnym kluczem
         const newProduct = {
+          uniqueKey,
           productId,
           selectedProperties,
           quantity: 1,
