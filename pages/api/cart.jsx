@@ -13,7 +13,7 @@ export default async function handle(req, res) {
     // Na przykład możesz zbudować obiekt mapujący identyfikatory produktów na wybrane właściwości.
     const selectedProperties = {};
     inputProducts.forEach((item) => {
-      selectedProperties[item.productId] = item.selectedProperty;
+      selectedProperties[item.productId] = item.selectedProperties;
     });
 
     // Wyszukiwanie produktów w bazie danych
@@ -27,7 +27,7 @@ export default async function handle(req, res) {
 
       return {
         ...productObject,
-        selectedProperty: selectedProperties[productObject._id.toString()], // Dodaj 'selectedProperty' do produktu.
+        selectedProperties: selectedProperties[productObject._id.toString()], // Dodaj 'selectedProperty' do produktu.
       };
     });
 
