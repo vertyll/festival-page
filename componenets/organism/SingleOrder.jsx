@@ -1,4 +1,4 @@
-import { normalDate } from "@/lib/date";
+import { normalDate } from "@/utils/date";
 import styled from "styled-components";
 
 const StyledOrder = styled.div`
