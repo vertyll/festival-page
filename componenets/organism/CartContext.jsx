@@ -76,7 +76,7 @@ export function CartContextProvider({ children }) {
   }
 
   function clearCart() {
-    setCartProducts([]);
+    localStorage.removeItem("cart");
   }
 
   return (

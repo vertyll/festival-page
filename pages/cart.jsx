@@ -128,6 +128,7 @@ export default function CartPage() {
     }
     if (window?.location.href.includes("success")) {
       setIsSuccess(true);
+      clearCart();
     }
     axios.get("/api/settings?name=shippingPrice").then((response) => {
       setShippingPrice(response.data.value);
