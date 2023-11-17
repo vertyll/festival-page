@@ -38,7 +38,10 @@ export default async function handler(req, res) {
 
     if (productInfo) {
       let description = "Brak właściwości";
-      if (productDetail.selectedProperties) {
+      if (
+        productDetail.selectedProperties &&
+        Object.keys(productDetail.selectedProperties).length > 0
+      ) {
         description = Object.entries(productDetail.selectedProperties)
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");
