@@ -30,37 +30,28 @@ export default function PrivacyPolicyPage() {
             vitae scelerisque ligula mi tincidunt massa. Vestibulum vel tortor
             justo.
           </p>
-          <p>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-              <li>Praesent in lorem a ipsum luctus convallis id ut metus.</li>
-              <li>
-                Nam in sapien in enim pellentesque scelerisque quis sed justo.
-              </li>
-              <li>Maecenas ultrices elit ac ullamcorper auctor.</li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>Vivamus consectetur velit sit amet augue egestas aliquet.</li>
-              <li>
-                Cras sit amet odio dignissim, volutpat diam sed, dictum mauris.
-              </li>
-              <li>Proin placerat tellus interdum ligula pretium blandit.</li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>
-                Fusce quis tortor congue, rutrum odio non, sollicitudin sem.
-              </li>
-              <li>Etiam ultrices elit et mauris luctus vulputate.</li>
-              <li>Nullam accumsan lacus vestibulum feugiat congue.</li>
-              <li>Nam placerat felis a elementum finibus.</li>
-              <li>Sed lacinia augue et arcu posuere faucibus.</li>
-              <li>Donec pulvinar lorem varius vulputate volutpat.</li>
-            </ul>
-          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Praesent in lorem a ipsum luctus convallis id ut metus.</li>
+            <li>
+              Nam in sapien in enim pellentesque scelerisque quis sed justo.
+            </li>
+            <li>Maecenas ultrices elit ac ullamcorper auctor.</li>
+            <li>Vivamus consectetur velit sit amet augue egestas aliquet.</li>
+            <li>
+              Cras sit amet odio dignissim, volutpat diam sed, dictum mauris.
+            </li>
+            <li>Proin placerat tellus interdum ligula pretium blandit.</li>
+            <li>
+              Fusce quis tortor congue, rutrum odio non, sollicitudin sem.
+            </li>
+            <li>Etiam ultrices elit et mauris luctus vulputate.</li>
+            <li>Nullam accumsan lacus vestibulum feugiat congue.</li>
+            <li>Nam placerat felis a elementum finibus.</li>
+            <li>Sed lacinia augue et arcu posuere faucibus.</li>
+            <li>Donec pulvinar lorem varius vulputate volutpat.</li>
+          </ul>
+
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
             fermentum pharetra efficitur. Mauris nisi arcu, ultricies nec
@@ -92,59 +83,45 @@ export default function PrivacyPolicyPage() {
             velit, quis faucibus risus scelerisque vitae. Sed pulvinar urna id
             dignissim egestas.
           </p>
-          <p>
-            <ul>
-              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-              <li>Praesent in lorem a ipsum luctus convallis id ut metus.</li>
-              <li>
-                Nam in sapien in enim pellentesque scelerisque quis sed justo.
-              </li>
-              <li>Maecenas ultrices elit ac ullamcorper auctor.</li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>Vivamus consectetur velit sit amet augue egestas aliquet.</li>
-              <li>
-                Cras sit amet odio dignissim, volutpat diam sed, dictum mauris.
-              </li>
-              <li>Proin placerat tellus interdum ligula pretium blandit.</li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>
-                Fusce quis tortor congue, rutrum odio non, sollicitudin sem.
-              </li>
-              <li>Etiam ultrices elit et mauris luctus vulputate.</li>
-              <li>Nullam accumsan lacus vestibulum feugiat congue.</li>
-              <li>Nam placerat felis a elementum finibus.</li>
-              <li>Sed lacinia augue et arcu posuere faucibus.</li>
-              <li>Donec pulvinar lorem varius vulputate volutpat.</li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>Duis eleifend mauris malesuada porta interdum.</li>
-              <li>
-                Nulla malesuada nibh sed magna ornare, quis tristique urna
-                tincidunt.
-              </li>
-              <li>
-                Sed sit amet velit in orci sodales tristique sit amet a nulla.
-              </li>
-            </ul>
-          </p>
-          <p>
-            <ul>
-              <li>Phasellus feugiat lorem in aliquet euismod.</li>
-              <li>Mauris nec odio quis ipsum egestas vulputate.</li>
-              <li>Nunc nec metus nec odio lobortis accumsan.</li>
-              <li>Donec quis sapien varius, facilisis ante eget, tempus mi.</li>
-              <li>Curabitur sit amet turpis sed velit molestie suscipit.</li>
-              <li>Maecenas bibendum leo non bibendum fringilla.</li>
-            </ul>
-          </p>
+          <ul>
+            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+            <li>Praesent in lorem a ipsum luctus convallis id ut metus.</li>
+            <li>
+              Nam in sapien in enim pellentesque scelerisque quis sed justo.
+            </li>
+            <li>Maecenas ultrices elit ac ullamcorper auctor.</li>
+            <li>Vivamus consectetur velit sit amet augue egestas aliquet.</li>
+            <li>
+              Cras sit amet odio dignissim, volutpat diam sed, dictum mauris.
+            </li>
+          </ul>
+          <ul>
+            <li>Proin placerat tellus interdum ligula pretium blandit.</li>
+            <li>
+              Fusce quis tortor congue, rutrum odio non, sollicitudin sem.
+            </li>
+            <li>Etiam ultrices elit et mauris luctus vulputate.</li>
+            <li>Nullam accumsan lacus vestibulum feugiat congue.</li>
+            <li>Nam placerat felis a elementum finibus.</li>
+            <li>Sed lacinia augue et arcu posuere faucibus.</li>
+            <li>Donec pulvinar lorem varius vulputate volutpat.</li>
+            <li>Duis eleifend mauris malesuada porta interdum.</li>
+          </ul>
+          <ul>
+            <li>
+              Nulla malesuada nibh sed magna ornare, quis tristique urna
+              tincidunt.
+            </li>
+            <li>
+              Sed sit amet velit in orci sodales tristique sit amet a nulla.
+            </li>
+            <li>Phasellus feugiat lorem in aliquet euismod.</li>
+            <li>Mauris nec odio quis ipsum egestas vulputate.</li>
+            <li>Nunc nec metus nec odio lobortis accumsan.</li>
+            <li>Donec quis sapien varius, facilisis ante eget, tempus mi.</li>
+            <li>Curabitur sit amet turpis sed velit molestie suscipit.</li>
+            <li>Maecenas bibendum leo non bibendum fringilla.</li>
+          </ul>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
             fermentum pharetra efficitur. Mauris nisi arcu, ultricies nec
