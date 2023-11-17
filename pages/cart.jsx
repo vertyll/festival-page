@@ -215,6 +215,9 @@ export default function CartPage() {
                 Wyślemy tobie powiadomienie email, kiedy twoje zamówienie będzie
                 gotowe
               </p>
+              <Button $usage="primary" $size="m" onClick={goToShop}>
+                Wróć do sklepu &#8617;
+              </Button>
             </Box>
           </DivCenter>
         </Layout>
