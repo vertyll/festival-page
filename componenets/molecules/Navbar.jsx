@@ -4,6 +4,8 @@ import styled, { css } from "styled-components";
 import { CartContext } from "../organism/CartContext";
 import IconHamburger from "../atoms/IconHamburger";
 import IconSearch from "../atoms/IconSearch";
+import IconCart from "../atoms/IconCart";
+import IconUser from "../atoms/IconUser";
 
 const StyledDiv = styled.div`
   max-width: 800px;
@@ -12,6 +14,10 @@ const StyledDiv = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   color: var(--main-maize-color);
   text-decoration: none;
   cursor: pointer;
@@ -160,9 +166,11 @@ export default function Navbar() {
             <IconSearch />
           </StyledLink>
           <StyledLink href="/account" $usage="special">
+            <IconUser />
             Konto
           </StyledLink>
           <StyledLink href="/cart" $usage="special">
+            <IconCart />
             Koszyk ({cartProducts.length})
           </StyledLink>
         </StyledNav>
