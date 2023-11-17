@@ -3,6 +3,7 @@ import { CartContextProvider } from "@/componenets/organism/CartContext";
 import { createGlobalStyle } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "@/componenets/atoms/ScrollToTop";
+import { AnimatePresence } from "framer-motion";
 
 const GlobalStyles = createGlobalStyle`
   body{
@@ -16,13 +17,16 @@ const GlobalStyles = createGlobalStyle`
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
+  router,
 }) {
   return (
     <>
       <GlobalStyles />
       <SessionProvider session={session}>
         <CartContextProvider>
-          <Component {...pageProps} />
+          <AnimatePresence mode="wait">
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
           <ScrollToTop />
         </CartContextProvider>
       </SessionProvider>
