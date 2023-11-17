@@ -11,7 +11,7 @@ import Title from "@/componenets/atoms/Title";
 import FieldInput from "@/componenets/molecules/FieldInput";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { validateFormValues } from "@/lib/validation/validation";
+import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import IconCreditCart from "@/componenets/atoms/IconCreditCart";
 

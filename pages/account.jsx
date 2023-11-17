@@ -10,7 +10,7 @@ import Tabs from "@/componenets/organism/Tabs";
 import SingleOrder from "@/componenets/organism/SingleOrder";
 import Spinner from "@/componenets/atoms/Spinner";
 import FieldInput from "@/componenets/molecules/FieldInput";
-import { validateFormValues } from "@/lib/validation/validation";
+import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import DivCenter from "@/componenets/atoms/DivCenter";
 

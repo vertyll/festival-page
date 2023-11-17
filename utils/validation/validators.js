@@ -1,6 +1,6 @@
 export const validateName = (name) => {
   if (!name.trim()) {
-    return "Proszę wpisać nazwę.";
+    return "Proszę wpisać imię.";
   } else if (name.trim().length > 30) {
     return "Nazwa nie może przekraczać 30 znaków.";
   }
@@ -53,7 +53,7 @@ export const validateStreetAddress = (streetAddress) => {
 
 export const validateCountry = (country) => {
   if (!country.trim()) {
-    return "Proszę wybrać kraj.";
+    return "Proszę wpisać kraj.";
   } else if (country.trim().length > 50) {
     return "Nazwa kraju nie może przekraczać 50 znaków.";
   }
