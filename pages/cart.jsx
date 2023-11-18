@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import IconCreditCart from "@/componenets/atoms/IconCreditCart";
+import AnimatedThanksImage from "@/componenets/atoms/AnimatedThanksImage";
+import AnimatedCartIcon from "@/componenets/atoms/AnimatedCartIcon";
 
 const Wrapper = styled.div`
   display: grid;
@@ -212,9 +214,10 @@ export default function CartPage() {
             <Box>
               <h1>Dziękujemy za złożone zamówienie</h1>
               <p>
-                Wyślemy tobie powiadomienie email, kiedy twoje zamówienie będzie
+                Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie
                 gotowe
               </p>
+              <AnimatedThanksImage style={{ maxWidth: '200px', height: '200px' }}/>
               <Button $usage="primary" $size="m" onClick={goToShop}>
                 Wróć do sklepu &#8617;
               </Button>
@@ -328,10 +331,7 @@ export default function CartPage() {
             {!cartProducts?.length && (
               <Box>
                 <ImageWrapper>
-                  <img
-                    src="https://nextjs-festival.s3.eu-north-1.amazonaws.com/shoppingbag1.png"
-                    alt="obrazek przedstawiający brak produktów w koszyku"
-                  />
+                  <AnimatedCartIcon />
                 </ImageWrapper>
               </Box>
             )}

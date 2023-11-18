@@ -13,6 +13,7 @@ import FieldInput from "@/componenets/molecules/FieldInput";
 import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import DivCenter from "@/componenets/atoms/DivCenter";
+import AnimatedLoginImage from "@/componenets/atoms/AnimatedLoginImage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +37,16 @@ const Wrapper = styled.div`
     gap: 50px;
     width: 100%;
   }
+`;
+
+const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const LoginInfo = styled.div`
+  max-width: 450px;
+  width: 100%;
 `;
 
 const LeftPanel = styled.div`
@@ -260,9 +271,27 @@ export default function AccountPage() {
             </LeftPanel>
           ) : (
             <>
-              <Button $usage="primary" $size="m" onClick={login}>
-                Logowanie Google &#8618;
-              </Button>
+              <LoginWrapper>
+                <LoginInfo>
+                  <h2>Zaloguj się na swoje konto</h2>
+                  <p>
+                    <b>I zgarnij korzyśći jakie daje Ci konto</b>
+                  </p>
+                  <p>
+                    Logując się, możesz dodać swoje produkty do listy
+                    ulubionych, zapisać dane do kolejnych płatności i sprawdzić
+                    stan swojego zamówienia
+                  </p>
+                  <Button $usage="primary" $size="m" onClick={login}>
+                    Logowanie Google &#8618;
+                  </Button>
+                </LoginInfo>
+                <div>
+                  <AnimatedLoginImage
+                    style={{ maxWidth: "350px", height: "350px" }}
+                  />
+                </div>
+              </LoginWrapper>
             </>
           )}
 
@@ -342,7 +371,9 @@ export default function AccountPage() {
                             onChange={(e) => setName(e.target.value)}
                           />
                           {validationErrors["name"] && (
-                            <ErrorDiv className="error-div-class">{validationErrors["name"]}</ErrorDiv>
+                            <ErrorDiv className="error-div-class">
+                              {validationErrors["name"]}
+                            </ErrorDiv>
                           )}
                           <FieldInput
                             labelText="Email"
@@ -353,7 +384,9 @@ export default function AccountPage() {
                             onChange={(e) => setEmail(e.target.value)}
                           />
                           {validationErrors["email"] && (
-                            <ErrorDiv  className="error-div-class">{validationErrors["email"]}</ErrorDiv>
+                            <ErrorDiv className="error-div-class">
+                              {validationErrors["email"]}
+                            </ErrorDiv>
                           )}
                           <CityHolder>
                             <FieldInput
@@ -365,7 +398,9 @@ export default function AccountPage() {
                               onChange={(e) => setCity(e.target.value)}
                             />
                             {validationErrors["city"] && (
-                              <ErrorDiv className="error-div-class">{validationErrors["city"]}</ErrorDiv>
+                              <ErrorDiv className="error-div-class">
+                                {validationErrors["city"]}
+                              </ErrorDiv>
                             )}
                             <FieldInput
                               labelText="Kod pocztowy"
@@ -403,7 +438,9 @@ export default function AccountPage() {
                             onChange={(e) => setCountry(e.target.value)}
                           />
                           {validationErrors["country"] && (
-                            <ErrorDiv className="error-div-class">{validationErrors["country"]}</ErrorDiv>
+                            <ErrorDiv className="error-div-class">
+                              {validationErrors["country"]}
+                            </ErrorDiv>
                           )}
                           <Button
                             $usage="primary"

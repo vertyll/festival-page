@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import Spinner from "@/componenets/atoms/Spinner";
 import styled from "styled-components";
+import AnimatedSearchIcon from "@/componenets/atoms/AnimatedSearchIcon";
 
 const SearchWrapper = styled.div`
   max-width: 980px;
@@ -59,9 +60,12 @@ export default function SearchPage() {
           <h2>Brak wyników dla &ldquo;{term}&rdquo;</h2>
         )}
         {isLoading && <Spinner />}
-        {!isLoading && products.length > 0 && (
-          <ProductContainer products={products} />
-        )}
+        {!isLoading &&
+          (products.length > 0 ? (
+            <ProductContainer products={products} />
+          ) : (
+            <AnimatedSearchIcon style={{ maxWidth: '450px', height: '450px' }} />
+          ))}
       </DivCenter>
     </Layout>
   );
