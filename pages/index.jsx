@@ -8,12 +8,18 @@ import Title from "@/componenets/atoms/Title";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { WishedProduct } from "@/models/WishedProduct";
 import { getServerSession } from "next-auth";
+import ArtistContainer from "@/componenets/organism/ArtistContainer";
+import { Artist } from "@/models/Artist";
 
-export default function HomePage({ newProducts, wishedNewProducts }) {
+export default function HomePage({ newProducts, wishedNewProducts, newArtists }) {
   return (
     <Layout>
       <Banner />
       <DivCenter>
+        <Title>Artyści 2024</Title>
+        <ArtistContainer
+          artists={newArtists}
+        />
         <Title>Nowe produkty</Title>
         <ProductContainer
           products={newProducts}
@@ -30,6 +36,10 @@ export async function getServerSideProps(ctx) {
     sort: { _id: -1 },
     limit: 8,
   });
+  const newArtists = await Artist.find({}, null, {
+    sort: { _id: -1 },
+    limit: 8,
+  });
   const session = await getServerSession(ctx.req, ctx.res, authOptions);
   const wishedNewProducts = session?.user
     ? await WishedProduct.find({
@@ -41,6 +51,7 @@ export async function getServerSideProps(ctx) {
     props: {
       newProducts: JSON.parse(JSON.stringify(newProducts)),
       wishedNewProducts: wishedNewProducts.map((i) => i.product.toString()),
+      newArtists: JSON.parse(JSON.stringify(newArtists)),
     },
   };
 }
