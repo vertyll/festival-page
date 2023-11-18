@@ -135,6 +135,12 @@ const StyledDataDiv = styled.div`
   border-radius: 30px;
   margin: 0px;
 
+  .error-div-class {
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+  }
+
   label {
     max-width: 450px;
     width: 100%;
@@ -336,7 +342,7 @@ export default function AccountPage() {
                             onChange={(e) => setName(e.target.value)}
                           />
                           {validationErrors["name"] && (
-                            <ErrorDiv>{validationErrors["name"]}</ErrorDiv>
+                            <ErrorDiv className="error-div-class">{validationErrors["name"]}</ErrorDiv>
                           )}
                           <FieldInput
                             labelText="Email"
@@ -347,7 +353,7 @@ export default function AccountPage() {
                             onChange={(e) => setEmail(e.target.value)}
                           />
                           {validationErrors["email"] && (
-                            <ErrorDiv>{validationErrors["email"]}</ErrorDiv>
+                            <ErrorDiv  className="error-div-class">{validationErrors["email"]}</ErrorDiv>
                           )}
                           <CityHolder>
                             <FieldInput
@@ -359,7 +365,7 @@ export default function AccountPage() {
                               onChange={(e) => setCity(e.target.value)}
                             />
                             {validationErrors["city"] && (
-                              <ErrorDiv>{validationErrors["city"]}</ErrorDiv>
+                              <ErrorDiv className="error-div-class">{validationErrors["city"]}</ErrorDiv>
                             )}
                             <FieldInput
                               labelText="Kod pocztowy"
@@ -370,7 +376,7 @@ export default function AccountPage() {
                               onChange={(e) => setPostalCode(e.target.value)}
                             />
                             {validationErrors["postalCode"] && (
-                              <ErrorDiv>
+                              <ErrorDiv className="error-div-class">
                                 {validationErrors["postalCode"]}
                               </ErrorDiv>
                             )}
@@ -384,7 +390,7 @@ export default function AccountPage() {
                             onChange={(e) => setStreetAddress(e.target.value)}
                           />
                           {validationErrors["streetAddress"] && (
-                            <ErrorDiv>
+                            <ErrorDiv className="error-div-class">
                               {validationErrors["streetAddress"]}
                             </ErrorDiv>
                           )}
@@ -397,7 +403,7 @@ export default function AccountPage() {
                             onChange={(e) => setCountry(e.target.value)}
                           />
                           {validationErrors["country"] && (
-                            <ErrorDiv>{validationErrors["country"]}</ErrorDiv>
+                            <ErrorDiv className="error-div-class">{validationErrors["country"]}</ErrorDiv>
                           )}
                           <Button
                             $usage="primary"
