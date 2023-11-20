@@ -3,12 +3,11 @@ const { createContext, useState, useEffect } = require("react");
 export const CartContext = createContext({});
 
 export function CartContextProvider({ children }) {
-  const [cartProducts, setCartProducts] = useState([]); // Początkowy stan to pusta tablica
+  const [cartProducts, setCartProducts] = useState([]);
   useEffect(() => {
     const cartItems = localStorage.getItem("cart");
 
     if (cartItems) {
-      // Jeśli znaleziono elementy w koszyku, ustaw stan
       setCartProducts(JSON.parse(cartItems));
     }
   }, []); // Pusta tablica zależności oznacza, że ten efekt działa raz, podobnie jak componentDidMount
