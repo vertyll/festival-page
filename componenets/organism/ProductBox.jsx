@@ -113,7 +113,7 @@ export default function ProductBox({
           {isWished ? <IconHeart /> : <IconHeartOutline />}
         </WishlistButton>
         <Image
-          src={images?.[0] || "/no-results-found.png"}
+          src={images?.[0] || "/no-image-found.png"}
           alt=""
           fill={true}
           sizes="100vh"

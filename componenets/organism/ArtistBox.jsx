@@ -4,10 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Box = styled(Link)`
-  background-color: white;
+  background-color: var(--border-color-light);
   padding: 30px 10px;
-  height: 150px;
-  width: 200px;
+  height: 100px;
+  width: 170px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -15,11 +15,11 @@ const Box = styled(Link)`
   text-decoration: none;
   color: inherit;
   position: relative;
-  box-shadow: var(--default-box-shadow);
 `;
 
 const Name = styled(Link)`
-  font-weight: normal;
+  font-weight: bold;
+  font-size: 1.2em;
   margin: 0;
   text-decoration: none;
   color: inherit;
@@ -29,16 +29,41 @@ const ArtistInfo = styled.div`
   margin-top: 10px;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background-color: white;
+  padding: 20px;
+  box-shadow: var(--default-box-shadow);
+`;
 
-export default function ArtistBox({ _id, name, images }) {
+const ArtistName = styled.div`
+  margin: 5px 0;
+`;
+
+const Date = styled(Link)`
+  font-weight: normal;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+`;
+
+const Stage = styled(Link)`
+  font-weight: normal;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+`;
+
+export default function ArtistBox({ _id, name, images, concertDate, scene }) {
   const url = "/artist/" + _id;
 
   return (
     <Wrapper>
+      <ArtistName>
+        <Name href={url}>{name}</Name>
+      </ArtistName>
       <Box href={url}>
         <Image
-          src={images?.[0] || "/no-results-found.png"}
+          src={images?.[0] || "/no-image-found.png"}
           alt=""
           fill={true}
           sizes="100vh"
@@ -49,7 +74,6 @@ export default function ArtistBox({ _id, name, images }) {
         />
       </Box>
       <ArtistInfo>
-        <Name href={url}>{name}</Name>
       </ArtistInfo>
     </Wrapper>
   );
