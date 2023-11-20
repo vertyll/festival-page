@@ -12,7 +12,7 @@ const AlertWrapper = styled.div`
       : props.type === "danger"
       ? "var(--alert-danger-color)"
       : "var(--alert-default-color)"};
-  color: black;
+  color: var(--dark-text-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@ const CloseButton = styled.button`
   transform: translateY(-50%);
   border: none;
   background: none;
-  color: black;
+  color: var(--dark-text-color);
   font-size: 20px;
   cursor: pointer;
 `;

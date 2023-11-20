@@ -53,7 +53,7 @@ const LeftPanel = styled.div`
   flex: 0 0 30%;
   padding: 20px;
   border-radius: 30px;
-  background-color: #fff;
+  background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   height: fit-content;
 
@@ -67,7 +67,7 @@ const RightPanel = styled.div`
   flex: 1;
   padding: 20px;
   border-radius: 30px;
-  background-color: #fff;
+  background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   min-width: 0;
 

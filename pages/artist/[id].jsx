@@ -5,7 +5,6 @@ import Layout from "@/componenets/templates/Layout";
 import Title from "@/componenets/atoms/Title";
 import SingleBox from "@/componenets/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
-import { Scene } from "@/models/Scene";
 import ArtistImage from "@/componenets/organism/ArtistImage";
 
 const ColWrapper = styled.div`

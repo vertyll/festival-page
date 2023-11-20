@@ -15,6 +15,7 @@ export default async function handle(req, res) {
       res.json(await Address.create({ userEmail: user.email, ...req.body }));
     }
   }
+
   if (req.method === "GET") {
     const address = await Address.findOne({ userEmail: user.email });
     res.json(address);

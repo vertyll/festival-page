@@ -103,7 +103,6 @@ export default async function handler(req, res) {
     ],
   });
 
-  // Odpowiedź serwera z adresem URL do przejścia na stronę płatności Stripe.
   res.json({
     url: stripeSession.url,
   });

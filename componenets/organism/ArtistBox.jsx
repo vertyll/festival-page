@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import { formatDate } from "@/utils/date";
@@ -21,14 +21,14 @@ const HoverText = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #000000bc;
-  color: white;
+  background-color: var(--main-night-color);
+  color: var(--light-text-color);
   padding: 2px 5px;
   border-radius: 5px;
   font-size: 0.8em;
-  opacity: 0; // Initially hidden
-  transition: opacity 0.3s ease-in-out; // Smooth transition for opacity
-  animation: ${fadeIn} 0.3s ease-in-out; // Apply the fade-in animation
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  animation: ${fadeIn} 0.3s ease-in-out;
 `;
 
 const Box = styled(Link)`
@@ -64,7 +64,7 @@ const ArtistInfo = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: white;
+  background-color: var(--light-color);
   padding: 20px;
   box-shadow: var(--default-box-shadow);
 `;
