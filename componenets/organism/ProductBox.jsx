@@ -120,6 +120,7 @@ export default function ProductBox({
           style={{
             objectFit: 'cover',
           }}
+          priority={false}
         />
       </Box>
       <ProductInfo>

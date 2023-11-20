@@ -45,6 +45,7 @@ export default function ArtistBox({ _id, name, images }) {
           style={{
             objectFit: "cover",
           }}
+          priority={false}
         />
       </Box>
       <ArtistInfo>
