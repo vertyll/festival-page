@@ -35,17 +35,7 @@ const StyledDescriptionDiv = styled.div`
   padding: 30px;
 `;
 
-export default function ArtistPage({ artist, scenePath }) {
-  const renderScenePath = () => {
-    if (!scenePath.length) return "Brak sceny";
-
-    return scenePath.map((sce, index) => (
-      <span key={sce._id}>
-        {sce.name} {index < sce.length - 1 ? " / " : ""}
-      </span>
-    ));
-  };
-
+export default function ArtistPage({ artist }) {
   return (
     <>
       <Layout>
@@ -56,7 +46,7 @@ export default function ArtistPage({ artist, scenePath }) {
             </SingleBox>
             <Row>
               <Title>{artist.name}</Title>
-              <div>Scena: {renderScenePath()}</div>
+              <div>Scena: </div>
             </Row>
           </ColWrapper>
           {artist.description && (
@@ -77,32 +67,10 @@ export async function getServerSideProps(context) {
   await mongooseConnect();
   const { id } = context.query;
   const artist = await Artist.findById(id).populate("scene");
-  const sceneInfo = await Scene.find();
 
-  const idToScene = sceneInfo.reduce((acc, scene) => {
-    acc[scene._id.toString()] = scene;
-    return acc;
-  }, {});
-
-  const getScenePath = (sceneId) => {
-    const path = [];
-    let currentScene = idToScene[sceneId];
-
-    while (currentScene) {
-      path.unshift(currentScene);
-      currentScene = currentScene.parent
-        ? idToScene[currentScene.parent.toString()]
-        : null;
-    }
-
-    return path;
-  };
-
-  const scenePath = artist.scene ? getScenePath(artist.scene._id) : [];
   return {
     props: {
       artist: JSON.parse(JSON.stringify(artist)),
-      scenePath: JSON.parse(JSON.stringify(scenePath)),
     },
   };
 }

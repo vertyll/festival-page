@@ -20,7 +20,7 @@ export default function HomePage({
     <Layout>
       <Banner />
       <DivCenter>
-        <Title>Artyści 2024</Title>
+        <Title>Nowo ogłoszeni artyści</Title>
         <ArtistContainer artists={newArtists} />
         <Title>Nowe produkty</Title>
         <ProductContainer
@@ -40,6 +40,7 @@ export async function getServerSideProps(ctx) {
   });
   const newArtists = await Artist.find({}, null, {
     sort: { _id: -1 },
+    limit: 2,
   });
   const session = await getServerSession(ctx.req, ctx.res, authOptions);
   const wishedNewProducts = session?.user
