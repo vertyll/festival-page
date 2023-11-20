@@ -10,11 +10,14 @@ import { WishedProduct } from "@/models/WishedProduct";
 import { getServerSession } from "next-auth";
 import ArtistContainer from "@/componenets/organism/ArtistContainer";
 import { Artist } from "@/models/Artist";
+import { News } from "@/models/News";
+import NewsContainer from "@/componenets/organism/NewsContainer";
 
 export default function HomePage({
   newProducts,
   wishedNewProducts,
   newArtists,
+  newNews,
 }) {
   return (
     <Layout>
@@ -27,6 +30,8 @@ export default function HomePage({
           products={newProducts}
           wishedProducts={wishedNewProducts}
         />
+        <Title>Nowe newsy</Title>
+        <NewsContainer news={newNews} />
       </DivCenter>
     </Layout>
   );
@@ -39,6 +44,10 @@ export async function getServerSideProps(ctx) {
     limit: 8,
   });
   const newArtists = await Artist.find({}, null, {
+    sort: { _id: -1 },
+    limit: 4,
+  });
+  const newNews = await News.find({}, null, {
     sort: { _id: -1 },
     limit: 2,
   });
@@ -54,6 +63,7 @@ export async function getServerSideProps(ctx) {
       newProducts: JSON.parse(JSON.stringify(newProducts)),
       wishedNewProducts: wishedNewProducts.map((i) => i.product.toString()),
       newArtists: JSON.parse(JSON.stringify(newArtists)),
+      newNews: JSON.parse(JSON.stringify(newNews)),
     },
   };
 }
