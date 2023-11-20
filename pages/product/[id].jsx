@@ -89,7 +89,7 @@ export default function ProductPage({ product, categoryPath }) {
   const handlePropertySelection = (propertyName, option) => {
     setSelectedProperty((prev) => ({
       ...prev,
-      [propertyName]: option, // Tutaj zapisujemy wybraną opcję dla danej właściwości.
+      [propertyName]: option, // Zapisujemy wybraną opcję dla danej właściwości.
     }));
   };
 

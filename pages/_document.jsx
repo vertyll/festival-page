@@ -34,7 +34,6 @@ export default class MyDocument extends Document {
     }
   }
 
-  // Renderowanie struktury dokumentu HTML
   render() {
     return (
       <Html>
