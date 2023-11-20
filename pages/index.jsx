@@ -11,15 +11,17 @@ import { getServerSession } from "next-auth";
 import ArtistContainer from "@/componenets/organism/ArtistContainer";
 import { Artist } from "@/models/Artist";
 
-export default function HomePage({ newProducts, wishedNewProducts, newArtists }) {
+export default function HomePage({
+  newProducts,
+  wishedNewProducts,
+  newArtists,
+}) {
   return (
     <Layout>
       <Banner />
       <DivCenter>
         <Title>Artyści 2024</Title>
-        <ArtistContainer
-          artists={newArtists}
-        />
+        <ArtistContainer artists={newArtists} />
         <Title>Nowe produkty</Title>
         <ProductContainer
           products={newProducts}
@@ -38,7 +40,6 @@ export async function getServerSideProps(ctx) {
   });
   const newArtists = await Artist.find({}, null, {
     sort: { _id: -1 },
-    limit: 8,
   });
   const session = await getServerSession(ctx.req, ctx.res, authOptions);
   const wishedNewProducts = session?.user

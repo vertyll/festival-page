@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import ProductBox from "./ProductBox";
-import { RevealWrapper } from "next-reveal";
 import ArtistBox from "./ArtistBox";
+import { RevealWrapper } from "next-reveal";
 
 const ArtistGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 50px;
   padding-top: 50px;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 `;
 

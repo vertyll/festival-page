@@ -8,25 +8,20 @@ import IconHeartOutline from "../atoms/IconHeartOutline";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Alert } from "../atoms/Alert";
+import Image from "next/image";
 
 const Box = styled(Link)`
   background-color: white;
   padding: 30px 10px;
-  height: 150px;
   text-align: center;
+  height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   color: inherit;
-  border-radius: 30px;
   position: relative;
   box-shadow: var(--default-box-shadow);
-
-  img {
-    max-width: 100%;
-    max-height: 150px;
-  }
 `;
 
 const WishlistButton = styled.button`
@@ -39,6 +34,7 @@ const WishlistButton = styled.button`
   right: 0;
   background: transparent;
   cursor: pointer;
+  z-index: 1;
   color: ${(props) => (props.$wished ? "red" : "black")};
   svg {
     width: 16px;
@@ -68,7 +64,7 @@ export default function ProductBox({
   wished = false,
   onRemoveFromWishlist = () => {},
 }) {
-  const { addProduct } = useContext(CartContext);
+  // const { addProduct } = useContext(CartContext);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const alertDuration = 3000;
@@ -110,15 +106,21 @@ export default function ProductBox({
         />
       )}
       <Box href={url}>
-        <div>
-          <WishlistButton
-            $wished={isWished}
-            onClick={(e) => addToWishlist(e, session)}
-          >
-            {isWished ? <IconHeart /> : <IconHeartOutline />}
-          </WishlistButton>
-          <img src={images?.[0]} alt="" />
-        </div>
+        <WishlistButton
+          $wished={isWished}
+          onClick={(e) => addToWishlist(e, session)}
+        >
+          {isWished ? <IconHeart /> : <IconHeartOutline />}
+        </WishlistButton>
+        <Image
+          src={images?.[0] || "/no-results-found.png"}
+          alt=""
+          fill={true}
+          sizes="100vh"
+          style={{
+            objectFit: 'cover',
+          }}
+        />
       </Box>
       <ProductInfo>
         <Name href={url}>{name}</Name>
