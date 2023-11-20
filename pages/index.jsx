@@ -23,15 +23,29 @@ export default function HomePage({
     <Layout>
       <Banner />
       <DivCenter>
-        <Title>Nowo ogłoszeni artyści</Title>
-        <ArtistContainer artists={newArtists} />
-        <Title>Nowe produkty</Title>
-        <ProductContainer
-          products={newProducts}
-          wishedProducts={wishedNewProducts}
-        />
-        <Title>Nowe newsy</Title>
-        <NewsContainer news={newNews} />
+        {newArtists && newArtists.length > 0 && (
+          <>
+            <Title>Nowo ogłoszeni artyści</Title>
+            <ArtistContainer artists={newArtists} />
+          </>
+        )}
+
+        {newProducts && newProducts.length > 0 && (
+          <>
+            <Title>Nowe produkty</Title>
+            <ProductContainer
+              products={newProducts}
+              wishedProducts={wishedNewProducts}
+            />
+          </>
+        )}
+
+        {newNews && newNews.length > 0 && (
+          <>
+            <Title>Nowe newsy</Title>
+            <NewsContainer news={newNews} />
+          </>
+        )}
       </DivCenter>
     </Layout>
   );
