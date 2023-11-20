@@ -1,10 +1,38 @@
 /* eslint-disable @next/next/no-img-element */
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import { formatDate } from "@/utils/date";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+`;
+
+const HoverText = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000bc;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  opacity: 0; // Initially hidden
+  transition: opacity 0.3s ease-in-out; // Smooth transition for opacity
+  animation: ${fadeIn} 0.3s ease-in-out; // Apply the fade-in animation
+`;
 
 const Box = styled(Link)`
-  background-color: var(--border-color-light);
+  background-color: var(--lavender-color);
   padding: 30px 10px;
   height: 100px;
   width: 170px;
@@ -15,6 +43,11 @@ const Box = styled(Link)`
   text-decoration: none;
   color: inherit;
   position: relative;
+
+  &:hover ${HoverText} {
+    display: block;
+    opacity: 1;
+  }
 `;
 
 const Name = styled(Link)`
@@ -27,6 +60,7 @@ const Name = styled(Link)`
 
 const ArtistInfo = styled.div`
   margin-top: 10px;
+  display: flex;
 `;
 
 const Wrapper = styled.div`
@@ -39,8 +73,9 @@ const ArtistName = styled.div`
   margin: 5px 0;
 `;
 
-const Date = styled(Link)`
-  font-weight: normal;
+const ConcertDate = styled(Link)`
+  font-weight: bold;
+  font-size: 0.9em;
   margin: 0;
   text-decoration: none;
   color: inherit;
@@ -53,7 +88,7 @@ const Stage = styled(Link)`
   color: inherit;
 `;
 
-export default function ArtistBox({ _id, name, images, concertDate, scene }) {
+export default function ArtistBox({ _id, name, images, concertDate }) {
   const url = "/artist/" + _id;
 
   return (
@@ -72,8 +107,10 @@ export default function ArtistBox({ _id, name, images, concertDate, scene }) {
           }}
           priority={false}
         />
+        <HoverText>Zobacz artystę &#8594;</HoverText>
       </Box>
       <ArtistInfo>
+        <ConcertDate href={url}>{formatDate(concertDate)}</ConcertDate>
       </ArtistInfo>
     </Wrapper>
   );
