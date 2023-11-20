@@ -34,8 +34,8 @@ const HoverText = styled.div`
 const Box = styled(Link)`
   background-color: var(--lavender-color);
   padding: 30px 10px;
-  height: 100px;
-  width: 170px;
+  height: 300px;
+  width: 200px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -64,9 +64,11 @@ const NewsInfo = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: white;
-  padding: 20px;
+  background-color: var(--main-plum-color);
   box-shadow: var(--default-box-shadow);
+  display: flex;
+  gap: 10px;
+  padding-right: 10px;
 `;
 
 const NewsName = styled.div`
@@ -86,9 +88,6 @@ export default function NewsBox({ _id, name, images }) {
 
   return (
     <Wrapper>
-      <NewsName>
-        <Name href={url}>{name}</Name>
-      </NewsName>
       <Box href={url}>
         <Image
           src={images?.[0] || "/no-image-found.png"}
@@ -102,6 +101,9 @@ export default function NewsBox({ _id, name, images }) {
         />
         <HoverText>Przeczytaj newsa &#8594;</HoverText>
       </Box>
+      <NewsName>
+        <Name href={url}>{name}</Name>
+      </NewsName>
     </Wrapper>
   );
 }
