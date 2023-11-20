@@ -5,16 +5,21 @@ import Layout from "@/componenets/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Artist } from "@/models/Artist";
 
-export default function LineUpPage({artists}) {
+export default function LineUpPage({ artists }) {
   return (
     <Layout>
       <DivCenter>
         <Title>PROGRAM 2024</Title>
-        <ArtistContainer artists={artists} />
+        {artists && artists.length > 0 ? (
+          <ArtistContainer artists={artists} />
+        ) : (
+          <p>Brak artystów do wyświetlenia</p>
+        )}
       </DivCenter>
     </Layout>
   );
 }
+
 
 export async function getServerSideProps(ctx) {
   await mongooseConnect();

@@ -159,6 +159,9 @@ export default function Navbar() {
           <StyledLink href="/lineup" $size="bold">
             LINE-UP
           </StyledLink>
+          <StyledLink href="/news" $size="bold">
+            NEWSY
+          </StyledLink>
           <StyledLink href="/products" $size="bold">
             SKLEP
           </StyledLink>
@@ -192,6 +195,9 @@ export default function Navbar() {
           </StyledLink>
           <StyledLink href="/lineup" $size="bold">
             LINE-UP
+          </StyledLink>
+          <StyledLink href="/news" $size="bold">
+            NEWSY
           </StyledLink>
           <StyledLink href="/products" $size="bold">
             Sklep

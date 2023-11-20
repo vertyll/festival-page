@@ -14,10 +14,14 @@ export default function ProductsPage({ products, wishedProducts }) {
       <Layout>
         <DivCenter>
           <Title>Wszystkie produkty</Title>
+          {products && products.length > 0 ? (
           <ProductContainer
             products={products}
             wishedProducts={wishedProducts}
           />
+          ) : (
+            <p>Brak produktów do wyświetlenia</p>
+        )}
         </DivCenter>
       </Layout>
     </>
