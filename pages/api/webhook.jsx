@@ -23,7 +23,6 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Handle the event
   switch (event.type) {
     case "checkout.session.completed":
       const data = event.data.object;
@@ -45,5 +44,3 @@ export default async function handler(req, res) {
 export const config = {
   api: { bodyParser: false },
 };
-
-//prefer-regal-unreal-magic

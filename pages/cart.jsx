@@ -158,11 +158,11 @@ export default function CartPage() {
           setStreetAddress(response.data.streetAddress || "");
           setCountry(response.data.country || "");
         } else {
-          console.error("No data returned from /api/address");
+          console.error("Brak danych zwróconych z /api/address");
         }
       })
       .catch((error) => {
-        console.error("An error occurred while fetching address data:", error);
+        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
       });
   }, [session]);
   useEffect(() => {
@@ -210,7 +210,6 @@ export default function CartPage() {
     });
 
     if (response.data.url) {
-      // Tutaj możesz wywołać finalizePurchase
       await finalizePurchase();
       window.location = response.data.url;
     }

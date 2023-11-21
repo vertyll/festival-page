@@ -232,11 +232,11 @@ export default function AccountPage() {
           setCountry(response.data.country || "");
           setAddressLoaded(true);
         } else {
-          console.error("No data returned from /api/address");
+          console.error("Brak danych zwróconych z /api/address");
         }
       })
       .catch((error) => {
-        console.error("An error occurred while fetching address data:", error);
+        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
       });
 
     axios.get("/api/wishlist").then((response) => {

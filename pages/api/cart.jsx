@@ -30,7 +30,7 @@ export default async function handle(req, res) {
     // Odpowiedź z zmodyfikowanymi produktami
     res.json(modifiedProducts);
   } catch (error) {
-    console.error("An error occurred:", error);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Wystąpił błąd:", error);
+    res.status(500).json({ message: "Wewnętrzny błąd serwera" });
   }
 }

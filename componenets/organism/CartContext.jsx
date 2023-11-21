@@ -13,7 +13,6 @@ export function CartContextProvider({ children }) {
     }
   }, []); // Pusta tablica zależności oznacza, że ten efekt działa raz, podobnie jak componentDidMount
   useEffect(() => {
-    // Aktualizacja localStorage gdy zmienia się cartProducts
     if (cartProducts.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cartProducts));
     } else {
@@ -83,7 +82,10 @@ export function CartContextProvider({ children }) {
     try {
       await axios.post("/api/update-availability", { cartProducts });
     } catch (error) {
-      console.error("Błąd podczas aktualizacji stanu magazynowego produktu:", error);
+      console.error(
+        "Błąd podczas aktualizacji stanu magazynowego produktu:",
+        error
+      );
     }
   }
 

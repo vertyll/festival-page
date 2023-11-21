@@ -5,38 +5,36 @@ export default async function handle(req, res) {
   await mongooseConnect();
 
   if (req.method !== "POST") {
-    console.log("Request method is not POST");
-    return res.status(405).json({ message: "Method not allowed" });
+    console.log("Metoda żądania nie jest metodą POST");
+    return res.status(405).json({ message: "Metoda jest niedozwolona" });
   }
 
   try {
-    console.log("Processing POST request");
+    console.log("Przetwarzanie żądania POST");
     const { cartProducts } = req.body;
 
     if (!cartProducts || cartProducts.length === 0) {
-      console.log("No cart products received", cartProducts);
-      throw new Error("No cart products provided");
+      console.log("Nie otrzymano żadnych produktów z koszyka", cartProducts);
+      throw new Error("Brak produktów w koszyku");
     }
 
-    console.log(
-      `Updating availability for ${cartProducts.length} cart products`
-    );
+    console.log(`Aktualizacja dostępności dla ${cartProducts.length}`);
     for (const item of cartProducts) {
-      console.log("Processing product:", item.productId);
+      console.log("Przetwarzam produkt:", item.productId);
       const product = await Product.findById(item.productId);
 
       if (!product) {
-        console.log(`Product not found: ${item.productId}`);
-        throw new Error(`Product with ID ${item.productId} not found`);
+        console.log(`Nie znaleziono produktu: ${item.productId}`);
+        throw new Error(`Produkt o ID ${item.productId} nie został znaleziony`);
       }
 
       if (product.properties && product.properties.length > 0) {
-        console.log(`Product has ${product.properties.length} properties`);
+        console.log(`Produkt z ${product.properties.length} właściwośći`);
         product.properties.forEach((prop) => {
           if (item.selectedProperties && item.selectedProperties[prop.name]) {
             const value = item.selectedProperties[prop.name];
             console.log(
-              `Updating availability for property: ${prop.name}, value: ${value}`
+              `Aktualizcja dostępności dla właściwośći: ${prop.name}, wartość: ${value}`
             );
             if (prop.availability && prop.availability[value] !== undefined) {
               const oldAvailability = prop.availability[value];
@@ -45,7 +43,7 @@ export default async function handle(req, res) {
                 oldAvailability - item.quantity
               );
               console.log(
-                `New availability for ${prop.name} (${value}):`,
+                `Nowy stan magazynowy dla ${prop.name} (${value}):`,
                 prop.availability[value]
               );
             }
@@ -53,26 +51,28 @@ export default async function handle(req, res) {
         });
       } else {
         console.log(
-          "Product does not have properties, updating overall availability"
+          "Produkt nie ma właściwości, aktualizuje ogólną dostępność"
         );
         const oldAvailability = product.availability;
         product.availability = Math.max(0, oldAvailability - item.quantity);
-        console.log(`New overall availability:`, product.availability);
+        console.log(`Nowa ogólna dostępność:`, product.availability);
       }
-      
+
       product.markModified("properties");
       await product.save();
-      console.log(`Product ${item.productId} availability updated`);
+      console.log(
+        `Zaktualizowano stan magazynowy dla produktu ${item.productId}`
+      );
     }
 
-    console.log("All products updated successfully");
+    console.log("Wszystkie stany magazynowe zostały zaktualizowane");
     res
       .status(200)
-      .json({ message: "Product availability updated successfully." });
+      .json({ message: "Dostępność produktu została zaktualizowana." });
   } catch (error) {
-    console.error("Error updating availability:", error);
+    console.error("Błąd przy aktualizacji stanu magazynowego:", error);
     res
       .status(500)
-      .json({ message: "Internal Server Error", error: error.message });
+      .json({ message: "Wewnętrzny błąd serwera", error: error.message });
   }
 }

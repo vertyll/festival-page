@@ -168,7 +168,7 @@ export default function ProductPage({ product, categoryPath }) {
   };
 
   const renderAvailability = () => {
-    // Jeśli produkt ma właściwości, wyświetl dostępność dla każdej z nich oraz ogólną dostępność
+    // Jeśli produkt ma właściwości, wyświetl dostępność dla każdej z nich i ogólną dostępność
     if (product.properties && product.properties.length > 0) {
       const totalAvailability = sumAvailability(product.properties);
 
