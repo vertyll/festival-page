@@ -10,7 +10,7 @@ export default function NewsPage({ news }) {
     <Layout>
       <DivCenter>
         <Title>Newsy</Title>
-        {news && news.news > 0 ? (
+        {news && news.length > 0 ? (
           <NewsContainer news={news} />
         ) : (
           <p>Brak newsów do wyświetlenia</p>
