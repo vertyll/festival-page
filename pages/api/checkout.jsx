@@ -8,7 +8,7 @@ const stripe = require("stripe")(process.env.STRIPE_SK);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    res.status(405).json({ message: "Method Not Allowed" });
+    res.status(405).json({ message: "Niedozwolona metoda" });
     return;
   }
 
