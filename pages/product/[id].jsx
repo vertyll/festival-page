@@ -9,7 +9,7 @@ import ProductImages from "@/componenets/organism/ProductImages";
 import IconCart from "@/componenets/atoms/IconCart";
 import Button from "@/componenets/atoms/Button";
 import { CartContext } from "@/componenets/organism/CartContext";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Category } from "@/models/Category";
 import { Alert } from "@/componenets/atoms/Alert";
 
@@ -64,21 +64,40 @@ const StyledDescriptionDiv = styled.div`
   padding: 30px;
 `;
 
+const PropertyContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+`;
+
+const AvailabilityText = styled.span`
+  color: ${(props) => (props.$available ? "green" : "red")};
+`;
+
 export default function ProductPage({ product, categoryPath }) {
   const { addProduct } = useContext(CartContext);
   const [selectedProperty, setSelectedProperty] = useState({});
   const [showAlert, setShowAlert] = useState(false);
+  const [showDangerAlert, setShowDangerAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertDangerMessage, setAlertDangerMessage] = useState("");
   const alertDuration = 3000;
 
   const handleAddToCartClick = () => {
-    if (allPropertiesSelected) {
+    const isAvailable =
+      product.properties.length > 0
+        ? sumAvailability(product.properties) > 0
+        : product.availability > 0;
+
+    if (allPropertiesSelected && isAvailable) {
       addProduct(product._id, selectedProperty);
       setAlertMessage("Produkt został dodany do koszyka.");
       setShowAlert(true);
     } else {
-      setAlertMessage("Wybierz wszystkie opcje przed dodaniem do koszyka.");
-      setShowAlert(true);
+      setAlertDangerMessage(
+        "Produkt nie jest dostępny lub nie wybrano wszystkich opcji."
+      );
+      setShowDangerAlert(true);
     }
   };
 
@@ -106,25 +125,88 @@ export default function ProductPage({ product, categoryPath }) {
 
   const renderCategoryProperties = () => {
     if (product.properties && product.properties.length > 0) {
-      return product.properties.map((prop, index) => {
-        const options = prop.values.split(",");
-        return (
-          <div key={index}>
-            <strong>{prop.name}: </strong>
-            {options.map((option, i) => (
+      return product.properties.map((prop, index) => (
+        <div key={index}>
+          <strong>{prop.name}: </strong>
+          <PropertyContainer>
+            {prop.values.map((value, i) => (
               <PropertyButton
                 key={i}
-                $isSelected={selectedProperty[prop.name] === option}
-                onClick={() => handlePropertySelection(prop.name, option)}
+                $isSelected={selectedProperty[prop.name] === value}
+                onClick={() =>
+                  prop.availability[value] > 0
+                    ? handlePropertySelection(prop.name, value)
+                    : null
+                }
+                disabled={prop.availability[value] <= 0}
               >
-                {option}
+                {value}
               </PropertyButton>
             ))}
-          </div>
-        );
-      });
+          </PropertyContainer>
+        </div>
+      ));
+    } else if (
+      product.properties &&
+      product.properties.length === 0 &&
+      product.availability
+    ) {
+      return <div>Brak właściwości dla tego produktu.</div>;
     }
-    return <div>Brak właściwości dla tego produktu.</div>;
+  };
+
+  const sumAvailability = (properties) => {
+    return properties.reduce((total, prop) => {
+      return (
+        total +
+        Object.values(prop.availability).reduce(
+          (subTotal, amount) => subTotal + Number(amount),
+          0
+        )
+      );
+    }, 0);
+  };
+
+  const renderAvailability = () => {
+    // Jeśli produkt ma właściwości, wyświetl dostępność dla każdej z nich oraz ogólną dostępność
+    if (product.properties && product.properties.length > 0) {
+      const totalAvailability = sumAvailability(product.properties);
+
+      return (
+        <>
+          {product.properties.map((prop, index) => (
+            <div key={index}>
+              {/* <strong>Ilość w magazynie dla {prop.name}: </strong> */}
+              {Object.entries(prop.availability).map(([value, amount], i) => (
+                <React.Fragment key={i}>
+                  <AvailabilityText $available={amount > 0}>
+                    {/* {value}: {amount > 0 ? amount : "brak"} */}
+                  </AvailabilityText>
+                  <span> </span> {/* Dodanie spacji */}
+                </React.Fragment>
+              ))}
+            </div>
+          ))}
+          <div>
+            <strong>Ilość w magazynie: </strong>
+            <AvailabilityText $available={totalAvailability > 0}>
+              {totalAvailability > 0 ? totalAvailability : "brak"}
+            </AvailabilityText>
+          </div>
+        </>
+      );
+    }
+    // Jeśli produkt nie ma właściwości, wyświetl ogólną dostępność
+    else if (product.availability !== undefined) {
+      return (
+        <div>
+          <strong>Ilość w magazynie: </strong>
+          <AvailabilityText $available={product.availability > 0}>
+            {product.availability > 0 ? product.availability : "brak"}
+          </AvailabilityText>
+        </div>
+      );
+    }
   };
 
   return (
@@ -138,6 +220,14 @@ export default function ProductPage({ product, categoryPath }) {
             type="success"
           />
         )}
+        {showDangerAlert && (
+          <Alert
+            message={alertDangerMessage}
+            onClose={() => setShowDangerAlert(false)}
+            duration={alertDuration}
+            type="danger"
+          />
+        )}
         <DivCenter>
           <ColWrapper>
             <SingleBox>
@@ -148,8 +238,9 @@ export default function ProductPage({ product, categoryPath }) {
               <div>Kategoria: {renderCategoryPath()}</div>
               <div>
                 Właściwości:
-                <div>{renderCategoryProperties()}</div>{" "}
+                <div>{renderCategoryProperties()}</div>
               </div>
+              <div>{renderAvailability()}</div>
               <Price>Cena: {product.price} zł</Price>
               <Button
                 onClick={handleAddToCartClick}

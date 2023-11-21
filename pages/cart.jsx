@@ -95,8 +95,13 @@ const SelectedPropertiesDiv = styled.div`
 
 export default function CartPage() {
   const { data: session } = useSession();
-  const { cartProducts, addProduct, removeProduct, clearCart } =
-    useContext(CartContext);
+  const {
+    cartProducts,
+    addProduct,
+    removeProduct,
+    clearCart,
+    finalizePurchase,
+  } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [name, setName] = useState("");
@@ -125,6 +130,11 @@ export default function CartPage() {
     }
   }, [cartProducts]);
   useEffect(() => {
+    axios.get("/api/settings?name=shippingPrice").then((response) => {
+      setShippingPrice(response.data.value);
+    });
+  }, []); // Pusta tablica zależności, aby żądanie wykonało się tylko raz przy montowaniu komponentu
+  useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
@@ -132,9 +142,6 @@ export default function CartPage() {
       setIsSuccess(true);
       clearCart();
     }
-    axios.get("/api/settings?name=shippingPrice").then((response) => {
-      setShippingPrice(response.data.value);
-    });
   }, [clearCart]);
   useEffect(() => {
     if (!session) {
@@ -201,7 +208,10 @@ export default function CartPage() {
       country,
       cartProducts,
     });
+
     if (response.data.url) {
+      // Tutaj możesz wywołać finalizePurchase
+      await finalizePurchase();
       window.location = response.data.url;
     }
   }
@@ -217,7 +227,9 @@ export default function CartPage() {
                 Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie
                 gotowe
               </p>
-              <AnimatedThanksImage style={{ maxWidth: '200px', height: '200px' }}/>
+              <AnimatedThanksImage
+                style={{ maxWidth: "200px", height: "200px" }}
+              />
               <Button $usage="primary" $size="m" onClick={goToShop}>
                 Wróć do sklepu &#8617;
               </Button>

@@ -48,7 +48,7 @@ export default function ProductImages({ images }) {
             $active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image} alt="zdjęcie produktu" />
+            <Image src={image || '/no-image-found.png'} alt="zdjęcie produktu" />
           </ImageButton>
         ))}
       </ImageButtons>

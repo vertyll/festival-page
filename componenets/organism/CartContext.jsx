@@ -1,4 +1,5 @@
-const { createContext, useState, useEffect } = require("react");
+import axios from "axios";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext({});
 
@@ -78,6 +79,14 @@ export function CartContextProvider({ children }) {
     localStorage.removeItem("cart");
   }
 
+  async function finalizePurchase() {
+    try {
+      await axios.post("/api/update-availability", { cartProducts });
+    } catch (error) {
+      console.error("Błąd podczas aktualizacji stanu magazynowego produktu:", error);
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -85,6 +94,7 @@ export function CartContextProvider({ children }) {
         addProduct,
         removeProduct,
         clearCart,
+        finalizePurchase,
       }}
     >
       {children}
