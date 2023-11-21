@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import { useContext, useState } from "react";
 import { CartContext } from "../organism/CartContext";
@@ -9,6 +9,33 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { Alert } from "../atoms/Alert";
 import Image from "next/image";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+`;
+
+const HoverText = styled.div`
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--main-night-color);
+  color: var(--light-text-color);
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  animation: ${fadeIn} 0.3s ease-in-out;
+`;
 
 const Box = styled(Link)`
   background-color: white;
@@ -22,6 +49,11 @@ const Box = styled(Link)`
   color: inherit;
   position: relative;
   box-shadow: var(--default-box-shadow);
+
+  &:hover ${HoverText} {
+    display: block;
+    opacity: 1;
+  }
 `;
 
 const WishlistButton = styled.button`
@@ -54,7 +86,10 @@ const ProductInfo = styled.div`
 
 const Price = styled.p``;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export default function ProductBox({
   _id,
@@ -118,10 +153,11 @@ export default function ProductBox({
           fill={true}
           sizes="100vh"
           style={{
-            objectFit: 'cover',
+            objectFit: "cover",
           }}
           priority={false}
         />
+        <HoverText>Zobacz produkt &#8594;</HoverText>
       </Box>
       <ProductInfo>
         <Name href={url}>{name}</Name>
