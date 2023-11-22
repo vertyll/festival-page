@@ -40,7 +40,7 @@ const ImageWrapper = styled.div`
 
 const Box = styled.div`
   background-color: var(--light-color);
-  border-radius: 30px;
+  border-radius: 20px;
   padding: 30px;
   box-shadow: var(--default-box-shadow);
 `;
@@ -52,7 +52,7 @@ const ProductImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 30px;
+  border-radius: 20px;
 
   img {
     max-width: 100%;

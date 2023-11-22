@@ -52,7 +52,7 @@ const LoginInfo = styled.div`
 const LeftPanel = styled.div`
   flex: 0 0 30%;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   height: fit-content;
@@ -66,7 +66,7 @@ const LeftPanel = styled.div`
 const RightPanel = styled.div`
   flex: 1;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   min-width: 0;
@@ -82,7 +82,7 @@ const UserProfile = styled.div`
   align-items: center;
   background-color: var(--main-white-smoke-color);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin-bottom: 15px;
 `;
 
@@ -110,7 +110,7 @@ const StyledWishedDiv = styled.div`
   text-align: left;
   background-color: var(--main-white-smoke-color);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin: 0px;
 
   @media screen and (min-width: 1200px) {
@@ -128,7 +128,7 @@ const StyledOrderDiv = styled.div`
   text-align: left;
   background-color: var(--main-white-smoke-color);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin: 0px;
 
   @media screen and (min-width: 768px) {
@@ -143,7 +143,7 @@ const StyledDataDiv = styled.div`
   text-align: left;
   background-color: var(--main-white-smoke-color);
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 20px;
   margin: 0px;
 
   .error-div-class {
@@ -168,7 +168,7 @@ const StyledDataDiv = styled.div`
 const InfoBox = styled.div`
   background-color: var(--light-color);
   padding: 20px 5px;
-  border-radius: 30px;
+  border-radius: 20px;
 
   @media screen and (min-width: 600px) {
     padding: 20px;

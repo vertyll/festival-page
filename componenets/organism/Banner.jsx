@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
   padding: 20px 20px;
   background-color: var(--gray-color);
   height: 500px;
-  border-radius: 30px;
+  border-radius: 20px;
   box-shadow: var(--default-box-shadow);
 `;
 

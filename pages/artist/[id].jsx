@@ -28,7 +28,7 @@ const Row = styled.div`
 const StyledDescriptionDiv = styled.div`
   display: flex;
   max-width: 850px;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   padding: 30px;

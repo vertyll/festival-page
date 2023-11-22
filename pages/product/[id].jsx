@@ -39,7 +39,7 @@ const PropertyButton = styled.button`
   padding: 15px;
   margin: 5px;
   border: none;
-  border-radius: 30px;
+  border-radius: 15px;
   background-color: ${(props) =>
     props.$isSelected
       ? "var(--main-deep-pink-color)"
@@ -65,7 +65,7 @@ const PropertyButton = styled.button`
 const StyledDescriptionDiv = styled.div`
   display: flex;
   max-width: 850px;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   padding: 30px;
