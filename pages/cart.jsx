@@ -293,7 +293,7 @@ export default function CartPage() {
                           <td>
                             <ProductImage>
                               <img
-                                src={fullProductData.images[0]}
+                                src={fullProductData.images[0] || "no-image-found.png"}
                                 alt={fullProductData.name}
                               />
                             </ProductImage>
