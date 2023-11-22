@@ -236,7 +236,10 @@ export default function AccountPage() {
         }
       })
       .catch((error) => {
-        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
+        console.error(
+          "Wystąpił błąd podczas pobierania danych adresowych:",
+          error
+        );
       });
 
     axios.get("/api/wishlist").then((response) => {
@@ -251,9 +254,10 @@ export default function AccountPage() {
 
   function productRemovedFromWishlist(idToRemove) {
     setWishedProducts((products) => {
-      return [...products.filter((p) => p._id.toString() !== idToRemove)];
+      return [...products.filter((p) => p && p._id.toString() !== idToRemove)];
     });
   }
+  
   return (
     <Layout>
       <DivCenter>
@@ -343,16 +347,19 @@ export default function AccountPage() {
                             </p>
                           )}
                           {wishedProducts.length > 0 &&
-                            wishedProducts.map((wp) => (
-                              <ProductBox
-                                key={wp._id}
-                                {...wp}
-                                wished={true}
-                                onRemoveFromWishlist={
-                                  productRemovedFromWishlist
-                                }
-                              />
-                            ))}
+                            wishedProducts.map(
+                              (wp) =>
+                                wp && (
+                                  <ProductBox
+                                    key={wp._id}
+                                    {...wp}
+                                    wished={true}
+                                    onRemoveFromWishlist={
+                                      productRemovedFromWishlist
+                                    }
+                                  />
+                                )
+                            )}
                         </StyledWishedDiv>
                       )}
                     </>
