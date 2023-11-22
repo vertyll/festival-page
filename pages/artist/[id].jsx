@@ -6,6 +6,7 @@ import Title from "@/componenets/atoms/Title";
 import SingleBox from "@/componenets/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
 import ArtistImage from "@/componenets/organism/ArtistImage";
+import { formatDate } from "@/utils/date";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -34,7 +35,11 @@ const StyledDescriptionDiv = styled.div`
   padding: 30px;
 `;
 
-export default function ArtistPage({ artist }) {
+export default function ArtistPage({ artist, scene }) {
+  const renderScene = () => {
+    return artist.scene ? artist.scene.name : "Brak danych";
+  };
+
   return (
     <>
       <Layout>
@@ -45,7 +50,17 @@ export default function ArtistPage({ artist }) {
             </SingleBox>
             <Row>
               <Title>{artist.name}</Title>
-              <div>Scena: </div>
+              <div>Scena: {renderScene()}</div>
+              <div>
+                Data koncertu:{" "}
+                {artist.concertDate
+                  ? formatDate(artist.concertDate)
+                  : "Brak danych"}
+              </div>
+              <div>
+                Godzina koncertu:{" "}
+                {artist.concertTime ? artist.concertTime : "Brak danych"}
+              </div>
             </Row>
           </ColWrapper>
           {artist.description && (
