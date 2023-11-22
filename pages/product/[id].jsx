@@ -43,15 +43,22 @@ const PropertyButton = styled.button`
   background-color: ${(props) =>
     props.$isSelected
       ? "var(--main-deep-pink-color)"
+      : props.disabled
+      ? "var(--no-properties-color)" // Szary kolor dla niedostępnych opcji
       : "var(--main-plum-color)"};
   color: ${(props) =>
-    props.$isSelected ? "var(--light-text-color)" : "var(--dark-text-color)"};
+    props.$isSelected || props.disabled
+      ? "var(--dark-text-color)"
+      : "var(--dark-text-color)"};
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--main-deep-pink-color);
-    color: var(--light-text-color);
+    background-color: ${(props) =>
+      props.disabled
+        ? "var(--no-properties-color)"
+        : "var(--main-deep-pink-color)"};
+    color: var(--dark-text-color);
   }
 `;
 
