@@ -8,7 +8,9 @@ const StyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px 20px;
-  background-color: var(--gray-color);
+  background-size: cover;
+  background-position: center;
+  background-image: url("/pexels-rahul-pandit-3052360.webp");
   height: 500px;
   border-radius: 20px;
   box-shadow: var(--default-box-shadow);
