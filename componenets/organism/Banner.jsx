@@ -18,12 +18,13 @@ const StyledDiv = styled.div`
 
 const Title = styled.h1`
   margin: 0;
-  font-family: "Concert One", sans-serif;
+  font-family: 'Signika', sans-serif;
 `;
 
 const Description = styled.p`
   color: var(--light-text-color);
   font-size: 1rem;
+  font-family: 'Signika', sans-serif;
 `;
 
 export default function Banner() {
