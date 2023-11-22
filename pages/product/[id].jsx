@@ -12,6 +12,7 @@ import { CartContext } from "@/componenets/organism/CartContext";
 import React, { useContext, useState } from "react";
 import { Category } from "@/models/Category";
 import { Alert } from "@/componenets/atoms/Alert";
+import { Setting } from "@/models/Setting";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -81,7 +82,12 @@ const AvailabilityText = styled.span`
   color: ${(props) => (props.$available ? "green" : "red")};
 `;
 
-export default function ProductPage({ product, categoryPath }) {
+export default function ProductPage({
+  product,
+  categoryPath,
+  availabilityVisible,
+  additionalAvailabilityVisible,
+}) {
   const { addProduct } = useContext(CartContext);
   const [selectedProperty, setSelectedProperty] = useState({});
   const [showAlert, setShowAlert] = useState(false);
@@ -199,13 +205,18 @@ export default function ProductPage({ product, categoryPath }) {
   const renderAvailability = () => {
     const renderCombinationAvailability = (combination, availability) => (
       <>
-        {Array.isArray(combination) ? combination.join(", ") : combination} -{" "}
-        <span>
-          <AvailabilityText $available={availability > 0}>
-            {availability}
-          </AvailabilityText>{" "}
-          sztuk
-        </span>
+        {additionalAvailabilityVisible && (
+          <>
+            {Array.isArray(combination) ? combination.join(", ") : combination}{" "}
+            -{" "}
+            <span>
+              <AvailabilityText $available={availability > 0}>
+                {availability}
+              </AvailabilityText>{" "}
+              sztuk
+            </span>
+          </>
+        )}
       </>
     );
 
@@ -220,12 +231,16 @@ export default function ProductPage({ product, categoryPath }) {
               )}
             </div>
           ))}
-          <div>
-            <strong>Ilość w magazynie: </strong>
-            <AvailabilityText $available={sumAvailability(product) > 0}>
-              {sumAvailability(product) > 0 ? sumAvailability(product) : "brak"}
-            </AvailabilityText>
-          </div>
+          {availabilityVisible && (
+            <div>
+              <strong>Ilość w magazynie: </strong>
+              <AvailabilityText $available={sumAvailability(product) > 0}>
+                {sumAvailability(product) > 0
+                  ? sumAvailability(product)
+                  : "brak"}
+              </AvailabilityText>
+            </div>
+          )}
         </>
       );
     } else if (product.availability !== undefined) {
@@ -273,7 +288,9 @@ export default function ProductPage({ product, categoryPath }) {
                 Właściwości:
                 <div>{renderCategoryProperties()}</div>
               </div>
-              <div>{renderAvailability()}</div>
+              <Row>
+                <div>{renderAvailability()}</div>
+              </Row>
               <Price>Cena: {product.price} zł</Price>
               <Button
                 onClick={handleAddToCartClick}
@@ -305,7 +322,18 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const product = await Product.findById(id).populate("category");
   const categories = await Category.find();
-
+  const availabilitySetting = await Setting.findOne({
+    name: "availabilityVisible",
+  });
+  const isAvailabilityVisible = availabilitySetting
+    ? availabilitySetting.value
+    : false;
+  const additionalAvailabilityVisible = await Setting.findOne({
+    name: "additionalAvailabilityVisible",
+  });
+  const isAdditionalAvailabilityVisible = additionalAvailabilityVisible
+    ? additionalAvailabilityVisible.value
+    : false;
   const idToCategory = categories.reduce((acc, category) => {
     acc[category._id.toString()] = category;
     return acc;
@@ -332,6 +360,8 @@ export async function getServerSideProps(context) {
     props: {
       product: JSON.parse(JSON.stringify(product)),
       categoryPath: JSON.parse(JSON.stringify(categoryPath)),
+      availabilityVisible: isAvailabilityVisible,
+      additionalAvailabilityVisible: isAdditionalAvailabilityVisible,
     },
   };
 }
