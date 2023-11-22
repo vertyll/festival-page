@@ -35,9 +35,9 @@ const StyledDescriptionDiv = styled.div`
   padding: 30px;
 `;
 
-export default function ArtistPage({ artist, scene }) {
-  const renderScene = () => {
-    return artist.scene ? artist.scene.name : "Brak danych";
+export default function ArtistPage({ artist, stage }) {
+  const renderStage = () => {
+    return artist.stage ? artist.stage.name : "Brak danych";
   };
 
   return (
@@ -50,7 +50,7 @@ export default function ArtistPage({ artist, scene }) {
             </SingleBox>
             <Row>
               <Title>{artist.name}</Title>
-              <div>Scena: {renderScene()}</div>
+              <div>Scena: {renderStage()}</div>
               <div>
                 Data koncertu:{" "}
                 {artist.concertDate
@@ -80,7 +80,7 @@ export default function ArtistPage({ artist, scene }) {
 export async function getServerSideProps(context) {
   await mongooseConnect();
   const { id } = context.query;
-  const artist = await Artist.findById(id).populate("scene");
+  const artist = await Artist.findById(id).populate("stage");
 
   return {
     props: {
