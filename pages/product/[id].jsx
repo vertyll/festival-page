@@ -84,12 +84,19 @@ export default function ProductPage({ product, categoryPath }) {
   const alertDuration = 3000;
 
   const handleAddToCartClick = () => {
-    const isAvailable =
-      product.properties.length > 0
-        ? sumAvailability(product.properties) > 0
-        : product.availability > 0;
+    // Sprawdzenie, czy wszystkie właściwości zostały wybrane
+    const allPropertiesSelected = product.properties.every((prop) =>
+      selectedProperty.hasOwnProperty(prop.name)
+    );
 
-    if (allPropertiesSelected && isAvailable) {
+    // Sprawdzenie, czy aktualnie wybrana kombinacja jest dostępna
+    const isAvailable =
+      allPropertiesSelected &&
+      product.properties.every((prop) =>
+        isCombinationAvailable(prop.name, selectedProperty[prop.name])
+      );
+
+    if (isAvailable) {
       addProduct(product._id, selectedProperty);
       setAlertMessage("Produkt został dodany do koszyka.");
       setShowAlert(true);
@@ -123,6 +130,21 @@ export default function ProductPage({ product, categoryPath }) {
     ));
   };
 
+  const isCombinationAvailable = (propertyName, value) => {
+    // Budowanie pełnej kombinacji na podstawie aktualnie wybranych właściwości
+    let currentCombination = Object.values({
+      ...selectedProperty,
+      [propertyName]: value,
+    });
+
+    // Sprawdź, czy istnieje kombinacja z tą dostępnością
+    return product.combinations.some(
+      (comb) =>
+        currentCombination.every((val) => comb.combination.includes(val)) &&
+        comb.availability > 0
+    );
+  };
+
   const renderCategoryProperties = () => {
     if (product.properties && product.properties.length > 0) {
       return product.properties.map((prop, index) => (
@@ -134,11 +156,11 @@ export default function ProductPage({ product, categoryPath }) {
                 key={i}
                 $isSelected={selectedProperty[prop.name] === value}
                 onClick={() =>
-                  prop.availability[value] > 0
+                  isCombinationAvailable(prop.name, value)
                     ? handlePropertySelection(prop.name, value)
                     : null
                 }
-                disabled={prop.availability[value] <= 0}
+                disabled={!isCombinationAvailable(prop.name, value)}
               >
                 {value}
               </PropertyButton>
@@ -155,49 +177,51 @@ export default function ProductPage({ product, categoryPath }) {
     }
   };
 
-  const sumAvailability = (properties) => {
-    return properties.reduce((total, prop) => {
-      return (
-        total +
-        Object.values(prop.availability).reduce(
-          (subTotal, amount) => subTotal + Number(amount),
-          0
-        )
+  const sumAvailability = (product) => {
+    if (product.properties && product.properties.length > 0) {
+      return product.combinations.reduce(
+        (total, comb) => total + comb.availability,
+        0
       );
-    }, 0);
+    } else {
+      // Jeśli nie ma właściwości, zwróć wartość z pola availability
+      return product.availability;
+    }
   };
 
   const renderAvailability = () => {
-    // Jeśli produkt ma właściwości, wyświetl dostępność dla każdej z nich i ogólną dostępność
-    if (product.properties && product.properties.length > 0) {
-      const totalAvailability = sumAvailability(product.properties);
+    const renderCombinationAvailability = (combination, availability) => (
+      <>
+        {combination.join(", ")} -{" "}
+        <span>
+          <AvailabilityText $available={availability > 0}>
+            {availability}
+          </AvailabilityText>{" "}
+          sztuk
+        </span>
+      </>
+    );
 
+    if (product.combinations && product.combinations.length > 0) {
       return (
         <>
-          {product.properties.map((prop, index) => (
+          {product.combinations.map((comb, index) => (
             <div key={index}>
-              {/* <strong>Ilość w magazynie dla {prop.name}: </strong> */}
-              {Object.entries(prop.availability).map(([value, amount], i) => (
-                <React.Fragment key={i}>
-                  <AvailabilityText $available={amount > 0}>
-                    {/* {value}: {amount > 0 ? amount : "brak"} */}
-                  </AvailabilityText>
-                  <span> </span> {/* Dodanie spacji */}
-                </React.Fragment>
-              ))}
+              {renderCombinationAvailability(
+                comb.combination,
+                comb.availability
+              )}
             </div>
           ))}
           <div>
             <strong>Ilość w magazynie: </strong>
-            <AvailabilityText $available={totalAvailability > 0}>
-              {totalAvailability > 0 ? totalAvailability : "brak"}
+            <AvailabilityText $available={sumAvailability(product) > 0}>
+              {sumAvailability(product) > 0 ? sumAvailability(product) : "brak"}
             </AvailabilityText>
           </div>
         </>
       );
-    }
-    // Jeśli produkt nie ma właściwości, wyświetl ogólną dostępność
-    else if (product.availability !== undefined) {
+    } else if (product.availability !== undefined) {
       return (
         <div>
           <strong>Ilość w magazynie: </strong>
@@ -206,6 +230,8 @@ export default function ProductPage({ product, categoryPath }) {
           </AvailabilityText>
         </div>
       );
+    } else {
+      return <div>Brak informacji o dostępności.</div>;
     }
   };
 

@@ -18,7 +18,9 @@ export default async function handle(req, res) {
       throw new Error("Brak produktów w koszyku");
     }
 
-    console.log(`Aktualizacja dostępności dla ${cartProducts.length}`);
+    console.log(
+      `Aktualizacja dostępności dla ${cartProducts.length} produktów`
+    );
     for (const item of cartProducts) {
       console.log("Przetwarzam produkt:", item.productId);
       const product = await Product.findById(item.productId);
@@ -28,37 +30,38 @@ export default async function handle(req, res) {
         throw new Error(`Produkt o ID ${item.productId} nie został znaleziony`);
       }
 
-      if (product.properties && product.properties.length > 0) {
-        console.log(`Produkt z ${product.properties.length} właściwośći`);
-        product.properties.forEach((prop) => {
-          if (item.selectedProperties && item.selectedProperties[prop.name]) {
-            const value = item.selectedProperties[prop.name];
-            console.log(
-              `Aktualizcja dostępności dla właściwośći: ${prop.name}, wartość: ${value}`
-            );
-            if (prop.availability && prop.availability[value] !== undefined) {
-              const oldAvailability = prop.availability[value];
-              prop.availability[value] = Math.max(
-                0,
-                oldAvailability - item.quantity
-              );
-              console.log(
-                `Nowy stan magazynowy dla ${prop.name} (${value}):`,
-                prop.availability[value]
-              );
+      if (product.combinations && product.combinations.length > 0) {
+        console.log("Aktualizacja dostępności kombinacji");
+        for (const comb of product.combinations) {
+          let isMatchingCombination = true;
+          for (const propName in item.selectedProperties) {
+            if (!comb.combination.includes(item.selectedProperties[propName])) {
+              isMatchingCombination = false;
+              break;
             }
           }
-        });
+
+          if (isMatchingCombination) {
+            const oldAvailability = comb.availability;
+            comb.availability = Math.max(0, oldAvailability - item.quantity);
+            console.log(
+              `Zaktualizowano dostępność dla kombinacji: ${comb.combination.join(
+                ", "
+              )}`
+            );
+            break;
+          }
+        }
       } else {
-        console.log(
-          "Produkt nie ma właściwości, aktualizuje ogólną dostępność"
-        );
+        console.log("Aktualizacja ogólnej dostępności");
         const oldAvailability = product.availability;
         product.availability = Math.max(0, oldAvailability - item.quantity);
-        console.log(`Nowa ogólna dostępność:`, product.availability);
+        console.log(
+          `Zaktualizowano ogólną dostępność: ${product.availability}`
+        );
       }
 
-      product.markModified("properties");
+      product.markModified("combinations");
       await product.save();
       console.log(
         `Zaktualizowano stan magazynowy dla produktu ${item.productId}`
