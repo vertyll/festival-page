@@ -199,7 +199,7 @@ export default function ProductPage({ product, categoryPath }) {
   const renderAvailability = () => {
     const renderCombinationAvailability = (combination, availability) => (
       <>
-        {combination.join(", ")} -{" "}
+        {Array.isArray(combination) ? combination.join(", ") : combination} -{" "}
         <span>
           <AvailabilityText $available={availability > 0}>
             {availability}
