@@ -7,6 +7,7 @@ import SingleBox from "@/componenets/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
 import ArtistImage from "@/componenets/organism/ArtistImage";
 import { formatDate } from "@/utils/date";
+import { Stage } from "@/models/Stage";
 
 const ColWrapper = styled.div`
   display: grid;
