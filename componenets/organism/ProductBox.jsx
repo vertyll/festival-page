@@ -42,6 +42,7 @@ const Box = styled(Link)`
   padding: 30px 10px;
   text-align: center;
   height: 150px;
+  width: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
