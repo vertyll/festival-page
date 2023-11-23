@@ -12,26 +12,21 @@ const StyledDiv = styled.div`
   background-position: center;
   background-image: url("/pexels-rahul-pandit-3052360.webp");
   height: 500px;
-  border-radius: 20px;
+  gap: 50px;
   box-shadow: var(--default-box-shadow);
 `;
 
 const Title = styled.h1`
   margin: 0;
-  font-family: 'Signika', sans-serif;
-`;
-
-const Description = styled.p`
-  color: var(--light-text-color);
-  font-size: 1rem;
-  font-family: 'Signika', sans-serif;
+  font-weight: bold;
+  font-size: 3em;
+  font-family: "Signika", sans-serif;
 `;
 
 export default function Banner() {
   return (
     <StyledDiv>
       <Title>Sunset Festival</Title>
-      <Description>Tutaj będzie jakiś opis</Description>
       <Button $usage="primary" $size="l">
         <IconCreditCart />
         Kup bilet
