@@ -13,6 +13,8 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   padding: 0 20px;
+  font-family: 'Almendra', serif;
+  font-size: 1.2em;
 `;
 
 const Wrapper = styled.div`
