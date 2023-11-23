@@ -1,6 +1,6 @@
 import lottie from "lottie-web";
 import { useRef, useEffect } from "react";
-import animationData from "./../../public/isometric-research-of-statistical-data-and-analytics.json";
+import animationData from "/public/lottie/isometric-research-of-statistical-data-and-analytics.json";
 
 export default function AnimatedSearchIcon({
   style = { maxWidth: "200px", height: "200px" },

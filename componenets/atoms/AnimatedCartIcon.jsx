@@ -1,6 +1,6 @@
 import lottie from "lottie-web";
 import { useRef, useEffect } from "react";
-import animationData from "./../../public/sammy-shopping.json";
+import animationData from "/public/lottie/sammy-shopping.json";
 
 export default function AnimatedCartIcon({
   style = { maxWidth: "200px", height: "200px" },

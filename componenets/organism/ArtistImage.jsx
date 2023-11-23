@@ -48,7 +48,7 @@ export default function ArtistImage({ images }) {
             $active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image} alt="zdjęcie artysty" />
+            <Image src={image || '/no-image-found.webp'} alt="zdjęcie artysty" />
           </ImageButton>
         ))}
       </ImageButtons>

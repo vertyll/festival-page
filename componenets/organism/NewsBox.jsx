@@ -95,7 +95,7 @@ export default function NewsBox({ _id, name, images, createdAt }) {
     <Wrapper>
       <Box href={url}>
         <Image
-          src={images?.[0] || "/no-image-found.png"}
+          src={images?.[0] || "/no-image-found.webp"}
           alt=""
           fill={true}
           sizes="100vh"

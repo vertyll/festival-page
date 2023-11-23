@@ -48,7 +48,7 @@ export default function NewsImage({ images }) {
             $active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image} alt="zdjęcie newsa" />
+            <Image src={image || '/no-image-found.webp'} alt="zdjęcie newsa" />
           </ImageButton>
         ))}
       </ImageButtons>

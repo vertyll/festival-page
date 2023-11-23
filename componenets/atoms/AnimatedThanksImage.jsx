@@ -1,6 +1,6 @@
 import lottie from "lottie-web";
 import { useRef, useEffect } from "react";
-import animationData from "./../../public/florid-web-wallet-and-online-banking.json";
+import animationData from "/public/lottie/florid-web-wallet-and-online-banking.json";
 
 export default function AnimatedThanksImage({
   style = { maxWidth: "200px", height: "200px" },

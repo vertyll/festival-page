@@ -1,6 +1,6 @@
 import lottie from "lottie-web";
 import { useRef, useEffect } from "react";
-import animationData from "./../../public/isometric-face-id-technology-on-phone.json";
+import animationData from "/public/lottie/isometric-face-id-technology-on-phone.json";
 
 export default function AnimatedLoginImage({
   style = { maxWidth: "200px", height: "200px" },
