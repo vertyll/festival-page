@@ -7,6 +7,7 @@ import SingleBox from "@/componenets/atoms/SingleBox";
 import { News } from "@/models/news";
 import NewsImage from "@/componenets/organism/NewsImage";
 import { formatDate } from "@/utils/date";
+import Head from "next/head";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -38,6 +39,9 @@ const StyledDescriptionDiv = styled.div`
 export default function NewsPage({ news }) {
   return (
     <>
+      <Head>
+        <title>{news.name} - Sunset Festival</title>
+      </Head>
       <Layout>
         <DivCenter>
           <ColWrapper>

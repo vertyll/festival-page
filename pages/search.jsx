@@ -9,6 +9,7 @@ import { debounce } from "lodash";
 import Spinner from "@/componenets/atoms/Spinner";
 import styled from "styled-components";
 import AnimatedSearchIcon from "@/componenets/atoms/AnimatedSearchIcon";
+import Head from "next/head";
 
 const SearchWrapper = styled.div`
   max-width: 980px;
@@ -46,27 +47,34 @@ export default function SearchPage() {
   }, [term, searchProducts]);
 
   return (
-    <Layout>
-      <DivCenter>
-        <SearchWrapper>
-          <Input
-            autoFocus
-            value={term}
-            onChange={(e) => setTerm(e.target.value)}
-            placeholder="Wyszukaj produkt ..."
-          />
-        </SearchWrapper>
-        {!isLoading && term !== "" && products.length === 0 && (
-          <h2>Brak wyników dla &ldquo;{term}&rdquo;</h2>
-        )}
-        {isLoading && <Spinner />}
-        {!isLoading &&
-          (products.length > 0 ? (
-            <ProductContainer products={products} />
-          ) : (
-            <AnimatedSearchIcon style={{ maxWidth: '450px', height: '450px' }} />
-          ))}
-      </DivCenter>
-    </Layout>
+    <>
+      <Head>
+        <title>Wyszukiwanie produktu - Sunset Festival</title>
+      </Head>
+      <Layout>
+        <DivCenter>
+          <SearchWrapper>
+            <Input
+              autoFocus
+              value={term}
+              onChange={(e) => setTerm(e.target.value)}
+              placeholder="Wyszukaj produkt ..."
+            />
+          </SearchWrapper>
+          {!isLoading && term !== "" && products.length === 0 && (
+            <h2>Brak wyników dla &ldquo;{term}&rdquo;</h2>
+          )}
+          {isLoading && <Spinner />}
+          {!isLoading &&
+            (products.length > 0 ? (
+              <ProductContainer products={products} />
+            ) : (
+              <AnimatedSearchIcon
+                style={{ maxWidth: "450px", height: "450px" }}
+              />
+            ))}
+        </DivCenter>
+      </Layout>
+    </>
   );
 }

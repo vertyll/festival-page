@@ -7,21 +7,25 @@ import Title from "@/componenets/atoms/Title";
 import { WishedProduct } from "@/models/WishedProduct";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import Head from "next/head";
 
 export default function ProductsPage({ products, wishedProducts }) {
   return (
     <>
+      <Head>
+        <title>Produkty - Sunset Festival</title>
+      </Head>
       <Layout>
         <DivCenter>
           <Title>Wszystkie produkty</Title>
           {products && products.length > 0 ? (
-          <ProductContainer
-            products={products}
-            wishedProducts={wishedProducts}
-          />
+            <ProductContainer
+              products={products}
+              wishedProducts={wishedProducts}
+            />
           ) : (
             <p>Brak produktów do wyświetlenia</p>
-        )}
+          )}
         </DivCenter>
       </Layout>
     </>

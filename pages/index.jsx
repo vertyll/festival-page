@@ -12,6 +12,7 @@ import ArtistContainer from "@/componenets/organism/ArtistContainer";
 import { Artist } from "@/models/Artist";
 import { News } from "@/models/News";
 import NewsContainer from "@/componenets/organism/NewsContainer";
+import Head from "next/head";
 
 export default function HomePage({
   newProducts,
@@ -20,34 +21,39 @@ export default function HomePage({
   newNews,
 }) {
   return (
-    <Layout>
-      <Banner />
-      <DivCenter>
-        {newArtists && newArtists.length > 0 && (
-          <>
-            <Title>Nowo ogłoszeni artyści</Title>
-            <ArtistContainer artists={newArtists} />
-          </>
-        )}
+    <>
+      <Head>
+        <title>Strona główna - Sunset Festival</title>
+      </Head>
+      <Layout>
+        <Banner />
+        <DivCenter>
+          {newArtists && newArtists.length > 0 && (
+            <>
+              <Title>Nowo ogłoszeni artyści</Title>
+              <ArtistContainer artists={newArtists} />
+            </>
+          )}
 
-        {newProducts && newProducts.length > 0 && (
-          <>
-            <Title>Nowe produkty</Title>
-            <ProductContainer
-              products={newProducts}
-              wishedProducts={wishedNewProducts}
-            />
-          </>
-        )}
+          {newProducts && newProducts.length > 0 && (
+            <>
+              <Title>Nowe produkty</Title>
+              <ProductContainer
+                products={newProducts}
+                wishedProducts={wishedNewProducts}
+              />
+            </>
+          )}
 
-        {newNews && newNews.length > 0 && (
-          <>
-            <Title>Nowe newsy</Title>
-            <NewsContainer news={newNews} />
-          </>
-        )}
-      </DivCenter>
-    </Layout>
+          {newNews && newNews.length > 0 && (
+            <>
+              <Title>Nowe newsy</Title>
+              <NewsContainer news={newNews} />
+            </>
+          )}
+        </DivCenter>
+      </Layout>
+    </>
   );
 }
 

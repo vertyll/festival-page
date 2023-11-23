@@ -8,6 +8,7 @@ import { Artist } from "@/models/Artist";
 import ArtistImage from "@/componenets/organism/ArtistImage";
 import { formatDate } from "@/utils/date";
 import { Stage } from "@/models/Stage";
+import Head from "next/head";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -43,6 +44,9 @@ export default function ArtistPage({ artist, stage }) {
 
   return (
     <>
+      <Head>
+        <title>{artist.name} - Sunset Festival</title>
+      </Head>
       <Layout>
         <DivCenter>
           <ColWrapper>

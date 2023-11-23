@@ -13,6 +13,7 @@ import React, { useContext, useState } from "react";
 import { Category } from "@/models/Category";
 import { Alert } from "@/componenets/atoms/Alert";
 import { Setting } from "@/models/Setting";
+import Head from "next/head";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -259,6 +260,9 @@ export default function ProductPage({
 
   return (
     <>
+      <Head>
+        <title>{product.name} - Sunset Festival</title>
+      </Head>
       <Layout>
         {showAlert && (
           <Alert

@@ -16,6 +16,7 @@ import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import IconCreditCart from "@/componenets/atoms/IconCreditCart";
 import AnimatedThanksImage from "@/componenets/atoms/AnimatedThanksImage";
 import AnimatedCartIcon from "@/componenets/atoms/AnimatedCartIcon";
+import Head from "next/head";
 
 const Wrapper = styled.div`
   display: grid;
@@ -162,7 +163,10 @@ export default function CartPage() {
         }
       })
       .catch((error) => {
-        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
+        console.error(
+          "Wystąpił błąd podczas pobierania danych adresowych:",
+          error
+        );
       });
   }, [session]);
   useEffect(() => {
@@ -218,6 +222,9 @@ export default function CartPage() {
   if (isSuccess) {
     return (
       <>
+        <Head>
+          <title>Koszyk - Sunset Festival</title>
+        </Head>
         <Layout>
           <DivCenter>
             <Box>
@@ -293,7 +300,10 @@ export default function CartPage() {
                           <td>
                             <ProductImage>
                               <img
-                                src={fullProductData.images[0] || "no-image-found.png"}
+                                src={
+                                  fullProductData.images[0] ||
+                                  "no-image-found.png"
+                                }
                                 alt={fullProductData.name}
                               />
                             </ProductImage>

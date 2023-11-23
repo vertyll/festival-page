@@ -14,6 +14,7 @@ import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "@/componenets/atoms/ErrorDiv";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import AnimatedLoginImage from "@/componenets/atoms/AnimatedLoginImage";
+import Head from "next/head";
 
 const Wrapper = styled.div`
   display: flex;
@@ -257,215 +258,222 @@ export default function AccountPage() {
       return [...products.filter((p) => p && p._id.toString() !== idToRemove)];
     });
   }
-  
-  return (
-    <Layout>
-      <DivCenter>
-        <Wrapper>
-          {session ? (
-            <LeftPanel>
-              <h3>Profil</h3>
-              <UserProfile>
-                <ProfilePicture src={session.user.image} />
-                <div>{session.user.name}</div>
-              </UserProfile>
-              <Button $usage="primary" onClick={logout} $size="m">
-                Wyloguj &#8617;
-              </Button>
-            </LeftPanel>
-          ) : (
-            <>
-              <LoginWrapper>
-                <LoginInfo>
-                  <h2>Zaloguj się na swoje konto</h2>
-                  <p>
-                    <b>I zgarnij korzyśći jakie daje Ci konto</b>
-                  </p>
-                  <p>
-                    Logując się, możesz dodać swoje produkty do listy
-                    ulubionych, zapisać dane do kolejnych płatności i sprawdzić
-                    stan swojego zamówienia
-                  </p>
-                  <Button $usage="primary" $size="m" onClick={login}>
-                    Logowanie Google &#8618;
-                  </Button>
-                </LoginInfo>
-                <div>
-                  <AnimatedLoginImage
-                    style={{ maxWidth: "350px", height: "350px" }}
-                  />
-                </div>
-              </LoginWrapper>
-            </>
-          )}
 
-          {session && (
-            <RightPanel>
-              <RevealWrapper delay={0}>
-                <InfoBox>
-                  <Tabs
-                    tabs={["Zamówienia", "Ulubione", "Konto"]}
-                    active={activeTab}
-                    onChange={setActiveTab}
-                  />
-                  {activeTab === "Zamówienia" && (
-                    <>
-                      {!orderLoaded && <Spinner />}
-                      {orderLoaded && (
-                        <StyledOrderDiv
-                          style={{
-                            visibility:
-                              orders.length > 0 ? "visible" : "hidden",
-                          }}
-                        >
-                          {orders.length === 0 && (
-                            <p style={{ visibility: "visible" }}>
-                              Brak zamówień
-                            </p>
-                          )}
-                          {orders.length > 0 &&
-                            orders.map((o) => (
-                              <SingleOrder key={o._id} {...o} />
-                            ))}
-                        </StyledOrderDiv>
-                      )}
-                    </>
-                  )}
-                  {activeTab === "Ulubione" && (
-                    <>
-                      {!wishlistLoaded && <Spinner />}
-                      {wishlistLoaded && (
-                        <StyledWishedDiv
-                          style={{
-                            visibility:
-                              wishedProducts.length > 0 ? "visible" : "hidden",
-                          }}
-                        >
-                          {wishedProducts.length === 0 && (
-                            <p style={{ visibility: "visible" }}>
-                              Brak polubionych produktów
-                            </p>
-                          )}
-                          {wishedProducts.length > 0 &&
-                            wishedProducts.map(
-                              (wp) =>
-                                wp && (
-                                  <ProductBox
-                                    key={wp._id}
-                                    {...wp}
-                                    wished={true}
-                                    onRemoveFromWishlist={
-                                      productRemovedFromWishlist
-                                    }
-                                  />
-                                )
-                            )}
-                        </StyledWishedDiv>
-                      )}
-                    </>
-                  )}
-                  {activeTab === "Konto" && (
-                    <>
-                      {!addressLoaded && <Spinner />}
-                      {addressLoaded && session && (
-                        <StyledDataDiv>
-                          <FieldInput
-                            labelText="Imie"
-                            type="text"
-                            placeholder="Name"
-                            value={name}
-                            name="name"
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                          {validationErrors["name"] && (
-                            <ErrorDiv className="error-div-class">
-                              {validationErrors["name"]}
-                            </ErrorDiv>
-                          )}
-                          <FieldInput
-                            labelText="Email"
-                            type="text"
-                            placeholder="Email"
-                            value={email}
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                          />
-                          {validationErrors["email"] && (
-                            <ErrorDiv className="error-div-class">
-                              {validationErrors["email"]}
-                            </ErrorDiv>
-                          )}
-                          <CityHolder>
-                            <FieldInput
-                              labelText="Miasto"
-                              type="text"
-                              placeholder="City"
-                              value={city}
-                              name="city"
-                              onChange={(e) => setCity(e.target.value)}
-                            />
-                            {validationErrors["city"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["city"]}
-                              </ErrorDiv>
-                            )}
-                            <FieldInput
-                              labelText="Kod pocztowy"
-                              type="text"
-                              placeholder="Postal Code"
-                              value={postalCode}
-                              name="postalCode"
-                              onChange={(e) => setPostalCode(e.target.value)}
-                            />
-                            {validationErrors["postalCode"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["postalCode"]}
-                              </ErrorDiv>
-                            )}
-                          </CityHolder>
-                          <FieldInput
-                            labelText="Ulica"
-                            type="text"
-                            placeholder="Street Address"
-                            value={streetAddress}
-                            name="streetAddress"
-                            onChange={(e) => setStreetAddress(e.target.value)}
-                          />
-                          {validationErrors["streetAddress"] && (
-                            <ErrorDiv className="error-div-class">
-                              {validationErrors["streetAddress"]}
-                            </ErrorDiv>
-                          )}
-                          <FieldInput
-                            labelText="Państwo"
-                            type="text"
-                            placeholder="Country"
-                            value={country}
-                            name="country"
-                            onChange={(e) => setCountry(e.target.value)}
-                          />
-                          {validationErrors["country"] && (
-                            <ErrorDiv className="error-div-class">
-                              {validationErrors["country"]}
-                            </ErrorDiv>
-                          )}
-                          <Button
-                            $usage="primary"
-                            onClick={saveAddress}
-                            $size="m"
+  return (
+    <>
+      <Head>
+        <title>Konto - Sunset Festival</title>
+      </Head>
+      <Layout>
+        <DivCenter>
+          <Wrapper>
+            {session ? (
+              <LeftPanel>
+                <h3>Profil</h3>
+                <UserProfile>
+                  <ProfilePicture src={session.user.image} />
+                  <div>{session.user.name}</div>
+                </UserProfile>
+                <Button $usage="primary" onClick={logout} $size="m">
+                  Wyloguj &#8617;
+                </Button>
+              </LeftPanel>
+            ) : (
+              <>
+                <LoginWrapper>
+                  <LoginInfo>
+                    <h2>Zaloguj się na swoje konto</h2>
+                    <p>
+                      <b>I zgarnij korzyśći jakie daje Ci konto</b>
+                    </p>
+                    <p>
+                      Logując się, możesz dodać swoje produkty do listy
+                      ulubionych, zapisać dane do kolejnych płatności i
+                      sprawdzić stan swojego zamówienia
+                    </p>
+                    <Button $usage="primary" $size="m" onClick={login}>
+                      Logowanie Google &#8618;
+                    </Button>
+                  </LoginInfo>
+                  <div>
+                    <AnimatedLoginImage
+                      style={{ maxWidth: "350px", height: "350px" }}
+                    />
+                  </div>
+                </LoginWrapper>
+              </>
+            )}
+
+            {session && (
+              <RightPanel>
+                <RevealWrapper delay={0}>
+                  <InfoBox>
+                    <Tabs
+                      tabs={["Zamówienia", "Ulubione", "Konto"]}
+                      active={activeTab}
+                      onChange={setActiveTab}
+                    />
+                    {activeTab === "Zamówienia" && (
+                      <>
+                        {!orderLoaded && <Spinner />}
+                        {orderLoaded && (
+                          <StyledOrderDiv
+                            style={{
+                              visibility:
+                                orders.length > 0 ? "visible" : "hidden",
+                            }}
                           >
-                            Zapisz &#x2714;
-                          </Button>
-                        </StyledDataDiv>
-                      )}
-                    </>
-                  )}
-                </InfoBox>
-              </RevealWrapper>
-            </RightPanel>
-          )}
-        </Wrapper>
-      </DivCenter>
-    </Layout>
+                            {orders.length === 0 && (
+                              <p style={{ visibility: "visible" }}>
+                                Brak zamówień
+                              </p>
+                            )}
+                            {orders.length > 0 &&
+                              orders.map((o) => (
+                                <SingleOrder key={o._id} {...o} />
+                              ))}
+                          </StyledOrderDiv>
+                        )}
+                      </>
+                    )}
+                    {activeTab === "Ulubione" && (
+                      <>
+                        {!wishlistLoaded && <Spinner />}
+                        {wishlistLoaded && (
+                          <StyledWishedDiv
+                            style={{
+                              visibility:
+                                wishedProducts.length > 0
+                                  ? "visible"
+                                  : "hidden",
+                            }}
+                          >
+                            {wishedProducts.length === 0 && (
+                              <p style={{ visibility: "visible" }}>
+                                Brak polubionych produktów
+                              </p>
+                            )}
+                            {wishedProducts.length > 0 &&
+                              wishedProducts.map(
+                                (wp) =>
+                                  wp && (
+                                    <ProductBox
+                                      key={wp._id}
+                                      {...wp}
+                                      wished={true}
+                                      onRemoveFromWishlist={
+                                        productRemovedFromWishlist
+                                      }
+                                    />
+                                  )
+                              )}
+                          </StyledWishedDiv>
+                        )}
+                      </>
+                    )}
+                    {activeTab === "Konto" && (
+                      <>
+                        {!addressLoaded && <Spinner />}
+                        {addressLoaded && session && (
+                          <StyledDataDiv>
+                            <FieldInput
+                              labelText="Imie"
+                              type="text"
+                              placeholder="Name"
+                              value={name}
+                              name="name"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            {validationErrors["name"] && (
+                              <ErrorDiv className="error-div-class">
+                                {validationErrors["name"]}
+                              </ErrorDiv>
+                            )}
+                            <FieldInput
+                              labelText="Email"
+                              type="text"
+                              placeholder="Email"
+                              value={email}
+                              name="email"
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                            {validationErrors["email"] && (
+                              <ErrorDiv className="error-div-class">
+                                {validationErrors["email"]}
+                              </ErrorDiv>
+                            )}
+                            <CityHolder>
+                              <FieldInput
+                                labelText="Miasto"
+                                type="text"
+                                placeholder="City"
+                                value={city}
+                                name="city"
+                                onChange={(e) => setCity(e.target.value)}
+                              />
+                              {validationErrors["city"] && (
+                                <ErrorDiv className="error-div-class">
+                                  {validationErrors["city"]}
+                                </ErrorDiv>
+                              )}
+                              <FieldInput
+                                labelText="Kod pocztowy"
+                                type="text"
+                                placeholder="Postal Code"
+                                value={postalCode}
+                                name="postalCode"
+                                onChange={(e) => setPostalCode(e.target.value)}
+                              />
+                              {validationErrors["postalCode"] && (
+                                <ErrorDiv className="error-div-class">
+                                  {validationErrors["postalCode"]}
+                                </ErrorDiv>
+                              )}
+                            </CityHolder>
+                            <FieldInput
+                              labelText="Ulica"
+                              type="text"
+                              placeholder="Street Address"
+                              value={streetAddress}
+                              name="streetAddress"
+                              onChange={(e) => setStreetAddress(e.target.value)}
+                            />
+                            {validationErrors["streetAddress"] && (
+                              <ErrorDiv className="error-div-class">
+                                {validationErrors["streetAddress"]}
+                              </ErrorDiv>
+                            )}
+                            <FieldInput
+                              labelText="Państwo"
+                              type="text"
+                              placeholder="Country"
+                              value={country}
+                              name="country"
+                              onChange={(e) => setCountry(e.target.value)}
+                            />
+                            {validationErrors["country"] && (
+                              <ErrorDiv className="error-div-class">
+                                {validationErrors["country"]}
+                              </ErrorDiv>
+                            )}
+                            <Button
+                              $usage="primary"
+                              onClick={saveAddress}
+                              $size="m"
+                            >
+                              Zapisz &#x2714;
+                            </Button>
+                          </StyledDataDiv>
+                        )}
+                      </>
+                    )}
+                  </InfoBox>
+                </RevealWrapper>
+              </RightPanel>
+            )}
+          </Wrapper>
+        </DivCenter>
+      </Layout>
+    </>
   );
 }

@@ -4,22 +4,27 @@ import ArtistContainer from "@/componenets/organism/ArtistContainer";
 import Layout from "@/componenets/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Artist } from "@/models/Artist";
+import Head from "next/head";
 
 export default function LineUpPage({ artists }) {
   return (
-    <Layout>
-      <DivCenter>
-        <Title>PROGRAM 2024</Title>
-        {artists && artists.length > 0 ? (
-          <ArtistContainer artists={artists} />
-        ) : (
-          <p>Brak artystów do wyświetlenia</p>
-        )}
-      </DivCenter>
-    </Layout>
+    <>
+      <Head>
+        <title>Program - Sunset Festival</title>
+      </Head>
+      <Layout>
+        <DivCenter>
+          <Title>PROGRAM 2024</Title>
+          {artists && artists.length > 0 ? (
+            <ArtistContainer artists={artists} />
+          ) : (
+            <p>Brak artystów do wyświetlenia</p>
+          )}
+        </DivCenter>
+      </Layout>
+    </>
   );
 }
-
 
 export async function getServerSideProps(ctx) {
   await mongooseConnect();
