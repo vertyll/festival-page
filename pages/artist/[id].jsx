@@ -37,7 +37,7 @@ const StyledDescriptionDiv = styled.div`
   padding: 30px;
 `;
 
-export default function ArtistPage({ artist, stage }) {
+export default function ArtistPage({ artist }) {
   const renderStage = () => {
     return artist.stage ? artist.stage.name : "Brak danych";
   };
