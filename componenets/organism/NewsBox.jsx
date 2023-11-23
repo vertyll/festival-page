@@ -21,9 +21,9 @@ const HoverText = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--main-night-color);
+  background-color: var(--hover-text-color);
   color: var(--light-text-color);
-  padding: 2px 5px;
+  padding: 10px 20px;
   border-radius: 5px;
   font-size: 0.8em;
   opacity: 0;
@@ -43,11 +43,6 @@ const Box = styled(Link)`
   text-decoration: none;
   color: inherit;
   position: relative;
-
-  &:hover ${HoverText} {
-    display: block;
-    opacity: 1;
-  }
 `;
 
 const Name = styled(Link)`
@@ -63,12 +58,18 @@ const NewsInfo = styled.div`
   display: flex;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   background-color: var(--lavender-color);
   box-shadow: var(--default-box-shadow);
   display: flex;
   gap: 10px;
   padding-right: 10px;
+  text-decoration: none;
+  color: inherit;
+  &:hover ${HoverText} {
+    display: block;
+    opacity: 1;
+  }
 `;
 
 const NewsName = styled.div`
@@ -92,7 +93,7 @@ export default function NewsBox({ _id, name, images, createdAt }) {
   const url = "/news/" + _id;
 
   return (
-    <Wrapper>
+    <Wrapper href={url}>
       <Box href={url}>
         <Image
           src={images?.[0] || "/no-image-found.webp"}
@@ -104,7 +105,6 @@ export default function NewsBox({ _id, name, images, createdAt }) {
           }}
           priority={false}
         />
-        <HoverText>Przeczytaj newsa &#8594;</HoverText>
       </Box>
       <InfoWrapper>
         <NewsInfo>
@@ -114,6 +114,7 @@ export default function NewsBox({ _id, name, images, createdAt }) {
           <Name href={url}>{name}</Name>
         </NewsName>
       </InfoWrapper>
+      <HoverText>Przeczytaj newsa &#8594;</HoverText>
     </Wrapper>
   );
 }

@@ -27,9 +27,9 @@ const HoverText = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--main-night-color);
+  background-color: var(--hover-text-color);
   color: var(--light-text-color);
-  padding: 2px 5px;
+  padding: 5px 10px;
   border-radius: 5px;
   font-size: 0.8em;
   opacity: 0;
@@ -51,7 +51,7 @@ const Box = styled(Link)`
   position: relative;
   box-shadow: var(--default-box-shadow);
 
-  &:hover ${HoverText} {
+    &:hover ${HoverText} {
     display: block;
     opacity: 1;
   }

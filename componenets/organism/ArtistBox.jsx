@@ -21,7 +21,7 @@ const HoverText = styled.div`
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--main-night-color);
+  background-color: var(--hover-text-color);
   color: var(--light-text-color);
   padding: 2px 5px;
   border-radius: 5px;
