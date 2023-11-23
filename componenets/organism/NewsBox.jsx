@@ -31,7 +31,7 @@ const HoverText = styled.div`
   animation: ${fadeIn} 0.3s ease-in-out;
 `;
 
-const Box = styled(Link)`
+const Box = styled.div`
   background-color: var(--lavender-color);
   padding: 30px 10px;
   height: 300px;
@@ -45,7 +45,7 @@ const Box = styled(Link)`
   position: relative;
 `;
 
-const Name = styled(Link)`
+const Name = styled.div`
   font-weight: bold;
   font-size: 1.2em;
   margin: 0;
@@ -76,7 +76,7 @@ const NewsName = styled.div`
   margin: 5px 0;
 `;
 
-const NewsDate = styled(Link)`
+const NewsDate = styled.div`
   font-weight: bold;
   font-size: 0.9em;
   margin: 0;
@@ -94,7 +94,7 @@ export default function NewsBox({ _id, name, images, createdAt }) {
 
   return (
     <Wrapper href={url}>
-      <Box href={url}>
+      <Box>
         <Image
           src={images?.[0] || "/no-image-found.webp"}
           alt=""
@@ -108,10 +108,10 @@ export default function NewsBox({ _id, name, images, createdAt }) {
       </Box>
       <InfoWrapper>
         <NewsInfo>
-          <NewsDate href={url}>{formatDate(createdAt)}</NewsDate>
+          <NewsDate>{formatDate(createdAt)}</NewsDate>
         </NewsInfo>
         <NewsName>
-          <Name href={url}>{name}</Name>
+          <Name>{name}</Name>
         </NewsName>
       </InfoWrapper>
       <HoverText>Przeczytaj newsa &#8594;</HoverText>
