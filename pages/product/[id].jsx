@@ -3,7 +3,6 @@ import { Product } from "@/models/Product";
 import styled from "styled-components";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import Layout from "@/componenets/templates/Layout";
-import Title from "@/componenets/atoms/Title";
 import SingleBox from "@/componenets/atoms/SingleBox";
 import ProductImages from "@/componenets/organism/ProductImages";
 import IconCart from "@/componenets/atoms/IconCart";
@@ -81,6 +80,10 @@ const PropertyContainer = styled.div`
 
 const AvailabilityText = styled.span`
   color: ${(props) => (props.$available ? "green" : "red")};
+`;
+
+const Title = styled.h1`
+    font-size: 2em;
 `;
 
 export default function ProductPage({

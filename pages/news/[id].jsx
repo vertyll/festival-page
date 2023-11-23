@@ -2,7 +2,6 @@ import { mongooseConnect } from "@/lib/mongoose";
 import styled from "styled-components";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import Layout from "@/componenets/templates/Layout";
-import Title from "@/componenets/atoms/Title";
 import SingleBox from "@/componenets/atoms/SingleBox";
 import { News } from "@/models/news";
 import NewsImage from "@/componenets/organism/NewsImage";
@@ -34,6 +33,10 @@ const StyledDescriptionDiv = styled.div`
   background-color: var(--light-color);
   box-shadow: var(--default-box-shadow);
   padding: 30px;
+`;
+
+const Title = styled.h1`
+    font-size: 2em;
 `;
 
 export default function NewsPage({ news }) {
