@@ -5,7 +5,7 @@ import SponsorBox from "./SponsorBox";
 const SponsorGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 50px;
+  gap: 15px;
   padding-top: 50px;
 
   @media screen and (min-width: 575px) {

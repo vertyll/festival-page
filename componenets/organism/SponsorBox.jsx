@@ -34,7 +34,7 @@ const Box = styled(Link)`
   background-color: white;
   padding: 30px 10px;
   text-align: center;
-  height: 150px;
+  height: 100px;
   width: 200px;
   display: flex;
   justify-content: center;
