@@ -3,17 +3,17 @@ import styled from "styled-components";
 import { RevealWrapper } from "next-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Layout from "@/componenets/templates/Layout";
-import Button from "@/componenets/atoms/Button";
-import ProductBox from "@/componenets/organism/ProductBox";
-import Tabs from "@/componenets/organism/Tabs";
-import SingleOrder from "@/componenets/organism/SingleOrder";
-import Spinner from "@/componenets/atoms/Spinner";
-import FieldInput from "@/componenets/molecules/FieldInput";
+import Layout from "@/components/templates/Layout";
+import Button from "@/components/atoms/Button";
+import ProductBox from "@/components/organism/ProductBox";
+import Tabs from "@/components/organism/Tabs";
+import SingleOrder from "@/components/organism/SingleOrder";
+import Spinner from "@/components/atoms/Spinner";
+import FieldInput from "@/components/molecules/FieldInput";
 import { validateFormValues } from "@/utils/validation/validation";
-import ErrorDiv from "@/componenets/atoms/ErrorDiv";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import AnimatedLoginImage from "@/componenets/atoms/AnimatedLoginImage";
+import ErrorDiv from "@/components/atoms/ErrorDiv";
+import DivCenter from "@/components/atoms/DivCenter";
+import AnimatedLoginImage from "@/components/atoms/AnimatedLoginImage";
 import Head from "next/head";
 
 const Wrapper = styled.div`

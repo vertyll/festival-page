@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Input from "@/componenets/atoms/Input";
-import ProductContainer from "@/componenets/organism/ProductContainer";
-import Layout from "@/componenets/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import Input from "@/components/atoms/Input";
+import ProductContainer from "@/components/organism/ProductContainer";
+import Layout from "@/components/templates/Layout";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
-import Spinner from "@/componenets/atoms/Spinner";
+import Spinner from "@/components/atoms/Spinner";
 import styled from "styled-components";
-import AnimatedSearchIcon from "@/componenets/atoms/AnimatedSearchIcon";
+import AnimatedSearchIcon from "@/components/atoms/AnimatedSearchIcon";
 import Head from "next/head";
 
 const SearchWrapper = styled.div`

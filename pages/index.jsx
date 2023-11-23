@@ -1,17 +1,17 @@
-import ProductContainer from "@/componenets/organism/ProductContainer";
-import Banner from "@/componenets/organism/Banner";
-import Layout from "@/componenets/templates/Layout";
+import ProductContainer from "@/components/organism/ProductContainer";
+import Banner from "@/components/organism/Banner";
+import Layout from "@/components/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Title from "@/componenets/atoms/Title";
+import DivCenter from "@/components/atoms/DivCenter";
+import Title from "@/components/atoms/Title";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { WishedProduct } from "@/models/WishedProduct";
 import { getServerSession } from "next-auth";
-import ArtistContainer from "@/componenets/organism/ArtistContainer";
+import ArtistContainer from "@/components/organism/ArtistContainer";
 import { Artist } from "@/models/Artist";
 import { News } from "@/models/News";
-import NewsContainer from "@/componenets/organism/NewsContainer";
+import NewsContainer from "@/components/organism/NewsContainer";
 import Head from "next/head";
 
 export default function HomePage({

@@ -1,10 +1,10 @@
 import { mongooseConnect } from "@/lib/mongoose";
-import Layout from "@/componenets/templates/Layout";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Title from "@/componenets/atoms/Title";
+import Layout from "@/components/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import Title from "@/components/atoms/Title";
 import Head from "next/head";
 import { Sponsor } from "@/models/Sponsor";
-import SponsorsContainer from "@/componenets/organism/SponsorsContainer";
+import SponsorsContainer from "@/components/organism/SponsorsContainer";
 import styled from "styled-components";
 
 const Thanks = styled.h2`

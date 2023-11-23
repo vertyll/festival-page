@@ -1,7 +1,7 @@
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Title from "@/componenets/atoms/Title";
-import ArtistContainer from "@/componenets/organism/ArtistContainer";
-import Layout from "@/componenets/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import Title from "@/components/atoms/Title";
+import ArtistContainer from "@/components/organism/ArtistContainer";
+import Layout from "@/components/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Artist } from "@/models/Artist";
 import Head from "next/head";

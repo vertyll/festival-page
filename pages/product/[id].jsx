@@ -1,16 +1,16 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import styled from "styled-components";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Layout from "@/componenets/templates/Layout";
-import SingleBox from "@/componenets/atoms/SingleBox";
-import ProductImages from "@/componenets/organism/ProductImages";
-import IconCart from "@/componenets/atoms/IconCart";
-import Button from "@/componenets/atoms/Button";
-import { CartContext } from "@/componenets/organism/CartContext";
+import DivCenter from "@/components/atoms/DivCenter";
+import Layout from "@/components/templates/Layout";
+import SingleBox from "@/components/atoms/SingleBox";
+import ProductImages from "@/components/organism/ProductImages";
+import IconCart from "@/components/atoms/IconCart";
+import Button from "@/components/atoms/Button";
+import { CartContext } from "@/components/organism/CartContext";
 import React, { useContext, useState } from "react";
 import { Category } from "@/models/Category";
-import { Alert } from "@/componenets/atoms/Alert";
+import { Alert } from "@/components/atoms/Alert";
 import { Setting } from "@/models/Setting";
 import Head from "next/head";
 

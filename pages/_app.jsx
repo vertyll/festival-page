@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
-import { CartContextProvider } from "@/componenets/organism/CartContext";
+import { CartContextProvider } from "@/components/organism/CartContext";
 import { createGlobalStyle } from "styled-components";
 import { SessionProvider } from "next-auth/react";
-import ScrollToTop from "@/componenets/atoms/ScrollToTop";
+import ScrollToTop from "@/components/atoms/ScrollToTop";
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
 

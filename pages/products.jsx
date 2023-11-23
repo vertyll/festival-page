@@ -1,9 +1,9 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-import Layout from "@/componenets/templates/Layout";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import ProductContainer from "@/componenets/organism/ProductContainer";
-import Title from "@/componenets/atoms/Title";
+import Layout from "@/components/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import ProductContainer from "@/components/organism/ProductContainer";
+import Title from "@/components/atoms/Title";
 import { WishedProduct } from "@/models/WishedProduct";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";

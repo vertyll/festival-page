@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import styled from "styled-components";
 import { useContext, useEffect, useState } from "react";
-import { CartContext } from "@/componenets/organism/CartContext";
+import { CartContext } from "@/components/organism/CartContext";
 import axios from "axios";
-import Layout from "@/componenets/templates/Layout";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Button from "@/componenets/atoms/Button";
-import Table from "@/componenets/atoms/Table";
-import FieldInput from "@/componenets/molecules/FieldInput";
+import Layout from "@/components/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import Button from "@/components/atoms/Button";
+import Table from "@/components/atoms/Table";
+import FieldInput from "@/components/molecules/FieldInput";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { validateFormValues } from "@/utils/validation/validation";
-import ErrorDiv from "@/componenets/atoms/ErrorDiv";
-import IconCreditCart from "@/componenets/atoms/IconCreditCart";
-import AnimatedThanksImage from "@/componenets/atoms/AnimatedThanksImage";
-import AnimatedCartIcon from "@/componenets/atoms/AnimatedCartIcon";
+import ErrorDiv from "@/components/atoms/ErrorDiv";
+import IconCreditCart from "@/components/atoms/IconCreditCart";
+import AnimatedThanksImage from "@/components/atoms/AnimatedThanksImage";
+import AnimatedCartIcon from "@/components/atoms/AnimatedCartIcon";
 import Head from "next/head";
 
 const Wrapper = styled.div`

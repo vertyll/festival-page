@@ -1,7 +1,7 @@
-import DivCenter from "@/componenets/atoms/DivCenter";
-import DivText from "@/componenets/atoms/DivText";
-import Title from "@/componenets/atoms/Title";
-import Layout from "@/componenets/templates/Layout";
+import DivCenter from "@/components/atoms/DivCenter";
+import DivText from "@/components/atoms/DivText";
+import Title from "@/components/atoms/Title";
+import Layout from "@/components/templates/Layout";
 import Head from "next/head";
 
 export default function RegulationsPage() {

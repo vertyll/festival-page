@@ -1,10 +1,10 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import styled from "styled-components";
-import DivCenter from "@/componenets/atoms/DivCenter";
-import Layout from "@/componenets/templates/Layout";
-import SingleBox from "@/componenets/atoms/SingleBox";
+import DivCenter from "@/components/atoms/DivCenter";
+import Layout from "@/components/templates/Layout";
+import SingleBox from "@/components/atoms/SingleBox";
 import { News } from "@/models/news";
-import NewsImage from "@/componenets/organism/NewsImage";
+import NewsImage from "@/components/organism/NewsImage";
 import { formatDate } from "@/utils/date";
 import Head from "next/head";
 
