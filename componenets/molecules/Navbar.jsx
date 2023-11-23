@@ -165,6 +165,9 @@ export default function Navbar() {
           <StyledLink href="/products" $size="bold">
             SKLEP
           </StyledLink>
+          <StyledLink href="/sponsors" $size="bold">
+            SPONSORZY
+          </StyledLink>
           <StyledLink href="/search" $size="bold">
             <IconSearch />
           </StyledLink>
@@ -200,7 +203,10 @@ export default function Navbar() {
             NEWSY
           </StyledLink>
           <StyledLink href="/products" $size="bold">
-            Sklep
+            SKLEP
+          </StyledLink>
+          <StyledLink href="/sponsors" $size="bold">
+            SPONSORZY
           </StyledLink>
           <StyledLink href="/account" $size="bold">
             Konto
