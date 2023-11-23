@@ -7,7 +7,6 @@ import Layout from "@/componenets/templates/Layout";
 import DivCenter from "@/componenets/atoms/DivCenter";
 import Button from "@/componenets/atoms/Button";
 import Table from "@/componenets/atoms/Table";
-import Title from "@/componenets/atoms/Title";
 import FieldInput from "@/componenets/molecules/FieldInput";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -28,6 +27,12 @@ const Wrapper = styled.div`
     grid-template-columns: 1.2fr 0.8fr;
     gap: 50px;
   }
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  font-weight: bold;
+  font-size: 2.5;
 `;
 
 const ImageWrapper = styled.div`
@@ -254,7 +259,7 @@ export default function CartPage() {
               <Title>Koszyk</Title>
               {!cartProducts?.length && (
                 <div>
-                  <h1>Twój koszyk jest pusty</h1>
+                  <h2>Twój koszyk jest pusty</h2>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
                   <Button $usage="primary" $size="m" onClick={goToShop}>
                     Wróć do sklepu &#8617;

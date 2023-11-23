@@ -10,7 +10,6 @@ const StyledDiv = styled.div`
   padding: 20px 20px;
   background-size: cover;
   background-position: center;
-  background-image: url("/pexels-rahul-pandit-3052360.webp");
   height: 500px;
   gap: 50px;
   box-shadow: var(--default-box-shadow);
@@ -20,7 +19,7 @@ const Title = styled.h1`
   margin: 0;
   font-weight: bold;
   font-size: 3em;
-  font-family: "Signika", sans-serif;
+  font-family: "Almendra", serif;
 `;
 
 export default function Banner() {
