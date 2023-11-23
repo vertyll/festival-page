@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/components/templates/Layout";
 import Button from "@/components/atoms/Button";
-import ProductBox from "@/components/organism/ProductBox";
 import Tabs from "@/components/organism/Tabs";
 import SingleOrder from "@/components/organism/SingleOrder";
 import Spinner from "@/components/atoms/Spinner";
@@ -15,6 +14,7 @@ import ErrorDiv from "@/components/atoms/ErrorDiv";
 import DivCenter from "@/components/atoms/DivCenter";
 import AnimatedLoginImage from "@/components/atoms/AnimatedLoginImage";
 import Head from "next/head";
+import WishedProductBox from "@/components/organism/WishedProductBox";
 
 const Wrapper = styled.div`
   display: flex;
@@ -357,7 +357,7 @@ export default function AccountPage() {
                               wishedProducts.map(
                                 (wp) =>
                                   wp && (
-                                    <ProductBox
+                                    <WishedProductBox
                                       key={wp._id}
                                       {...wp}
                                       wished={true}
