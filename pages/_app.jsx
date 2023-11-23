@@ -4,6 +4,7 @@ import { createGlobalStyle } from "styled-components";
 import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "@/componenets/atoms/ScrollToTop";
 import { AnimatePresence } from "framer-motion";
+import Head from "next/head";
 
 const GlobalStyles = createGlobalStyle`
   body{
@@ -23,6 +24,13 @@ export default function App({
     <>
       <GlobalStyles />
       <SessionProvider session={session}>
+        <Head>
+          <meta name="author" content="Mikołaj Gawron" />
+          <meta
+            name="description"
+            content="Praca inżynierska - strona festiwalu muzycznego z sklepem internetowym"
+          />
+        </Head>
         <CartContextProvider>
           <AnimatePresence mode="wait">
             <Component {...pageProps} key={router.route} />
