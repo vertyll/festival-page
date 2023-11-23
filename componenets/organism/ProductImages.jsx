@@ -5,16 +5,19 @@ const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
 `;
+
 const BigImage = styled.img`
   max-width: 100%;
   max-height: 200px;
 `;
+
 const ImageButtons = styled.div`
   display: flex;
   gap: 10px;
   flex-grow: 0;
   margin-top: 10px;
 `;
+
 const ImageButton = styled.div`
   border: 2px solid var(--border-color-for-image);
   ${(props) =>
@@ -30,16 +33,35 @@ const ImageButton = styled.div`
   cursor: pointer;
   border-radius: 5px;
 `;
+
 const BigImageWrapper = styled.div`
   text-align: center;
 `;
 
+const NoImageText = styled.div`
+  font-size: 1rem;
+  color: var(--gray-color);
+  text-align: center;
+`;
+
 export default function ProductImages({ images }) {
-  const [activeImage, setActiveImage] = useState(images?.[0]);
+  const [activeImage, setActiveImage] = useState(
+    images?.[0] || "/no-image-found.webp"
+  );
+
+  if (!images || images.length === 0) {
+    return (
+      <BigImageWrapper>
+        <BigImage src="/no-image-found.webp" alt="Brak zdjęcia" />
+        <NoImageText>brak grafiki</NoImageText>
+      </BigImageWrapper>
+    );
+  }
+
   return (
     <>
       <BigImageWrapper>
-        <BigImage src={activeImage} />
+        <BigImage src={activeImage} alt="Zdjęcie produktu" />
       </BigImageWrapper>
       <ImageButtons>
         {images.map((image) => (
@@ -48,7 +70,7 @@ export default function ProductImages({ images }) {
             $active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image || '/no-image-found.webp'} alt="zdjęcie produktu" />
+            <Image src={image} alt="Zdjęcie produktu" />
           </ImageButton>
         ))}
       </ImageButtons>

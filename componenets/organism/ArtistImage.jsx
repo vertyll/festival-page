@@ -34,8 +34,26 @@ const BigImageWrapper = styled.div`
   text-align: center;
 `;
 
+const NoImageText = styled.div`
+  font-size: 1rem;
+  color: var(--gray-color);
+  text-align: center;
+`;
+
 export default function ArtistImage({ images }) {
-  const [activeImage, setActiveImage] = useState(images?.[0]);
+  const [activeImage, setActiveImage] = useState(
+    images?.[0] || "/no-image-found.webp"
+  );
+
+  if (!images || images.length === 0) {
+    return (
+      <BigImageWrapper>
+        <BigImage src="/no-image-found.webp" alt="Brak zdjęcia" />
+        <NoImageText>brak grafiki</NoImageText>
+      </BigImageWrapper>
+    );
+  }
+
   return (
     <>
       <BigImageWrapper>
@@ -48,7 +66,10 @@ export default function ArtistImage({ images }) {
             $active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image || '/no-image-found.webp'} alt="zdjęcie artysty" />
+            <Image
+              src={image}
+              alt="zdjęcie artysty"
+            />
           </ImageButton>
         ))}
       </ImageButtons>
