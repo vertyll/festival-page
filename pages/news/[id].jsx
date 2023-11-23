@@ -3,10 +3,10 @@ import styled from "styled-components";
 import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
 import SingleBox from "@/components/atoms/SingleBox";
-import { News } from "@/models/news";
 import NewsImage from "@/components/organism/NewsImage";
 import { formatDate } from "@/utils/date";
 import Head from "next/head";
+import { News } from "@/models/News";
 
 const ColWrapper = styled.div`
   display: grid;
