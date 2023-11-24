@@ -7,9 +7,9 @@ const AlertWrapper = styled.div`
   left: 0;
   right: 0;
   background-color: ${(props) =>
-    props.type === "success"
+    props.$type === "success"
       ? "var(--alert-success-color)"
-      : props.type === "danger"
+      : props.$type === "danger"
       ? "var(--alert-danger-color)"
       : "var(--alert-default-color)"};
   color: var(--dark-text-color);

@@ -264,7 +264,7 @@ export default function ProductPage({
             message={alertMessage}
             onClose={() => setShowAlert(false)}
             duration={alertDuration}
-            type="success"
+            $type="success"
           />
         )}
         {showDangerAlert && (
@@ -272,7 +272,7 @@ export default function ProductPage({
             message={alertDangerMessage}
             onClose={() => setShowDangerAlert(false)}
             duration={alertDuration}
-            type="danger"
+            $type="danger"
           />
         )}
         <DivCenter>
