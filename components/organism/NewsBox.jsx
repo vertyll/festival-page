@@ -54,7 +54,7 @@ const Name = styled.div`
 `;
 
 const NewsInfo = styled.div`
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
 `;
 
@@ -73,7 +73,7 @@ const Wrapper = styled(Link)`
 `;
 
 const NewsName = styled.div`
-  margin: 5px 0;
+  margin: 25px 0;
 `;
 
 const NewsDate = styled.div`

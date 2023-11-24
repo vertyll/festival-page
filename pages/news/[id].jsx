@@ -54,7 +54,7 @@ export default function NewsPage({ news }) {
             </SingleBox>
             <Row>
               <Title>{news.name}</Title>
-              <div>Opublikowano: {formatDate(news.createdAt)}</div>
+              <div><b>Opublikowano:</b> {formatDate(news.createdAt)}</div>
             </Row>
           </ColWrapper>
           {news.description && (
