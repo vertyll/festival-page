@@ -138,7 +138,7 @@ export default function ProductBox({
           message={alertMessage}
           onClose={() => setShowAlert(false)}
           duration={alertDuration}
-          $type="danger"
+          type="danger"
         />
       )}
       <Box href={url}>
