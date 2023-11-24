@@ -50,3 +50,8 @@ export const validateCountry = (country) => {
 
   return null;
 };
+
+export const validateNewsletterEmail = (email) => {
+  const re = EMAIL_PATTERN;
+  return re.test(String(email).toLowerCase());
+};

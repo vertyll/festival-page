@@ -3,6 +3,7 @@ import Footer from "../organism/Footer";
 import Header from "../organism/Header";
 import { AnimatedPage } from "../atoms/AnimatedPage";
 import { pageTransition, pageVariants } from "@/utils/animations";
+import Newsletter from "../organism/Newsletter";
 
 const StyledDiv = styled.div`
   min-height: 80vh;
@@ -23,6 +24,7 @@ export default function Layout({ children }) {
       >
         <StyledDiv>{children}</StyledDiv>
       </AnimatedPage>
+      <Newsletter />
       <Footer />
     </>
   );
