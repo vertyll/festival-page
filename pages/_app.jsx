@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
-    background-color: var(--main-white-smoke-color);
+    background-color: var(--main-background-color);
   }
 `;
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
 import SingleBox from "@/components/atoms/SingleBox";
+import StyledDescriptionBox from "@/components/atoms/StyledDescriptionBox";
 import NewsImage from "@/components/organism/NewsImage";
 import { formatDate } from "@/utils/date";
 import Head from "next/head";
@@ -30,7 +31,7 @@ const StyledDescriptionDiv = styled.div`
   display: flex;
   max-width: 850px;
   border-radius: 20px;
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   box-shadow: var(--default-box-shadow);
   padding: 30px;
 `;
@@ -58,7 +59,7 @@ export default function NewsPage({ news }) {
           </ColWrapper>
           {news.description && (
             <>
-              <StyledDescriptionDiv>{news.description}</StyledDescriptionDiv>
+              <StyledDescriptionBox>{news.description}</StyledDescriptionBox>
             </>
           )}
         </DivCenter>

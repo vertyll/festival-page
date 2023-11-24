@@ -32,7 +32,7 @@ const HoverText = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: var(--lavender-color);
+  background-color: var(--main-white-smoke-color);
   padding: 30px 10px;
   height: 300px;
   width: 175px;
@@ -59,7 +59,7 @@ const NewsInfo = styled.div`
 `;
 
 const Wrapper = styled(Link)`
-  background-color: var(--lavender-color);
+  background-color: var(--main-white-smoke-color);
   box-shadow: var(--default-box-shadow);
   display: flex;
   gap: 10px;

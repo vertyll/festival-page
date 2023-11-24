@@ -54,7 +54,7 @@ const LeftPanel = styled.div`
   flex: 0 0 30%;
   padding: 20px;
   border-radius: 20px;
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   box-shadow: var(--default-box-shadow);
   height: fit-content;
 
@@ -68,7 +68,7 @@ const RightPanel = styled.div`
   flex: 1;
   padding: 20px;
   border-radius: 20px;
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   box-shadow: var(--default-box-shadow);
   min-width: 0;
 
@@ -81,7 +81,7 @@ const RightPanel = styled.div`
 const UserProfile = styled.div`
   display: flex;
   align-items: center;
-  background-color: var(--main-white-smoke-color);
+  background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
   margin-bottom: 15px;
@@ -109,7 +109,7 @@ const StyledWishedDiv = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   text-align: left;
-  background-color: var(--main-white-smoke-color);
+  background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
   margin: 0px;
@@ -127,7 +127,7 @@ const StyledOrderDiv = styled.div`
   grid-template-columns: 1fr;
   gap: 50px;
   text-align: left;
-  background-color: var(--main-white-smoke-color);
+  background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
   margin: 0px;
@@ -142,7 +142,7 @@ const StyledDataDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   text-align: left;
-  background-color: var(--main-white-smoke-color);
+  background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
   margin: 0px;
@@ -167,7 +167,7 @@ const StyledDataDiv = styled.div`
 `;
 
 const InfoBox = styled.div`
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   padding: 20px 5px;
   border-radius: 20px;
 

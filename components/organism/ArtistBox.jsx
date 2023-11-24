@@ -32,7 +32,7 @@ const HoverText = styled.div`
 `;
 
 const Box = styled(Link)`
-  background-color: var(--lavender-color);
+  background-color: var(--main-white-smoke-color);
   padding: 30px 10px;
   height: 100px;
   width: 170px;
@@ -64,7 +64,7 @@ const ArtistInfo = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   padding: 20px;
   box-shadow: var(--default-box-shadow);
 `;

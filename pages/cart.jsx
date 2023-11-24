@@ -45,10 +45,14 @@ const ImageWrapper = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   border-radius: 20px;
   padding: 30px;
   box-shadow: var(--default-box-shadow);
+
+  input {
+    background-color: var(--light-color);
+  }
 `;
 
 const ProductImage = styled.div`

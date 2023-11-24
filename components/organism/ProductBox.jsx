@@ -38,7 +38,7 @@ const HoverText = styled.div`
 `;
 
 const Box = styled(Link)`
-  background-color: white;
+  background-color: var(--main-white-smoke-color);
   padding: 30px 10px;
   text-align: center;
   height: 150px;

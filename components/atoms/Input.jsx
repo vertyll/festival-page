@@ -7,6 +7,7 @@ const StyledInput = styled.input`
   border: 1px solid var(--main-night-color);
   border-radius: 20px;
   box-sizing: border-box;
+  background-color: var(--main-white-smoke-color);
 
   &:hover {
     border: 1px solid var(--main-medium-slate-blue-color);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SingleBox = styled.div`
-  background-color: var(--light-color);
+  background-color: var(--main-white-smoke-color);
   border-radius: 20px;
   padding: 30px;
   display: flex;

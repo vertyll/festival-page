@@ -17,12 +17,12 @@
   --border-color-for-under: #cfcfcf;
   --border-color-light: #cfcfcf;
   --light-color: #fff;
+  --main-background-color: #fff;
   --nav-color: #222;
   --error-bg-color: #ffb2b2;
   --alert-success-color: #7aff7ab0;
   --alert-danger-color: #ffb2b2b0;
   --alert-default-color: #858585b0;
   --default-box-shadow: 0px 3px 16px 0px rgba(18, 18, 18, 0.4);
-  --lavender-color: #e6e6ea;
   --hover-text-color: #000000ad;
 }

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
 import SingleBox from "@/components/atoms/SingleBox";
+import StyledDescriptionBox from "@/components/atoms/StyledDescriptionBox";
 import ProductImages from "@/components/organism/ProductImages";
 import IconCart from "@/components/atoms/IconCart";
 import Button from "@/components/atoms/Button";
@@ -61,15 +62,6 @@ const PropertyButton = styled.button`
         : "var(--main-deep-pink-color)"};
     color: var(--dark-text-color);
   }
-`;
-
-const StyledDescriptionDiv = styled.div`
-  display: flex;
-  max-width: 850px;
-  border-radius: 20px;
-  background-color: var(--light-color);
-  box-shadow: var(--default-box-shadow);
-  padding: 30px;
 `;
 
 const PropertyContainer = styled.div`
@@ -166,7 +158,7 @@ export default function ProductPage({
     if (product.properties && product.properties.length > 0) {
       return product.properties.map((prop, index) => (
         <div key={index}>
-          <strong>{prop.name}: </strong>
+          <p>{prop.name}:</p>
           <PropertyContainer>
             {prop.values.map((value, i) => (
               <PropertyButton
@@ -290,15 +282,15 @@ export default function ProductPage({
             </SingleBox>
             <Row>
               <Title>{product.name}</Title>
-              <div>Kategoria: {renderCategoryPath()}</div>
+              <div><b>Kategoria:</b> {renderCategoryPath()}</div>
               <div>
-                Właściwości:
+                <b>Właściwości:</b>
                 <div>{renderCategoryProperties()}</div>
               </div>
               <Row>
                 <div>{renderAvailability()}</div>
               </Row>
-              <Price>Cena: {product.price} zł</Price>
+              <Price><b>Cena:</b> {product.price} zł</Price>
               <Button
                 onClick={handleAddToCartClick}
                 $size="m"
@@ -315,7 +307,7 @@ export default function ProductPage({
               <div>
                 <h3>Opis produktu</h3>
               </div>
-              <StyledDescriptionDiv>{product.description}</StyledDescriptionDiv>
+              <StyledDescriptionBox>{product.description}</StyledDescriptionBox>
             </>
           )}
         </DivCenter>

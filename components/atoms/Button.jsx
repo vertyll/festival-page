@@ -24,6 +24,7 @@ const StyledButton = styled.button`
     props.$usage === "primary" &&
     css`
       background-color: var(--main-maize-color);
+      color: var(--dark-text-color);
     `}
 
   ${(props) =>
@@ -35,7 +36,8 @@ const StyledButton = styled.button`
   ${(props) =>
     props.$usage === "quantity" &&
     css`
-      background-color: var(--main-white-smoke-color);
+      background-color: var(--main-maize-color);
+      color: var(--dark-text-color);
     `}
 
   ${(props) =>

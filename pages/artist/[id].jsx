@@ -2,6 +2,7 @@ import { mongooseConnect } from "@/lib/mongoose";
 import styled from "styled-components";
 import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
+import StyledDescriptionBox from "@/components/atoms/StyledDescriptionBox";
 import SingleBox from "@/components/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
 import ArtistImage from "@/components/organism/ArtistImage";
@@ -27,15 +28,6 @@ const Row = styled.div`
   flex-direction: column;
 `;
 
-const StyledDescriptionDiv = styled.div`
-  display: flex;
-  max-width: 850px;
-  border-radius: 20px;
-  background-color: var(--light-color);
-  box-shadow: var(--default-box-shadow);
-  padding: 30px;
-`;
-
 const Title = styled.h1`
     font-size: 2em;
 `;
@@ -58,15 +50,15 @@ export default function ArtistPage({ artist }) {
             </SingleBox>
             <Row>
               <Title>{artist.name}</Title>
-              <div>Scena: {renderStage()}</div>
+              <div><b>Scena:</b> {renderStage()}</div>
               <div>
-                Data koncertu:{" "}
+                <b>Data koncertu:</b>{" "}
                 {artist.concertDate
                   ? formatDate(artist.concertDate)
                   : "Brak danych"}
               </div>
               <div>
-                Godzina koncertu:{" "}
+                <b>Godzina koncertu:</b>{" "}
                 {artist.concertTime ? artist.concertTime : "Brak danych"}
               </div>
             </Row>
@@ -76,7 +68,7 @@ export default function ArtistPage({ artist }) {
               <div>
                 <h3>Opis artysty</h3>
               </div>
-              <StyledDescriptionDiv>{artist.description}</StyledDescriptionDiv>
+              <StyledDescriptionBox>{artist.description}</StyledDescriptionBox>
             </>
           )}
         </DivCenter>
