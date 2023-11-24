@@ -8,11 +8,11 @@ import Title from "@/components/atoms/Title";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { WishedProduct } from "@/models/WishedProduct";
 import { getServerSession } from "next-auth";
-import ArtistContainer from "@/components/organism/ArtistContainer";
 import { Artist } from "@/models/Artist";
 import { News } from "@/models/News";
 import NewsContainer from "@/components/organism/NewsContainer";
 import Head from "next/head";
+import ArtistContainerForHomePage from "@/components/organism/ArtistContainerForHomePage";
 
 export default function HomePage({
   newProducts,
@@ -31,7 +31,7 @@ export default function HomePage({
           {newArtists && newArtists.length > 0 && (
             <>
               <Title>Nowo ogłoszeni artyści</Title>
-              <ArtistContainer artists={newArtists} />
+              <ArtistContainerForHomePage artists={newArtists} />
             </>
           )}
 

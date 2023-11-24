@@ -5,23 +5,15 @@ import { RevealWrapper } from "next-reveal";
 const ArtistGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 25px;
+  gap: 50px;
   padding-top: 50px;
 
-  @media screen and (min-width: 575px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media screen and (min-width: 1100px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 `;
 
-export default function ArtistContainer({ artists }) {
+export default function ArtistContainerForHomePage({ artists }) {
   return (
     <ArtistGrid>
       {artists?.length > 0 &&

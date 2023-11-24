@@ -13,10 +13,6 @@ const ProductGrid = styled.div`
   }
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
@@ -27,17 +23,17 @@ const ProductGrid = styled.div`
 
 export default function ProductContainer({ products, wishedProducts = [] }) {
   return (
-      <ProductGrid>
-        {products?.length > 0 &&
-          products.map((product, index) => (
-            <RevealWrapper key={product._id} delay={index * 50}>
-              <ProductBox
-                key={product._id}
-                {...product}
-                wished={wishedProducts.includes(product._id)}
-              ></ProductBox>
-            </RevealWrapper>
-          ))}
-      </ProductGrid>
+    <ProductGrid>
+      {products?.length > 0 &&
+        products.map((product, index) => (
+          <RevealWrapper key={product._id} delay={index * 50}>
+            <ProductBox
+              key={product._id}
+              {...product}
+              wished={wishedProducts.includes(product._id)}
+            ></ProductBox>
+          </RevealWrapper>
+        ))}
+    </ProductGrid>
   );
 }
