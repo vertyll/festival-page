@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  color: var(--main-maize-color);
+  color: var(--dark-text-color);
   text-decoration: none;
   cursor: pointer;
   svg {
@@ -62,7 +62,7 @@ const StyledNav = styled.nav`
   gap: 20px;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 985px) {
     display: ${(props) => (props.$open ? "flex" : "none")};
     flex-direction: column;
     width: 100%;
@@ -76,10 +76,10 @@ const NavButton = styled.button`
   border: none;
   width: 45px;
   height: 45px;
-  color: var(--light-color);
+  color: var(--dark-text-color);
   cursor: pointer;
 
-  @media (min-width: 769px) {
+  @media (min-width: 985px) {
     display: none;
   }
 `;
@@ -87,14 +87,14 @@ const NavButton = styled.button`
 const MobileMenuWrapper = styled.div`
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 985px) {
     display: block;
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
     width: 300px;
-    background: var(--nav-color);
+    background: var(--light-color);
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
     z-index: 2;
@@ -116,7 +116,7 @@ const CloseButton = styled.button`
   border: none;
   width: 45px;
   height: 45px;
-  color: var(--light-color);
+  color: var(--dark-text-color);
   cursor: pointer;
 `;
 
@@ -128,7 +128,7 @@ const CenterDiv = styled.div`
 const PageOverlay = styled.div`
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 985px) {
     ${(props) =>
       props.$open &&
       css`
@@ -168,14 +168,17 @@ export default function Navbar() {
           <StyledLink href="/sponsors" $size="bold">
             SPONSORZY
           </StyledLink>
+          <StyledLink href="/map" $size="bold">
+            MAPKA
+          </StyledLink>
           <StyledLink href="/search" $size="bold">
             <IconSearch />
           </StyledLink>
-          <StyledLink href="/account" $usage="special">
+          <StyledLink href="/account">
             <IconUser />
             Konto
           </StyledLink>
-          <StyledLink href="/cart" $usage="special">
+          <StyledLink href="/cart">
             <IconCart />
             Koszyk ({cartProducts.length})
           </StyledLink>
@@ -207,6 +210,9 @@ export default function Navbar() {
           </StyledLink>
           <StyledLink href="/sponsors" $size="bold">
             SPONSORZY
+          </StyledLink>
+          <StyledLink href="/map" $size="bold">
+            MAPKA
           </StyledLink>
           <StyledLink href="/account" $size="bold">
             Konto
