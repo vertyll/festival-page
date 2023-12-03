@@ -34,8 +34,8 @@ const HoverText = styled.div`
 const Box = styled.div`
   background-color: var(--main-white-smoke-color);
   padding: 30px 10px;
-  height: 300px;
-  width: 175px;
+  height: 350px;
+  width: 300px;
   text-align: center;
   display: flex;
   justify-content: center;

@@ -8,7 +8,7 @@ const NewsGrid = styled.div`
   gap: 50px;
   padding-top: 50px;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 985px) {
     grid-template-columns: 1fr 1fr;
   }
 `;
