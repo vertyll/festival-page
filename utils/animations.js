@@ -13,5 +13,5 @@ export const pageVariants = {
 export const pageTransition = {
   type: "tween",
   ease: "anticipate",
-  duration: 0.5,
+  duration: 0.2,
 };
