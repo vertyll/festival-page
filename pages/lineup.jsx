@@ -5,6 +5,7 @@ import Layout from "@/components/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Artist } from "@/models/Artist";
 import Head from "next/head";
+import TitleBanner from "@/components/atoms/TitleBanner";
 
 export default function LineUpPage({ artists }) {
   return (
@@ -13,6 +14,7 @@ export default function LineUpPage({ artists }) {
         <title>Program - Sunset Festival</title>
       </Head>
       <Layout>
+        <TitleBanner imageUrl="/banerlineup.webp" />
         <DivCenter>
           <Title>PROGRAM 2024</Title>
           {artists && artists.length > 0 ? (

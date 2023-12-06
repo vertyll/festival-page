@@ -3,14 +3,14 @@ import Button from "../atoms/Button";
 import IconCreditCart from "../atoms/IconCreditCart";
 
 const StyledDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 20px;
   background-size: cover;
   background-position: center;
-  height: 500px;
+  width: 100%;
+  height: 525px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   gap: 50px;
   box-shadow: var(--default-box-shadow);
 `;
