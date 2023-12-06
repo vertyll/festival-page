@@ -35,7 +35,7 @@ const Box = styled.div`
   background-color: var(--main-white-smoke-color);
   padding: 30px 10px;
   height: 350px;
-  width: 300px;
+  width: 0;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -43,6 +43,14 @@ const Box = styled.div`
   text-decoration: none;
   color: inherit;
   position: relative;
+
+  @media screen and (min-width: 480px) {
+    width: 250px;
+  }
+  
+  @media screen and (min-width: 985px) {
+    width: 350px;
+  }
 `;
 
 const Name = styled.div`
