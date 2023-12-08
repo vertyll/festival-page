@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   flex-direction: row;
   gap: 50px;
   width: 75%;
+  margin-top: 50px;
 
   @media screen and (max-width: 1400px) {
     width: 85%;
