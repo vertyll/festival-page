@@ -46,13 +46,13 @@ const NoImageText = styled.div`
 
 export default function ProductImage({ images }) {
   const [activeImage, setActiveImage] = useState(
-    images?.[0] || "/no-image-found.webp"
+    images?.[0] || "/images/no-image-found.webp"
   );
 
   if (!images || images.length === 0) {
     return (
       <BigImageWrapper>
-        <BigImage src="/no-image-found.webp" alt="Brak zdjęcia" />
+        <BigImage src="/images/no-image-found.webp" alt="Brak zdjęcia" />
         <NoImageText>brak grafiki</NoImageText>
       </BigImageWrapper>
     );
