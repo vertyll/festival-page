@@ -168,8 +168,8 @@ export default function Navbar() {
           <StyledLink href="/sponsors" $size="bold">
             SPONSORZY
           </StyledLink>
-          <StyledLink href="/map" $size="bold">
-            MAPKA
+          <StyledLink href="/info" $size="bold">
+            INFORMACJE
           </StyledLink>
           <StyledLink href="/search" $size="bold">
             <IconSearch />
@@ -211,8 +211,8 @@ export default function Navbar() {
           <StyledLink href="/sponsors" $size="bold">
             SPONSORZY
           </StyledLink>
-          <StyledLink href="/map" $size="bold">
-            MAPKA
+          <StyledLink href="/info" $size="bold">
+            INFORMACJE
           </StyledLink>
           <StyledLink href="/account" $size="bold">
             Konto
