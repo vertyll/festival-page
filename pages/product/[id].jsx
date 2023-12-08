@@ -47,7 +47,7 @@ const Price = styled.span`
 `;
 
 const PropertyButton = styled.button`
-  padding: 15px;
+  padding: 15px 30px;
   margin: 5px;
   border: none;
   border-radius: 15px;
