@@ -7,7 +7,6 @@ import Newsletter from "../organism/Newsletter";
 
 const StyledDiv = styled.div`
   min-height: 80vh;
-  margin-top: 50px;
   margin-bottom: 50px;
 `;
 
