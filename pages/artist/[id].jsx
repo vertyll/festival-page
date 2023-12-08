@@ -7,6 +7,7 @@ import ArtistImage from "@/components/organism/ArtistImage";
 import { formatDate } from "@/utils/date";
 import { Stage } from "@/models/Stage";
 import Head from "next/head";
+import BackLink from "@/components/atoms/BackLink";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -51,6 +52,7 @@ export default function ArtistPage({ artist }) {
               <ArtistImage images={artist.images} />
             </SingleBox>
             <Row>
+              <BackLink link="/lineup" />
               <Title>{artist.name}</Title>
               <div><b>Scena:</b> {renderStage()}</div>
               <div>

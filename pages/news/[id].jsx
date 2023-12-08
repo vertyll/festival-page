@@ -6,6 +6,7 @@ import NewsImage from "@/components/organism/NewsImage";
 import { formatDate } from "@/utils/date";
 import Head from "next/head";
 import { News } from "@/models/News";
+import BackLink from "@/components/atoms/BackLink";
 
 const ColWrapper = styled.div`
     display: grid;
@@ -46,6 +47,7 @@ export default function NewsPage({ news }) {
               <NewsImage images={news.images} />
             </SingleBox>
             <Row>
+              <BackLink link="/news" />
               <Title>{news.name}</Title>
               <div><b>Opublikowano:</b> {formatDate(news.createdAt)}</div>
               {news.description && (
