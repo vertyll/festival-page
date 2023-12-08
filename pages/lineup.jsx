@@ -14,7 +14,7 @@ export default function LineUpPage({ artists }) {
         <title>Program - Sunset Festival</title>
       </Head>
       <Layout>
-        <TitleBanner imageUrl="/banerlineup.webp" />
+        <TitleBanner imageUrl="/images/banerlineup.webp" />
         <DivCenter>
           <Title>PROGRAM 2024</Title>
           {artists && artists.length > 0 ? (

@@ -33,7 +33,7 @@ const InfoWrapper = styled.div`
 export default function MapPage() {
     return (
         <Layout>
-          <TitleBanner imageUrl="/banermapa.webp" />
+          <TitleBanner imageUrl="/images/banerinfo.webp" />
             <DivCenter>
                 <Title>Praktyczne informacje</Title>
                 <InfoWrapper>

@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 50px;
-  box-shadow: var(--default-box-shadow);
+  background-image: url("/images/baner.webp");
 `;
 
 const Title = styled.h1`
@@ -20,6 +20,7 @@ const Title = styled.h1`
   font-weight: bold;
   font-size: 3em;
   font-family: "Almendra", serif;
+  color: var(--light-color);
 `;
 
 export default function Banner() {

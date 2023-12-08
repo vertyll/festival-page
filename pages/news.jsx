@@ -5,6 +5,7 @@ import Layout from "@/components/templates/Layout";
 import { mongooseConnect } from "@/lib/mongoose";
 import { News } from "@/models/News";
 import Head from "next/head";
+import TitleBanner from "@/components/atoms/TitleBanner";
 
 export default function NewsPage({ news }) {
   return (
@@ -13,6 +14,7 @@ export default function NewsPage({ news }) {
         <title>Newsy - Sunset Festival</title>
       </Head>
       <Layout>
+        <TitleBanner imageUrl="/images/banernewsy.webp" />
         <DivCenter>
           <Title>Newsy</Title>
           {news && news.length > 0 ? (
