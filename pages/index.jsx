@@ -13,6 +13,7 @@ import { News } from "@/models/News";
 import NewsContainer from "@/components/organism/NewsContainer";
 import Head from "next/head";
 import ArtistContainerForHomePage from "@/components/organism/ArtistContainerForHomePage";
+import Newsletter from "@/components/organism/Newsletter";
 
 export default function HomePage({
   newProducts,
@@ -52,6 +53,7 @@ export default function HomePage({
             </>
           )}
         </DivCenter>
+        <Newsletter />
       </Layout>
     </>
   );
