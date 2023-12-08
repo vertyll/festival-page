@@ -113,13 +113,13 @@ const StyledWishedDiv = styled.div`
   background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
-  margin: 0px;
+  margin: 0;
 
   @media screen and (min-width: 1200px) {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     padding: 10px 20px;
-    margin: 30px 0px;
+    margin: 30px 0;
   }
 `;
 
@@ -131,11 +131,11 @@ const StyledOrderDiv = styled.div`
   background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
-  margin: 0px;
+  margin: 0;
 
   @media screen and (min-width: 768px) {
     padding: 10px 20px;
-    margin: 30px 0px;
+    margin: 30px 0;
   }
 `;
 
@@ -146,7 +146,7 @@ const StyledDataDiv = styled.div`
   background-color: var(--light-color);
   padding: 10px;
   border-radius: 20px;
-  margin: 0px;
+  margin: 0;
 
   .error-div-class {
     margin-left: auto;
@@ -163,7 +163,7 @@ const StyledDataDiv = styled.div`
 
   @media screen and (min-width: 768px) {
     padding: 10px 20px;
-    margin: 30px 0px;
+    margin: 30px 0;
   }
 `;
 
