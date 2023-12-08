@@ -2,7 +2,6 @@ import { mongooseConnect } from "@/lib/mongoose";
 import styled from "styled-components";
 import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
-import StyledDescriptionBox from "@/components/atoms/StyledDescriptionBox";
 import SingleBox from "@/components/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
 import ArtistImage from "@/components/organism/ArtistImage";
@@ -13,13 +12,13 @@ import Head from "next/head";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 920px;
   width: 100%;
+  gap: 50px;
+  margin-top: 50px;
+  
   @media screen and (min-width: 768px) {
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
   }
-  gap: 40px;
-  margin: 40px 5px;
 `;
 
 const Row = styled.div`
@@ -61,16 +60,17 @@ export default function ArtistPage({ artist }) {
                 <b>Godzina koncertu:</b>{" "}
                 {artist.concertTime ? artist.concertTime : "Brak danych"}
               </div>
+
+              {artist.description && (
+                <>
+                  <div>
+                    <h3>Opis artysty:</h3>
+                  </div>
+                  {artist.description}
+                </>
+              )}
             </Row>
           </ColWrapper>
-          {artist.description && (
-            <>
-              <div>
-                <h3>Opis artysty</h3>
-              </div>
-              <StyledDescriptionBox>{artist.description}</StyledDescriptionBox>
-            </>
-          )}
         </DivCenter>
       </Layout>
     </>

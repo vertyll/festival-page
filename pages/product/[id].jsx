@@ -20,11 +20,20 @@ const ColWrapper = styled.div`
   grid-template-columns: 1fr;
   max-width: 920px;
   width: 100%;
+  gap: 50px;
+  margin: 50px 5px;
+  
   @media screen and (min-width: 768px) {
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
   }
-  gap: 40px;
-  margin: 40px 5px;
+`;
+
+const DescriptionWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
 `;
 
 const Row = styled.div`
@@ -304,10 +313,13 @@ export default function ProductPage({
           </ColWrapper>
           {product.description && (
             <>
+
               <div>
                 <h3>Opis produktu</h3>
               </div>
-              <StyledDescriptionBox>{product.description}</StyledDescriptionBox>
+              <DescriptionWrapper>
+                <StyledDescriptionBox>{product.description}</StyledDescriptionBox>
+              </DescriptionWrapper>
             </>
           )}
         </DivCenter>

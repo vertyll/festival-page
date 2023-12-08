@@ -12,28 +12,19 @@ import { News } from "@/models/News";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 920px;
   width: 100%;
+  gap: 50px;
+  margin-top: 50px;
+
   @media screen and (min-width: 768px) {
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
   }
-  gap: 40px;
-  margin: 40px 5px;
 `;
 
 const Row = styled.div`
   display: flex;
   gap: 20px;
   flex-direction: column;
-`;
-
-const StyledDescriptionDiv = styled.div`
-  display: flex;
-  max-width: 850px;
-  border-radius: 20px;
-  background-color: var(--main-white-smoke-color);
-  box-shadow: var(--default-box-shadow);
-  padding: 30px;
 `;
 
 const Title = styled.h1`
@@ -55,13 +46,13 @@ export default function NewsPage({ news }) {
             <Row>
               <Title>{news.name}</Title>
               <div><b>Opublikowano:</b> {formatDate(news.createdAt)}</div>
+              {news.description && (
+                <>
+                  {news.description}
+                </>
+              )}
             </Row>
           </ColWrapper>
-          {news.description && (
-            <>
-              <StyledDescriptionBox>{news.description}</StyledDescriptionBox>
-            </>
-          )}
         </DivCenter>
       </Layout>
     </>
