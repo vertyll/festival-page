@@ -60,7 +60,7 @@ export default function SponsorBox({ _id, name, images, link:url }) {
     <Wrapper>
       <Box href={url}>
         <Image
-          src={images?.[0] || "/no-image-found.webp"}
+          src={images?.[0] || "/images/no-image-found.webp"}
           alt=""
           fill={true}
           sizes="100vh"

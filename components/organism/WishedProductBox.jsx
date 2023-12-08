@@ -152,7 +152,7 @@ export default function WishedProductBox({
           {isWished ? <IconHeart /> : <IconHeartOutline />}
         </WishlistButton>
         <img
-          src={images?.[0] || "/no-image-found.webp"}
+          src={images?.[0] || "/images/no-image-found.webp"}
           alt="zdjęcie produktu"
         />
         <HoverText>Zobacz produkt &#8594;</HoverText>
