@@ -49,9 +49,9 @@ export default function MapPage() {
                 <ImageWrapper>
                   <p>Sprawdź mapkę poniżej, aby łatwo odnaleźć się na festiwalu. Jeżeli potrzebujesz jej na wydarzeniu możesz ją wydrukować</p>
                   <img
-                        src="/mapka.webp"
+                        src="/images/mapka.webp"
                         alt="mapka festiwalu"
-                        onError={(e) => { e.target.onerror = null; e.target.src = '/no-image-found.webp'; }}
+                        onError={(e) => { e.target.onerror = null; e.target.src = '/images/no-image-found.webp'; }}
                     />
                 </ImageWrapper>
             </DivCenter>

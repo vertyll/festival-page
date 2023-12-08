@@ -313,7 +313,7 @@ export default function CartPage() {
                               <img
                                 src={
                                   fullProductData.images[0] ||
-                                  "no-image-found.webp"
+                                  "/images/no-image-found.webp"
                                 }
                                 alt={fullProductData.name}
                               />
