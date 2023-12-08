@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledDescriptionBox = styled.div`
   display: flex;
-  max-width: 850px;
+  max-width: 950px;
   width: 100%;
   border-radius: 20px;
   background-color: var(--main-white-smoke-color);

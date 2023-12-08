@@ -18,9 +18,9 @@ import Head from "next/head";
 const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 920px;
+  max-width: 1000px;
   width: 100%;
-  gap: 50px;
+  gap: 70px;
   margin: 50px 5px;
   
   @media screen and (min-width: 768px) {
