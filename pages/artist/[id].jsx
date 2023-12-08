@@ -66,9 +66,6 @@ export default function ArtistPage({ artist }) {
 
               {artist.description && (
                 <>
-                  <div>
-                    <h3>Opis artysty:</h3>
-                  </div>
                   {artist.description}
                 </>
               )}
