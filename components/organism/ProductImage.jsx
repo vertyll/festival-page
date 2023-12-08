@@ -13,9 +13,9 @@ const BigImage = styled.img`
 
 const ImageButtons = styled.div`
   display: flex;
-  gap: 10px;
   flex-grow: 0;
-  margin-top: 10px;
+  gap: 10px;
+  margin: 10px 0;
 `;
 
 const ImageButton = styled.div`
@@ -28,7 +28,7 @@ const ImageButton = styled.div`
       : `
       border-color: transparent;
     `}
-  height: 35px;
+  height: 80px;
   padding: 2px;
   cursor: pointer;
   border-radius: 5px;
@@ -44,7 +44,7 @@ const NoImageText = styled.div`
   text-align: center;
 `;
 
-export default function ProductImages({ images }) {
+export default function ProductImage({ images }) {
   const [activeImage, setActiveImage] = useState(
     images?.[0] || "/no-image-found.webp"
   );
