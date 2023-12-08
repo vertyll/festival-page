@@ -27,7 +27,7 @@ const Wrapper = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: underline;
-  color: var(--gray-color);
+  color: var(--dark-text-color);
   font-weight: bold;
   margin-bottom: 60px;
 
@@ -83,7 +83,7 @@ export default function Newsletter() {
 
   return (
     <NewsletterContainer>
-      <Title>Zapisz się do newslettera</Title>
+      <Title style={{ marginTop: '10px' }}>Zapisz się do newslettera</Title>
       <p>i otrzymuj najnowsze informacje od Sunset Festival!</p>
       <StyledLink href="/privacypolicy">Polityka prywatności</StyledLink>
       <form onSubmit={handleSubmit}>
