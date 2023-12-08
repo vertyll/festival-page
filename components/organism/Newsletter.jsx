@@ -16,7 +16,7 @@ const NewsletterContainer = styled.div`
   justify-content: center;
   padding: 20px;
   background-color: var(--newsletter-color);
-  margin: 200px 0px;
+  margin: 200px 0;
 `;
 
 const Wrapper = styled.div`
