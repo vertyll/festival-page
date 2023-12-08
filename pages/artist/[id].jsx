@@ -1,6 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import styled from "styled-components";
-import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
 import SingleBox from "@/components/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
@@ -13,8 +12,8 @@ const ColWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
-  gap: 50px;
-  margin-top: 50px;
+  gap: 20px;
+  //margin-top: 50px;
   
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -25,6 +24,11 @@ const Row = styled.div`
   display: flex;
   gap: 20px;
   flex-direction: column;
+  margin: 0 30px 0 30px;
+
+  @media screen and (min-width: 768px) {
+      margin: 0 30px 0 0;
+  }
 `;
 
 const Title = styled.h1`
@@ -42,7 +46,6 @@ export default function ArtistPage({ artist }) {
         <title>{artist.name} - Sunset Festival</title>
       </Head>
       <Layout>
-        <DivCenter>
           <ColWrapper>
             <SingleBox>
               <ArtistImage images={artist.images} />
@@ -71,7 +74,6 @@ export default function ArtistPage({ artist }) {
               )}
             </Row>
           </ColWrapper>
-        </DivCenter>
       </Layout>
     </>
   );

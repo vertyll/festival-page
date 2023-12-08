@@ -5,7 +5,7 @@ import DivCenter from "@/components/atoms/DivCenter";
 import Layout from "@/components/templates/Layout";
 import SingleBox from "@/components/atoms/SingleBox";
 import StyledDescriptionBox from "@/components/atoms/StyledDescriptionBox";
-import ProductImages from "@/components/organism/ProductImages";
+import ProductImage from "@/components/organism/ProductImage";
 import IconCart from "@/components/atoms/IconCart";
 import Button from "@/components/atoms/Button";
 import { CartContext } from "@/components/organism/CartContext";
@@ -24,7 +24,7 @@ const ColWrapper = styled.div`
   margin: 50px 5px;
   
   @media screen and (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
   }
 `;
 
@@ -287,7 +287,7 @@ export default function ProductPage({
         <DivCenter>
           <ColWrapper>
             <SingleBox>
-              <ProductImages images={product.images} />
+              <ProductImage images={product.images} />
             </SingleBox>
             <Row>
               <Title>{product.name}</Title>
