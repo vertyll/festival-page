@@ -12,6 +12,7 @@ import AnimatedSearchIcon from "@/components/atoms/AnimatedSearchIcon";
 import Head from "next/head";
 
 const SearchWrapper = styled.div`
+  margin-top: 50px;
   max-width: 980px;
   width: 100%;
 `;
