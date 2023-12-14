@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Button from "../atoms/Button";
 import IconCreditCart from "../atoms/IconCreditCart";
+import { useRouter } from "next/router";
 
 const StyledDiv = styled.div`
   background-size: cover;
@@ -24,10 +25,15 @@ const Title = styled.h1`
 `;
 
 export default function Banner() {
+  const router = useRouter();
+
+  const goToShop = () => {
+    router.push("/products");
+  };
   return (
     <StyledDiv>
       <Title>Sunset Festival</Title>
-      <Button $usage="primary" $size="l">
+      <Button $usage="primary" $size="l" onClick={goToShop}>
         <IconCreditCart />
         Kup bilet
       </Button>
