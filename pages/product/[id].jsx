@@ -22,7 +22,7 @@ const ColWrapper = styled.div`
   width: 100%;
   gap: 70px;
   margin: 50px 5px;
-  
+
   @media screen and (min-width: 768px) {
     grid-template-columns: 1.1fr 0.9fr;
   }
@@ -49,14 +49,15 @@ const Price = styled.span`
 const PropertyButton = styled.button`
   padding: 15px 30px;
   margin: 5px;
-  border: none;
-  border-radius: 15px;
-  background-color: ${(props) =>
+  border: 1.5px solid;
+  background-color: var(--light-color);
+  border-radius: 5px;
+  border-color: ${(props) =>
     props.$isSelected
-      ? "var(--main-deep-pink-color)"
+      ? "var(--dark-text-color)"
       : props.disabled
       ? "var(--no-properties-color)" // Szary kolor dla niedostępnych opcji
-      : "var(--main-plum-color)"};
+      : "var(--border-color-light)"};
   color: ${(props) =>
     props.$isSelected || props.disabled
       ? "var(--dark-text-color)"
@@ -65,10 +66,8 @@ const PropertyButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: ${(props) =>
-      props.disabled
-        ? "var(--no-properties-color)"
-        : "var(--main-deep-pink-color)"};
+    border-color: ${(props) =>
+      props.disabled ? "var(--no-properties-color)" : "var(--dark-text-color)"};
     color: var(--dark-text-color);
   }
 `;
@@ -76,7 +75,7 @@ const PropertyButton = styled.button`
 const PropertyContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 1px;
 `;
 
 const AvailabilityText = styled.span`
@@ -84,7 +83,7 @@ const AvailabilityText = styled.span`
 `;
 
 const Title = styled.h1`
-    font-size: 2em;
+  font-size: 2em;
 `;
 
 export default function ProductPage({
@@ -291,7 +290,9 @@ export default function ProductPage({
             </SingleBox>
             <Row>
               <Title>{product.name}</Title>
-              <div><b>Kategoria:</b> {renderCategoryPath()}</div>
+              <div>
+                <b>Kategoria:</b> {renderCategoryPath()}
+              </div>
               <div>
                 <b>Właściwości:</b>
                 <div>{renderCategoryProperties()}</div>
@@ -299,7 +300,9 @@ export default function ProductPage({
               <Row>
                 <div>{renderAvailability()}</div>
               </Row>
-              <Price><b>Cena:</b> {product.price} zł</Price>
+              <Price>
+                <b>Cena:</b> {product.price} zł
+              </Price>
               <Button
                 onClick={handleAddToCartClick}
                 $size="m"
@@ -313,12 +316,13 @@ export default function ProductPage({
           </ColWrapper>
           {product.description && (
             <>
-
               <div>
                 <h3>Opis produktu</h3>
               </div>
               <DescriptionWrapper>
-                <StyledDescriptionBox>{product.description}</StyledDescriptionBox>
+                <StyledDescriptionBox>
+                  {product.description}
+                </StyledDescriptionBox>
               </DescriptionWrapper>
             </>
           )}
