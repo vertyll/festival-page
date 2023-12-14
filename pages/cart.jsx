@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   max-width: 1000px;
   width: 100%;
   margin-top: 50px;
-  
+
   @media screen and (min-width: 768px) {
     grid-template-columns: 1.2fr 0.8fr;
     gap: 50px;
@@ -50,6 +50,7 @@ const Box = styled.div`
   background-color: var(--main-white-smoke-color);
   border-radius: 20px;
   padding: 30px;
+  margin-top: 50px;
   box-shadow: var(--default-box-shadow);
 
   input {
