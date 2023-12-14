@@ -46,11 +46,14 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const MarginTopWrapper = styled.div`
+  margin-top: 50px;
+`;
+
 const Box = styled.div`
   background-color: var(--main-white-smoke-color);
   border-radius: 20px;
   padding: 30px;
-  margin-top: 50px;
   box-shadow: var(--default-box-shadow);
 
   input {
@@ -239,19 +242,21 @@ export default function CartPage() {
         </Head>
         <Layout>
           <DivCenter>
-            <Box>
-              <h1>Dziękujemy za złożone zamówienie</h1>
-              <p>
-                Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie
-                gotowe
-              </p>
-              <AnimatedThanksImage
-                style={{ maxWidth: "200px", height: "200px" }}
-              />
-              <Button $usage="primary" $size="m" onClick={goToShop}>
-                Wróć do sklepu &#8617;
-              </Button>
-            </Box>
+            <MarginTopWrapper>
+              <Box>
+                <h1>Dziękujemy za złożone zamówienie</h1>
+                <p>
+                  Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie
+                  gotowe
+                </p>
+                <AnimatedThanksImage
+                  style={{ maxWidth: "200px", height: "200px" }}
+                />
+                <Button $usage="primary" $size="m" onClick={goToShop}>
+                  Wróć do sklepu &#8617;
+                </Button>
+              </Box>
+            </MarginTopWrapper>
           </DivCenter>
         </Layout>
       </>
