@@ -1,8 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Link: https://festival-page.vercel.app/
 
-## Getting Started
+## Założenia projektu 
 
-First, run the development server:
+Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest to strona e-commerce na której można również przeglądać informacje o festiwalu muzycznym. Wszystkim zarządza dedykowany do strony panel administacyjny, któy również znajduje się w repozytorium na GitHub.
+
+## Stos technologiczny
+
+### Frontend:
+- Next.js
+- React
+- Axios
+- Styled-components do szybkiego stylowania komponentów
+- Framer-motion do efektownego wyświetlania treści podczas przewijania strony
+
+### Backend:
+- Next-auth do uwierzytelniania użytkowników
+- MongoDB jako baza danych NoSQL za pomocą Mongoose
+- Stripe do obsługi płatności
+- Axios do wykonywania żądań HTTP do serwera
+
+### Inne:
+- ESLint do statycznej analizy kodu i utrzymania jednolitej jakości kodu
+- Lodash do efektywnego zarządzania danymi i manipulacji nimi
+- Lottie-web do renderowania animacji wektorowych w formacie JSON
+- mime-types do obsługi typów MIME
+
+### Dodatkowe narzędzia:
+- Next-reveal do efektownego wyświetlania treści podczas przewijania strony
+
+## Usługi chmurowe użyte w projekcie
+
+### Amazon AWS S3 Service:
+
+Do przechowywania zdjęć wrzucanych za pomocą panelu administracyjnego został użyty Amazon AWS S3 Service.
+
+### Google Cloud Platform:
+
+Kolejną usługą chmurową wykorzystaną w projekcie jest Google Cloud Platform. W kontekście autoryzacji została użyta usługa Google Cloud Console, umożliwiająca zarządzanie tożsamościami i uprawnieniami. Logowanie zostało rozdzielone na dwa projekty, panel administracyjny i stronę festiwalu ze sklepem wykorzystując identyfikatory klienta OAuth 2.0.
+
+Dzięki wykorzystaniu tych usług chmurowych projekt zyskał skalowalność, niezawodność oraz zaawansowane funkcje bezpieczeństwa, co znacznie zwiększyło jego funkcjonalność i atrakcyjność dla użytkowników.
+
+## Zdjęcia poglądowe
+
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.18.32.png)
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.18.51.png)
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.19.38.png)
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.20.26.png)
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.21.04.png)
+![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.22.06.png)
+
+## Informacje dodatkowe
+
+Aplikacja łączy się z panelem administracyjnym festiwalu, który również jest dostępny w repozytrium na GitHub.
+
+
+## Instrukcja instalacji projektu
+
+Pobieramy projekt na lokalne środowisko.
+Tworzymy plik .env i kopiujemy do niego zawartość .env.example, po czym definiujemy swoje własne klucze API i dane konfiguracyjne.
+
+Instalujemy npm za pomocą komendy:
+
+```bash
+npm install
+```
+
+Uruchamiamy aplikacje na lokalnym środowisku:
 
 ```bash
 npm run dev
@@ -14,27 +77,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Domyśnie, jeżeli użyjemy jednej z powyższej komendy, aplikacja powinna być dostępna na adresie [http://localhost:3000](http://localhost:3000). Adres wklejamy do przeglądarki internetowej.
