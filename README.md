@@ -30,6 +30,10 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 
 ## Usługi chmurowe użyte w projekcie
 
+### MongoDB Cloud Services
+
+Do przechowywania danych w bazie danych została użyta platforma MongoDB Atlas.
+
 ### Amazon AWS S3 Service:
 
 Do przechowywania zdjęć wrzucanych za pomocą panelu administracyjnego został użyty Amazon AWS S3 Service.
