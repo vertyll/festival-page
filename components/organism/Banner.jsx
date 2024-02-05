@@ -22,6 +22,7 @@ const Title = styled.h1`
   font-size: 3em;
   font-family: "Almendra", serif;
   color: var(--light-color);
+  text-shadow: 3px 3px 6px rgba(14, 14, 14, 1);
 `;
 
 export default function Banner() {
