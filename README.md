@@ -14,6 +14,7 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 - Framer-motion do efektownego wyświetlania treści podczas przewijania strony
 
 ### Backend:
+- Node.js
 - Next-auth do uwierzytelniania użytkowników
 - MongoDB jako baza danych NoSQL za pomocą Mongoose
 - Stripe do obsługi płatności
