@@ -48,12 +48,12 @@ Dzięki wykorzystaniu tych usług chmurowych projekt zyskał skalowalność, nie
 
 ## Zdjęcia poglądowe
 
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.18.32.png)
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.18.51.png)
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.19.38.png)
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.20.26.png)
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.21.04.png)
-![Widok projektu w Amazon S3 Service](https://nextjs-festival.s3.eu-north-1.amazonaws.com/Zrzut+ekranu+2024-02-1+o+19.22.06.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/1.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/2.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/3.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/4.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/5.png)
+![Widok projektu](https://raw.githubusercontent.com/vertyll/festival-page/main/screenshots/6.png)
 
 ## Informacje dodatkowe
 
