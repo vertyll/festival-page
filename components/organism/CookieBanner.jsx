@@ -17,6 +17,8 @@ const Container = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
   @media (min-width: 640px) {
     flex-direction: row;
     justify-content: space-between;
@@ -33,9 +35,10 @@ const Button = styled.button`
   background-color: var(--main-medium-slate-blue-color);
   color: var(--light-text-color);
   border-radius: 30px;
-  padding: 5px 15px;
+  padding: 12px 17px;
   transition: 0.5s;
   transition: background-color 0.2s;
+  border: 0;
   cursor: pointer;
 
   &:hover {
