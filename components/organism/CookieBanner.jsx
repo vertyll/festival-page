@@ -6,7 +6,7 @@ const BannerWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--gray-color);
+  background-color: var(--main-white-smoke-color);
   padding: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 50;
@@ -27,17 +27,14 @@ const Container = styled.div`
 const Text = styled.p`
   font-size: 0.875rem;
   color: var(--dark-text-color);
-  margin-bottom: 0.5rem;
-  @media (min-width: 640px) {
-    margin-bottom: 0;
-  }
 `;
 
 const Button = styled.button`
-  background-color: var(----main-medium-slate-blue-color);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  background-color: var(--main-medium-slate-blue-color);
+  color: var(--light-text-color);
+  border-radius: 30px;
+  padding: 5px 15px;
+  transition: 0.5s;
   transition: background-color 0.2s;
   cursor: pointer;
 
