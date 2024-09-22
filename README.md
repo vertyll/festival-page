@@ -21,6 +21,9 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 - Stripe do obsługi płatności
 - Axios do wykonywania żądań HTTP do serwera
 
+### Uwierzytelnianie:
+- uwierzytelnianie za pomocą OAuth 2.0
+
 ### Inne:
 - ESLint do statycznej analizy kodu i utrzymania jednolitej jakości kodu
 - Lodash do efektywnego zarządzania danymi i manipulacji nimi
