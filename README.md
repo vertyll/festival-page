@@ -7,14 +7,14 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 
 ## Stos technologiczny
 
-### Frontend:
+### Front-end:
 - Next.js
 - React
 - Axios
 - Styled-components do szybkiego stylowania komponentów
 - Framer-motion do efektownego wyświetlania treści podczas przewijania strony
 
-### Backend:
+### Back-end:
 - Node.js
 - Next-auth do uwierzytelniania użytkowników
 - MongoDB jako baza danych NoSQL za pomocą Mongoose
