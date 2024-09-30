@@ -1,5 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+const setCookie = (name, value, days) => {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = `${name}=${value};${expires};path=/`;
+};
+
+const getCookie = (name) => {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) === " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+};
 
 const BannerWrapper = styled.div`
   position: fixed;
@@ -50,14 +68,14 @@ const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const cookiesAccepted = localStorage.getItem('cookies_accepted');
+    const cookiesAccepted = getCookie("cookies_accepted");
     if (!cookiesAccepted) {
       setShowBanner(true);
     }
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem('cookies_accepted', 'true');
+    setCookie("cookies_accepted", "true", 365);
     setShowBanner(false);
   };
 
@@ -67,12 +85,11 @@ const CookieBanner = () => {
     <BannerWrapper>
       <Container>
         <Text>
-          Ta strona używa plików cookie, aby poprawić Twoje doświadczenie. 
-          Korzystając z naszej strony, zgadzasz się na wykorzystanie plików cookie.
+          Ta strona używa plików cookie, aby poprawić Twoje doświadczenie.
+          Korzystając z naszej strony, zgadzasz się na wykorzystanie plików
+          cookie.
         </Text>
-        <Button onClick={acceptCookies}>
-          Akceptuję
-        </Button>
+        <Button onClick={acceptCookies}>Akceptuję</Button>
       </Container>
     </BannerWrapper>
   );
