@@ -73,6 +73,7 @@ export default function ArtistPage({ artist }) {
 
 export async function getServerSideProps(context) {
   await mongooseConnect();
+  const { Stage } = require("@/models/Stage");
   const { id } = context.query;
   const artist = await Artist.findById(id).populate("stage");
 
