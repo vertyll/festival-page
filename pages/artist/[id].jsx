@@ -5,7 +5,6 @@ import SingleBox from "@/components/atoms/SingleBox";
 import { Artist } from "@/models/Artist";
 import ArtistImage from "@/components/organism/ArtistImage";
 import { formatDate } from "@/utils/date";
-import { Stage } from "@/models/Stage";
 import Head from "next/head";
 import BackLink from "@/components/atoms/BackLink";
 
