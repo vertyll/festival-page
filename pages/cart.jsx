@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import styled from "styled-components";
-import { useContext, useEffect, useState, useMemo } from "react";
+import { useContext, useEffect, useState, useMemo, useRef, useSyncExternalStore } from "react";
 import { CartContext } from "@/components/organism/CartContext";
 import axios from "axios";
 import Layout from "@/components/templates/Layout";
@@ -109,6 +109,9 @@ const SelectedPropertiesDiv = styled.div`
   font-size: 0.9em;
 `;
 
+// Stała pusta tablica dla SSR - musi być poza komponentem aby była cachowana
+const EMPTY_CART = [];
+
 export default function CartPage() {
   const { data: session } = useSession();
   const { cartProducts, addProduct, removeProduct, clearCart, finalizePurchase } = useContext(CartContext);
@@ -122,53 +125,53 @@ export default function CartPage() {
   const [shippingPrice, setShippingPrice] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const hasProcessedSuccess = useRef(false);
+
+  // Użyj useSyncExternalStore dla bezpiecznej hydratacji cartProducts
+  const clientCartProducts = useSyncExternalStore(
+    () => () => {}, // subscribe - nie potrzebujemy subskrypcji bo Context już to robi
+    () => cartProducts, // getSnapshot dla klienta
+    () => EMPTY_CART // getServerSnapshot dla SSR - używamy cachowanej stałej
+  );
 
   // Obliczanie totalPrice za pomocą useMemo zamiast useEffect
   const totalPrice = useMemo(() => {
-    return cartProducts.reduce((sum, cartItem) => {
+    return clientCartProducts.reduce((sum, cartItem) => {
       const product = products.find((p) => p._id === cartItem.productId);
       return product ? sum + cartItem.quantity * product.price : sum;
     }, 0);
-  }, [cartProducts, products]);
+  }, [clientCartProducts, products]);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (cartProducts.length > 0) {
+    if (clientCartProducts.length > 0) {
       axios
-        .post("/api/cart", { ids: cartProducts })
+        .post("/api/cart", { ids: clientCartProducts })
         .then((response) => {
           setProducts(response.data);
         })
         .catch((error) => {
           console.error("Error fetching products:", error);
         });
-    } else {
-      // Używamy queueMicrotask zamiast setTimeout dla lepszej wydajności
-      queueMicrotask(() => {
-        if (products.length > 0) {
-          setProducts([]);
-        }
-      });
     }
-  }, [cartProducts, products.length]);
+  }, [clientCartProducts]);
 
   useEffect(() => {
     axios.get("/api/settings?name=shippingPrice").then((response) => {
       setShippingPrice(response.data.value);
     });
-  }, []); // Pusta tablica zależności, aby żądanie wykonało się tylko raz przy montowaniu komponentu
+  }, []);
+
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-    if (window?.location.href.includes("success")) {
-      setTimeout(() => {
+    if (router.isReady && router.query.success && !hasProcessedSuccess.current) {
+      hasProcessedSuccess.current = true;
+      Promise.resolve().then(() => {
         setIsSuccess(true);
         clearCart();
-      }, 0);
+      });
     }
-  }, [clearCart]);
+  }, [router.isReady, router.query.success, clearCart]);
   useEffect(() => {
     if (!session) {
       return;
@@ -226,7 +229,7 @@ export default function CartPage() {
       postalCode,
       streetAddress,
       country,
-      cartProducts,
+      cartProducts: clientCartProducts,
     });
 
     if (response.data.url) {
@@ -258,6 +261,7 @@ export default function CartPage() {
       </>
     );
   }
+
   return (
     <>
       <Layout>
@@ -265,7 +269,7 @@ export default function CartPage() {
           <Wrapper>
             <Box>
               <Title>Koszyk</Title>
-              {!cartProducts?.length && (
+              {!clientCartProducts?.length && (
                 <div>
                   <h2>Twój koszyk jest pusty</h2>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
@@ -274,7 +278,7 @@ export default function CartPage() {
                   </Button>
                 </div>
               )}
-              {products?.length > 0 && (
+              {products?.length > 0 && clientCartProducts?.length > 0 && (
                 <Table>
                   <thead>
                     <tr>
@@ -285,7 +289,7 @@ export default function CartPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {cartProducts.map((cartItem) => {
+                    {clientCartProducts.map((cartItem) => {
                       // Używaj uniqueKey z cartItem do znalezienia pełnych danych produktu
                       const fullProductData = products.find((product) => product._id === cartItem.productId);
 
@@ -343,14 +347,14 @@ export default function CartPage() {
                 </Table>
               )}
             </Box>
-            {!cartProducts?.length && (
+            {!clientCartProducts?.length && (
               <Box>
                 <ImageWrapper>
                   <AnimatedCartIcon />
                 </ImageWrapper>
               </Box>
             )}
-            {!!cartProducts?.length && (
+            {!!clientCartProducts?.length && (
               <Box>
                 <Title>Informacje o płatności</Title>
                 <FieldInput

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useSyncExternalStore } from "react";
 import styled, { css } from "styled-components";
 import { CartContext } from "../organism/CartContext";
 import IconHamburger from "../atoms/IconHamburger";
@@ -147,6 +147,13 @@ export default function Navbar() {
   const { cartProducts } = useContext(CartContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Użyj useSyncExternalStore dla bezpiecznej hydratacji
+  const cartCount = useSyncExternalStore(
+    () => () => {}, // subscribe - nie potrzebujemy subskrypcji bo Context już to robi
+    () => cartProducts.length, // getSnapshot dla klienta
+    () => 0 // getServerSnapshot dla SSR
+  );
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -179,7 +186,7 @@ export default function Navbar() {
           </StyledLink>
           <StyledLink href="/cart">
             <IconCart />
-            Koszyk ({cartProducts.length})
+            Koszyk ({cartCount})
           </StyledLink>
         </StyledNav>
         <NavButton onClick={toggleMobileMenu}>
@@ -217,7 +224,7 @@ export default function Navbar() {
             Konto
           </StyledLink>
           <StyledLink href="/cart" $size="bold">
-            Koszyk ({cartProducts.length})
+            Koszyk ({cartCount})
           </StyledLink>
         </StyledNav>
       </MobileMenuWrapper>
