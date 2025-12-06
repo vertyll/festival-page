@@ -30,14 +30,10 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 
 ### Inne:
 
-- ESLint do statycznej analizy kodu i utrzymania jednolitej jakości kodu
+- ESLint i Prettier do statycznej analizy kodu i utrzymania jednolitej jakości kodu
 - Lodash do efektywnego zarządzania danymi i manipulacji nimi
 - Lottie-web do renderowania animacji wektorowych w formacie JSON
 - mime-types do obsługi typów MIME
-
-### Dodatkowe narzędzia:
-
-- Next-reveal do efektownego wyświetlania treści podczas przewijania strony
 
 ## Usługi chmurowe użyte w projekcie
 
