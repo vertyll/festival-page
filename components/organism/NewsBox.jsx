@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
@@ -47,7 +46,7 @@ const Box = styled.div`
   @media screen and (min-width: 480px) {
     width: 250px;
   }
-  
+
   @media screen and (min-width: 985px) {
     width: 350px;
   }

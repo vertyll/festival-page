@@ -53,7 +53,9 @@ const CookieBanner = () => {
   useEffect(() => {
     const cookiesAccepted = getCookie("cookies_accepted");
     if (!cookiesAccepted) {
-      setShowBanner(true);
+      queueMicrotask(() => {
+        setShowBanner(true);
+      });
     }
   }, []);
 
@@ -68,9 +70,8 @@ const CookieBanner = () => {
     <BannerWrapper>
       <Container>
         <Text>
-          Ta strona używa plików cookie, aby poprawić Twoje doświadczenie.
-          Korzystając z naszej strony, zgadzasz się na wykorzystanie plików
-          cookie.
+          Ta strona używa plików cookie, aby poprawić Twoje doświadczenie. Korzystając z naszej strony, zgadzasz się na
+          wykorzystanie plików cookie.
         </Text>
         <Button onClick={acceptCookies}>Akceptuję</Button>
       </Container>

@@ -8,8 +8,7 @@ const isTooLong = (value, maxLength) => value.trim().length > maxLength;
 
 export const validateName = (name) => {
   if (!name.trim()) return "Proszę wpisać imię.";
-  if (isTooLong(name, MAX_NAME_LENGTH))
-    return `Nazwa nie może przekraczać ${MAX_NAME_LENGTH} znaków.`;
+  if (isTooLong(name, MAX_NAME_LENGTH)) return `Nazwa nie może przekraczać ${MAX_NAME_LENGTH} znaków.`;
 
   return null;
 };
@@ -23,8 +22,7 @@ export const validateEmail = (email) => {
 
 export const validateCity = (city) => {
   if (!city.trim()) return "Proszę wpisać nazwę miasta.";
-  if (isTooLong(city, MAX_CITY_LENGTH))
-    return `Nazwa miasta nie może przekraczać ${MAX_CITY_LENGTH} znaków.`;
+  if (isTooLong(city, MAX_CITY_LENGTH)) return `Nazwa miasta nie może przekraczać ${MAX_CITY_LENGTH} znaków.`;
 
   return null;
 };
@@ -45,8 +43,7 @@ export const validateStreetAddress = (streetAddress) => {
 
 export const validateCountry = (country) => {
   if (!country.trim()) return "Proszę wpisać kraj.";
-  if (isTooLong(country, MAX_COUNTRY_LENGTH))
-    return `Nazwa kraju nie może przekraczać ${MAX_COUNTRY_LENGTH} znaków.`;
+  if (isTooLong(country, MAX_COUNTRY_LENGTH)) return `Nazwa kraju nie może przekraczać ${MAX_COUNTRY_LENGTH} znaków.`;
 
   return null;
 };

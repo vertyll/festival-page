@@ -9,30 +9,30 @@ import { News } from "@/models/News";
 import BackLink from "@/components/atoms/BackLink";
 
 const ColWrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    gap: 20px;
-    //margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  gap: 20px;
+  //margin-top: 50px;
 
-    @media screen and (min-width: 768px) {
-        grid-template-columns: 1fr 1fr;
-    }
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 const Row = styled.div`
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-    margin: 0 30px 0 30px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  margin: 0 30px 0 30px;
 
-    @media screen and (min-width: 768px) {
-        margin: 0 30px 0 0;
-    }
+  @media screen and (min-width: 768px) {
+    margin: 0 30px 0 0;
+  }
 `;
 
 const Title = styled.h1`
-    font-size: 2em;
+  font-size: 2em;
 `;
 
 export default function NewsPage({ news }) {
@@ -42,21 +42,19 @@ export default function NewsPage({ news }) {
         <title>{news.name} - Sunset Festival</title>
       </Head>
       <Layout>
-          <ColWrapper>
-            <SingleBox>
-              <NewsImage images={news.images} />
-            </SingleBox>
-            <Row>
-              <BackLink link="/news" />
-              <Title>{news.name}</Title>
-              <div><b>Opublikowano:</b> {formatDate(news.createdAt)}</div>
-              {news.description && (
-                <>
-                  {news.description}
-                </>
-              )}
-            </Row>
-          </ColWrapper>
+        <ColWrapper>
+          <SingleBox>
+            <NewsImage images={news.images} />
+          </SingleBox>
+          <Row>
+            <BackLink link="/news" />
+            <Title>{news.name}</Title>
+            <div>
+              <b>Opublikowano:</b> {formatDate(news.createdAt)}
+            </div>
+            {news.description && <>{news.description}</>}
+          </Row>
+        </ColWrapper>
       </Layout>
     </>
   );

@@ -15,21 +15,14 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-  router,
-}) {
+export default function App({ Component, pageProps: { session, ...pageProps }, router }) {
   return (
     <>
       <GlobalStyles />
       <SessionProvider session={session}>
         <Head>
           <meta name="author" content="Mikołaj Gawron" />
-          <meta
-            name="description"
-            content="Praca inżynierska - strona festiwalu muzycznego z sklepem internetowym"
-          />
+          <meta name="description" content="Praca inżynierska - strona festiwalu muzycznego z sklepem internetowym" />
         </Head>
         <CartContextProvider>
           <AnimatePresence mode="wait">

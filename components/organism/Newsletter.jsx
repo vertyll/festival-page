@@ -83,34 +83,22 @@ export default function Newsletter() {
 
   return (
     <NewsletterContainer>
-      <Title style={{ marginTop: '10px' }}>Zapisz się do newslettera</Title>
+      <Title style={{ marginTop: "10px" }}>Zapisz się do newslettera</Title>
       <p>i otrzymuj najnowsze informacje od Sunset Festival!</p>
       <StyledLink href="/privacypolicy">Polityka prywatności</StyledLink>
       <form onSubmit={handleSubmit}>
         <Wrapper>
-          <Input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="wpisz email..."
-          />
+          <Input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="wpisz email..." />
           <div>
             <Button type="submit" $usage="primary" $size="m">
               Subskrybuj
             </Button>
           </div>
         </Wrapper>
-        {validationErrors["email"] && (
-          <ErrorDiv>{validationErrors["email"]}</ErrorDiv>
-        )}
+        {validationErrors["email"] && <ErrorDiv>{validationErrors["email"]}</ErrorDiv>}
       </form>
       {showAlert && (
-        <Alert
-          message={alertMessage}
-          duration={alertDuration}
-          onClose={() => setShowAlert(false)}
-          type="success"
-        />
+        <Alert message={alertMessage} duration={alertDuration} onClose={() => setShowAlert(false)} type="success" />
       )}
       {showDangerAlert && (
         <Alert

@@ -1,13 +1,15 @@
 ## Link: https://festival-page.vercel.app/
+
 ## [Architektura, przebieg prac i dokumentacja](https://drive.google.com/file/d/1gM-3S7d_71FZs3sFO97FI3Wvi9d4cauR/view?usp=sharing)
 
-## Założenia projektu 
+## Założenia projektu
 
 Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest to strona e-commerce na której można również przeglądać informacje o festiwalu muzycznym. Wszystkim zarządza dedykowany do strony panel administacyjny, któy również znajduje się w repozytorium na GitHub.
 
 ## Stos technologiczny
 
 ### Front-end:
+
 - Next.js
 - React
 - Axios
@@ -15,6 +17,7 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 - Framer-motion do efektownego wyświetlania treści podczas przewijania strony
 
 ### Back-end:
+
 - Node.js
 - Next-auth do uwierzytelniania użytkowników
 - MongoDB jako baza danych NoSQL za pomocą Mongoose
@@ -22,15 +25,18 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 - Axios do wykonywania żądań HTTP do serwera
 
 ### Uwierzytelnianie:
+
 - uwierzytelnianie za pomocą OAuth 2.0
 
 ### Inne:
+
 - ESLint do statycznej analizy kodu i utrzymania jednolitej jakości kodu
 - Lodash do efektywnego zarządzania danymi i manipulacji nimi
 - Lottie-web do renderowania animacji wektorowych w formacie JSON
 - mime-types do obsługi typów MIME
 
 ### Dodatkowe narzędzia:
+
 - Next-reveal do efektownego wyświetlania treści podczas przewijania strony
 
 ## Usługi chmurowe użyte w projekcie
@@ -61,7 +67,6 @@ Dzięki wykorzystaniu tych usług chmurowych projekt zyskał skalowalność, nie
 ## Informacje dodatkowe
 
 Aplikacja łączy się z panelem administracyjnym festiwalu, który również jest dostępny w repozytrium na GitHub.
-
 
 ## Instrukcja instalacji projektu
 

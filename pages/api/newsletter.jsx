@@ -16,9 +16,7 @@ export default async function handler(req, res) {
   try {
     // Sprawdzenie, czy adres email już istnieje na liście
     const listResponse = await axios.get(
-      `https://api.eu.mailgun.net/v3/lists/${encodeURIComponent(
-        process.env.MAILGUN_LIST_ADDRESS
-      )}/members/${email}`,
+      `https://api.eu.mailgun.net/v3/lists/${encodeURIComponent(process.env.MAILGUN_LIST_ADDRESS)}/members/${email}`,
       {
         auth: {
           username: "api",
@@ -42,9 +40,7 @@ export default async function handler(req, res) {
   try {
     // Jeśli adres email nie istnieje, dodaj go do listy
     await axios.post(
-      `https://api.eu.mailgun.net/v3/lists/${encodeURIComponent(
-        process.env.MAILGUN_LIST_ADDRESS
-      )}/members`,
+      `https://api.eu.mailgun.net/v3/lists/${encodeURIComponent(process.env.MAILGUN_LIST_ADDRESS)}/members`,
       new URLSearchParams({
         subscribed: "True",
         address: email,
@@ -60,9 +56,7 @@ export default async function handler(req, res) {
       }
     );
 
-    return res
-      .status(200)
-      .json({ message: "Pomyślnie zapisano do newslettera" });
+    return res.status(200).json({ message: "Pomyślnie zapisano do newslettera" });
   } catch (error) {
     console.error("Error subscribing email:", error);
     return res.status(500).json({ error: "Wewnętrzny błąd serwera" });

@@ -2,18 +2,18 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const Image = styled.img`
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 `;
 const BigImage = styled.img`
-    max-width: 100%;
-    max-height: 800px;
+  max-width: 100%;
+  max-height: 800px;
 `;
 const ImageButtons = styled.div`
-    display: flex;
-    flex-grow: 0;
-    gap: 10px;
-    margin: 10px 0;
+  display: flex;
+  flex-grow: 0;
+  gap: 10px;
+  margin: 10px 0;
 `;
 
 const ImageButton = styled.div`
@@ -42,9 +42,7 @@ const NoImageText = styled.div`
 `;
 
 export default function NewsImage({ images }) {
-  const [activeImage, setActiveImage] = useState(
-    images?.[0] || "/images/no-image-found.webp"
-  );
+  const [activeImage, setActiveImage] = useState(images?.[0] || "/images/no-image-found.webp");
 
   if (!images || images.length === 0) {
     return (
@@ -62,11 +60,7 @@ export default function NewsImage({ images }) {
       </BigImageWrapper>
       <ImageButtons>
         {images.map((image) => (
-          <ImageButton
-            key={image}
-            $active={image === activeImage}
-            onClick={() => setActiveImage(image)}
-          >
+          <ImageButton key={image} $active={image === activeImage} onClick={() => setActiveImage(image)}>
             <Image src={image || "/images/no-image-found.webp"} alt="zdjęcie newsa" />
           </ImageButton>
         ))}

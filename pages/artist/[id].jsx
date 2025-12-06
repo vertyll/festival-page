@@ -15,7 +15,7 @@ const ColWrapper = styled.div`
   width: 100%;
   gap: 20px;
   //margin-top: 50px;
-  
+
   @media screen and (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
   }
@@ -28,12 +28,12 @@ const Row = styled.div`
   margin: 0 30px 0 30px;
 
   @media screen and (min-width: 768px) {
-      margin: 0 30px 0 0;
+    margin: 0 30px 0 0;
   }
 `;
 
 const Title = styled.h1`
-    font-size: 2em;
+  font-size: 2em;
 `;
 
 export default function ArtistPage({ artist }) {
@@ -47,32 +47,26 @@ export default function ArtistPage({ artist }) {
         <title>{artist.name} - Sunset Festival</title>
       </Head>
       <Layout>
-          <ColWrapper>
-            <SingleBox>
-              <ArtistImage images={artist.images} />
-            </SingleBox>
-            <Row>
-              <BackLink link="/lineup" />
-              <Title>{artist.name}</Title>
-              <div><b>Scena:</b> {renderStage()}</div>
-              <div>
-                <b>Data koncertu:</b>{" "}
-                {artist.concertDate
-                  ? formatDate(artist.concertDate)
-                  : "Brak danych"}
-              </div>
-              <div>
-                <b>Godzina koncertu:</b>{" "}
-                {artist.concertTime ? artist.concertTime : "Brak danych"}
-              </div>
+        <ColWrapper>
+          <SingleBox>
+            <ArtistImage images={artist.images} />
+          </SingleBox>
+          <Row>
+            <BackLink link="/lineup" />
+            <Title>{artist.name}</Title>
+            <div>
+              <b>Scena:</b> {renderStage()}
+            </div>
+            <div>
+              <b>Data koncertu:</b> {artist.concertDate ? formatDate(artist.concertDate) : "Brak danych"}
+            </div>
+            <div>
+              <b>Godzina koncertu:</b> {artist.concertTime ? artist.concertTime : "Brak danych"}
+            </div>
 
-              {artist.description && (
-                <>
-                  {artist.description}
-                </>
-              )}
-            </Row>
-          </ColWrapper>
+            {artist.description && <>{artist.description}</>}
+          </Row>
+        </ColWrapper>
       </Layout>
     </>
   );

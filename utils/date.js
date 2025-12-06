@@ -3,15 +3,7 @@ export function normalDate(dateString) {
 }
 
 export const formatDate = (dateString) => {
-  const days = [
-    "Niedziela",
-    "Poniedziałek",
-    "Wtorek",
-    "Środa",
-    "Czwartek",
-    "Piątek",
-    "Sobota",
-  ];
+  const days = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
   const date = new Date(dateString);
   const dayOfWeek = days[date.getDay()];
   const day = date.getDate().toString().padStart(2, "0");

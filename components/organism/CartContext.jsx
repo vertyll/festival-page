@@ -4,14 +4,14 @@ import React, { createContext, useState, useEffect } from "react";
 export const CartContext = createContext({});
 
 export function CartContextProvider({ children }) {
-  const [cartProducts, setCartProducts] = useState([]);
-  useEffect(() => {
-    const cartItems = localStorage.getItem("cart");
-
-    if (cartItems) {
-      setCartProducts(JSON.parse(cartItems));
+  const [cartProducts, setCartProducts] = useState(() => {
+    if (typeof window !== "undefined") {
+      const cartItems = localStorage.getItem("cart");
+      return cartItems ? JSON.parse(cartItems) : [];
     }
-  }, []); // Pusta tablica zależności oznacza, że ten efekt działa raz, podobnie jak componentDidMount
+    return [];
+  });
+
   useEffect(() => {
     if (cartProducts.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cartProducts));
@@ -25,9 +25,7 @@ export function CartContextProvider({ children }) {
       const uniqueKey = `${productId}-${JSON.stringify(selectedProperties)}`;
 
       // Sprawdzenie, czy istnieje już produkt o tym unikalnym kluczu
-      const existingProductIndex = prevCartProducts.findIndex(
-        (item) => item.uniqueKey === uniqueKey
-      );
+      const existingProductIndex = prevCartProducts.findIndex((item) => item.uniqueKey === uniqueKey);
 
       if (existingProductIndex !== -1) {
         // Zwiększenie ilości istniejącego produktu
@@ -50,9 +48,7 @@ export function CartContextProvider({ children }) {
   function removeProduct(productId, selectedProperties) {
     setCartProducts((prevCartProducts) => {
       const uniqueKey = `${productId}-${JSON.stringify(selectedProperties)}`;
-      const existingProductIndex = prevCartProducts.findIndex(
-        (item) => item.uniqueKey === uniqueKey
-      );
+      const existingProductIndex = prevCartProducts.findIndex((item) => item.uniqueKey === uniqueKey);
 
       if (existingProductIndex !== -1) {
         const newCartProducts = [...prevCartProducts];
@@ -82,10 +78,7 @@ export function CartContextProvider({ children }) {
     try {
       await axios.post("/api/update-availability", { cartProducts });
     } catch (error) {
-      console.error(
-        "Błąd podczas aktualizacji stanu magazynowego produktu:",
-        error
-      );
+      console.error("Błąd podczas aktualizacji stanu magazynowego produktu:", error);
     }
   }
 

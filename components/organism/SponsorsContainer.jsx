@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RevealWrapper } from "next-reveal";
+import RevealWrapper from "@/components/atoms/RevealWrapper";
 import SponsorBox from "./SponsorBox";
 
 const SponsorGrid = styled.div`

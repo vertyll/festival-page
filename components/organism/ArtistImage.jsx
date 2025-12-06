@@ -42,9 +42,7 @@ const NoImageText = styled.div`
 `;
 
 export default function ArtistImage({ images }) {
-  const [activeImage, setActiveImage] = useState(
-    images?.[0] || "/images/no-image-found.webp"
-  );
+  const [activeImage, setActiveImage] = useState(images?.[0] || "/images/no-image-found.webp");
 
   if (!images || images.length === 0) {
     return (
@@ -62,15 +60,8 @@ export default function ArtistImage({ images }) {
       </BigImageWrapper>
       <ImageButtons>
         {images.map((image) => (
-          <ImageButton
-            key={image}
-            $active={image === activeImage}
-            onClick={() => setActiveImage(image)}
-          >
-            <Image
-              src={image}
-              alt="zdjęcie artysty"
-            />
+          <ImageButton key={image} $active={image === activeImage} onClick={() => setActiveImage(image)}>
+            <Image src={image} alt="zdjęcie artysty" />
           </ImageButton>
         ))}
       </ImageButtons>

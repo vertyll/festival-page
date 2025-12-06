@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import { useContext, useState } from "react";
@@ -51,7 +50,7 @@ const Box = styled(Link)`
   position: relative;
   box-shadow: var(--default-box-shadow);
 
-    &:hover ${HoverText} {
+  &:hover ${HoverText} {
     display: block;
     opacity: 1;
   }
@@ -92,14 +91,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function ProductBox({
-  _id,
-  name,
-  images,
-  price,
-  wished = false,
-  onRemoveFromWishlist = () => {},
-}) {
+export default function ProductBox({ _id, name, images, price, wished = false, onRemoveFromWishlist = () => {} }) {
   // const { addProduct } = useContext(CartContext);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
@@ -112,9 +104,7 @@ export default function ProductBox({
     e.stopPropagation();
 
     if (!session) {
-      setAlertMessage(
-        "Musisz być zalogowany, aby dodać produkt do listy życzeń."
-      );
+      setAlertMessage("Musisz być zalogowany, aby dodać produkt do listy życzeń.");
       setShowAlert(true);
       return;
     }
@@ -134,18 +124,10 @@ export default function ProductBox({
   return (
     <Wrapper>
       {showAlert && (
-        <Alert
-          message={alertMessage}
-          onClose={() => setShowAlert(false)}
-          duration={alertDuration}
-          type="danger"
-        />
+        <Alert message={alertMessage} onClose={() => setShowAlert(false)} duration={alertDuration} type="danger" />
       )}
       <Box href={url}>
-        <WishlistButton
-          $wished={isWished}
-          onClick={(e) => addToWishlist(e, session)}
-        >
+        <WishlistButton $wished={isWished} onClick={(e) => addToWishlist(e, session)}>
           {isWished ? <IconHeart /> : <IconHeartOutline />}
         </WishlistButton>
         <Image

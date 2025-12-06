@@ -6,5 +6,4 @@ const WishedProductSchema = new Schema({
   product: { type: Schema.Types.ObjectId, ref: Product },
 });
 
-export const WishedProduct =
-  models?.WishedProduct || model("WishedProduct", WishedProductSchema);
+export const WishedProduct = models?.WishedProduct || model("WishedProduct", WishedProductSchema);

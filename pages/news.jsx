@@ -17,11 +17,7 @@ export default function NewsPage({ news }) {
         <TitleBanner imageUrl="/images/banernewsy.webp" />
         <DivCenter>
           <Title>Newsy</Title>
-          {news && news.length > 0 ? (
-            <NewsContainer news={news} />
-          ) : (
-            <p>Brak newsów do wyświetlenia</p>
-          )}
+          {news && news.length > 0 ? <NewsContainer news={news} /> : <p>Brak newsów do wyświetlenia</p>}
         </DivCenter>
       </Layout>
     </>

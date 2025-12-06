@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
@@ -55,7 +54,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function SponsorBox({ _id, name, images, link:url }) {
+export default function SponsorBox({ _id, name, images, link: url }) {
   return (
     <Wrapper>
       <Box href={url}>

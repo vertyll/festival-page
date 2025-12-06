@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
 import Image from "next/image";

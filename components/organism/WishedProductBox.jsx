@@ -115,9 +115,7 @@ export default function WishedProductBox({
     e.stopPropagation();
 
     if (!session) {
-      setAlertMessage(
-        "Musisz być zalogowany, aby dodać produkt do listy życzeń."
-      );
+      setAlertMessage("Musisz być zalogowany, aby dodać produkt do listy życzeń.");
       setShowAlert(true);
       return;
     }
@@ -137,24 +135,13 @@ export default function WishedProductBox({
   return (
     <Wrapper>
       {showAlert && (
-        <Alert
-          message={alertMessage}
-          onClose={() => setShowAlert(false)}
-          duration={alertDuration}
-          type="danger"
-        />
+        <Alert message={alertMessage} onClose={() => setShowAlert(false)} duration={alertDuration} type="danger" />
       )}
       <Box href={url}>
-        <WishlistButton
-          $wished={isWished}
-          onClick={(e) => addToWishlist(e, session)}
-        >
+        <WishlistButton $wished={isWished} onClick={(e) => addToWishlist(e, session)}>
           {isWished ? <IconHeart /> : <IconHeartOutline />}
         </WishlistButton>
-        <img
-          src={images?.[0] || "/images/no-image-found.webp"}
-          alt="zdjęcie produktu"
-        />
+        <img src={images?.[0] || "/images/no-image-found.webp"} alt="zdjęcie produktu" />
         <HoverText>Zobacz produkt &#8594;</HoverText>
       </Box>
       <ProductInfo>

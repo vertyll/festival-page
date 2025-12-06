@@ -10,8 +10,7 @@ export default class MyDocument extends Document {
       // Zastąpienie renderowania strony, aby dołączyć style
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
         });
 
       // Pobranie początkowych właściwości dokumentu

@@ -23,8 +23,6 @@ export default async function handle(req, res) {
   }
 
   if (req.method === "GET") {
-    res.json(
-      await WishedProduct.find({ userEmail: user.email }).populate("product")
-    );
+    res.json(await WishedProduct.find({ userEmail: user.email }).populate("product"));
   }
 }

@@ -17,11 +17,7 @@ export default function LineUpPage({ artists }) {
         <TitleBanner imageUrl="/images/banerlineup.webp" />
         <DivCenter>
           <Title>PROGRAM 2024</Title>
-          {artists && artists.length > 0 ? (
-            <ArtistContainer artists={artists} />
-          ) : (
-            <p>Brak artystów do wyświetlenia</p>
-          )}
+          {artists && artists.length > 0 ? <ArtistContainer artists={artists} /> : <p>Brak artystów do wyświetlenia</p>}
         </DivCenter>
       </Layout>
     </>

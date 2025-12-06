@@ -15,12 +15,7 @@ import Head from "next/head";
 import ArtistContainerForHomePage from "@/components/organism/ArtistContainerForHomePage";
 import Newsletter from "@/components/organism/Newsletter";
 
-export default function HomePage({
-  newProducts,
-  wishedNewProducts,
-  newArtists,
-  newNews,
-}) {
+export default function HomePage({ newProducts, wishedNewProducts, newArtists, newNews }) {
   return (
     <>
       <Head>
@@ -39,10 +34,7 @@ export default function HomePage({
           {newProducts && newProducts.length > 0 && (
             <>
               <Title>Nowe produkty</Title>
-              <ProductContainer
-                products={newProducts}
-                wishedProducts={wishedNewProducts}
-              />
+              <ProductContainer products={newProducts} wishedProducts={wishedNewProducts} />
             </>
           )}
 

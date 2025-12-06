@@ -14,13 +14,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <AnimatedPage
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={pageTransition}
-      >
+      <AnimatedPage initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
         <StyledDiv>{children}</StyledDiv>
       </AnimatedPage>
       <CookieBanner />

@@ -18,9 +18,7 @@ export default async function handle(req, res) {
       throw new Error("Brak produktów w koszyku");
     }
 
-    console.log(
-      `Aktualizacja dostępności dla ${cartProducts.length} produktów`
-    );
+    console.log(`Aktualizacja dostępności dla ${cartProducts.length} produktów`);
     for (const item of cartProducts) {
       console.log("Przetwarzam produkt:", item.productId);
       const product = await Product.findById(item.productId);
@@ -44,11 +42,7 @@ export default async function handle(req, res) {
           if (isMatchingCombination) {
             const oldAvailability = comb.availability;
             comb.availability = Math.max(0, oldAvailability - item.quantity);
-            console.log(
-              `Zaktualizowano dostępność dla kombinacji: ${comb.combination.join(
-                ", "
-              )}`
-            );
+            console.log(`Zaktualizowano dostępność dla kombinacji: ${comb.combination.join(", ")}`);
             break;
           }
         }
@@ -56,26 +50,18 @@ export default async function handle(req, res) {
         console.log("Aktualizacja ogólnej dostępności");
         const oldAvailability = product.availability;
         product.availability = Math.max(0, oldAvailability - item.quantity);
-        console.log(
-          `Zaktualizowano ogólną dostępność: ${product.availability}`
-        );
+        console.log(`Zaktualizowano ogólną dostępność: ${product.availability}`);
       }
 
       product.markModified("combinations");
       await product.save();
-      console.log(
-        `Zaktualizowano stan magazynowy dla produktu ${item.productId}`
-      );
+      console.log(`Zaktualizowano stan magazynowy dla produktu ${item.productId}`);
     }
 
     console.log("Wszystkie stany magazynowe zostały zaktualizowane");
-    res
-      .status(200)
-      .json({ message: "Dostępność produktu została zaktualizowana." });
+    res.status(200).json({ message: "Dostępność produktu została zaktualizowana." });
   } catch (error) {
     console.error("Błąd przy aktualizacji stanu magazynowego:", error);
-    res
-      .status(500)
-      .json({ message: "Wewnętrzny błąd serwera", error: error.message });
+    res.status(500).json({ message: "Wewnętrzny błąd serwera", error: error.message });
   }
 }

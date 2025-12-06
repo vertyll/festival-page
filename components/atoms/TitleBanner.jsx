@@ -8,7 +8,7 @@ const Banner = styled.div`
   justify-content: center;
   overflow: hidden;
   position: relative;
-  
+
   img {
     width: 100%;
   }
@@ -21,6 +21,7 @@ const Content = styled.div`
 export default function TitleBanner({ imageUrl, children }) {
   return (
     <Banner>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={imageUrl} alt="Tło baneru" />
       <Content>{children}</Content>
     </Banner>

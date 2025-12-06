@@ -56,18 +56,14 @@ const PropertyButton = styled.button`
     props.$isSelected
       ? "var(--dark-text-color)"
       : props.disabled
-      ? "var(--no-properties-color)" // Szary kolor dla niedostępnych opcji
-      : "var(--border-color-light)"};
-  color: ${(props) =>
-    props.$isSelected || props.disabled
-      ? "var(--dark-text-color)"
-      : "var(--dark-text-color)"};
+        ? "var(--no-properties-color)" // Szary kolor dla niedostępnych opcji
+        : "var(--border-color-light)"};
+  color: ${(props) => (props.$isSelected || props.disabled ? "var(--dark-text-color)" : "var(--dark-text-color)")};
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: ${(props) =>
-      props.disabled ? "var(--no-properties-color)" : "var(--dark-text-color)"};
+    border-color: ${(props) => (props.disabled ? "var(--no-properties-color)" : "var(--dark-text-color)")};
     color: var(--dark-text-color);
   }
 `;
@@ -86,12 +82,7 @@ const Title = styled.h1`
   font-size: 2em;
 `;
 
-export default function ProductPage({
-  product,
-  categoryPath,
-  availabilityVisible,
-  additionalAvailabilityVisible,
-}) {
+export default function ProductPage({ product, categoryPath, availabilityVisible, additionalAvailabilityVisible }) {
   const { addProduct } = useContext(CartContext);
   const [selectedProperty, setSelectedProperty] = useState({});
   const [showAlert, setShowAlert] = useState(false);
@@ -102,32 +93,24 @@ export default function ProductPage({
 
   const handleAddToCartClick = () => {
     // Sprawdzenie, czy wszystkie właściwości zostały wybrane
-    const allPropertiesSelected = product.properties.every((prop) =>
-      selectedProperty.hasOwnProperty(prop.name)
-    );
+    const allPropertiesSelected = product.properties.every((prop) => selectedProperty.hasOwnProperty(prop.name));
 
     // Sprawdzenie, czy aktualnie wybrana kombinacja jest dostępna
     const isAvailable =
       allPropertiesSelected &&
-      product.properties.every((prop) =>
-        isCombinationAvailable(prop.name, selectedProperty[prop.name])
-      );
+      product.properties.every((prop) => isCombinationAvailable(prop.name, selectedProperty[prop.name]));
 
     if (isAvailable) {
       addProduct(product._id, selectedProperty);
       setAlertMessage("Produkt został dodany do koszyka.");
       setShowAlert(true);
     } else {
-      setAlertDangerMessage(
-        "Produkt nie jest dostępny lub nie wybrano wszystkich opcji."
-      );
+      setAlertDangerMessage("Produkt nie jest dostępny lub nie wybrano wszystkich opcji.");
       setShowDangerAlert(true);
     }
   };
 
-  const allPropertiesSelected = product.properties.every((prop) =>
-    selectedProperty.hasOwnProperty(prop.name)
-  );
+  const allPropertiesSelected = product.properties.every((prop) => selectedProperty.hasOwnProperty(prop.name));
 
   const handlePropertySelection = (propertyName, option) => {
     setSelectedProperty((prev) => ({
@@ -156,9 +139,7 @@ export default function ProductPage({
 
     // Sprawdź, czy istnieje kombinacja z tą dostępnością
     return product.combinations.some(
-      (comb) =>
-        currentCombination.every((val) => comb.combination.includes(val)) &&
-        comb.availability > 0
+      (comb) => currentCombination.every((val) => comb.combination.includes(val)) && comb.availability > 0
     );
   };
 
@@ -173,9 +154,7 @@ export default function ProductPage({
                 key={i}
                 $isSelected={selectedProperty[prop.name] === value}
                 onClick={() =>
-                  isCombinationAvailable(prop.name, value)
-                    ? handlePropertySelection(prop.name, value)
-                    : null
+                  isCombinationAvailable(prop.name, value) ? handlePropertySelection(prop.name, value) : null
                 }
                 disabled={!isCombinationAvailable(prop.name, value)}
               >
@@ -185,21 +164,14 @@ export default function ProductPage({
           </PropertyContainer>
         </div>
       ));
-    } else if (
-      product.properties &&
-      product.properties.length === 0 &&
-      product.availability
-    ) {
+    } else if (product.properties && product.properties.length === 0 && product.availability) {
       return <div>Brak właściwości dla tego produktu.</div>;
     }
   };
 
   const sumAvailability = (product) => {
     if (product.properties && product.properties.length > 0) {
-      return product.combinations.reduce(
-        (total, comb) => total + comb.availability,
-        0
-      );
+      return product.combinations.reduce((total, comb) => total + comb.availability, 0);
     } else {
       // Jeśli nie ma właściwości, zwróć wartość z pola availability
       return product.availability;
@@ -211,13 +183,9 @@ export default function ProductPage({
       <>
         {additionalAvailabilityVisible && (
           <>
-            {Array.isArray(combination) ? combination.join(", ") : combination}{" "}
-            -{" "}
+            {Array.isArray(combination) ? combination.join(", ") : combination} -{" "}
             <span>
-              <AvailabilityText $available={availability > 0}>
-                {availability}
-              </AvailabilityText>{" "}
-              sztuk
+              <AvailabilityText $available={availability > 0}>{availability}</AvailabilityText> sztuk
             </span>
           </>
         )}
@@ -228,20 +196,13 @@ export default function ProductPage({
       return (
         <>
           {product.combinations.map((comb, index) => (
-            <div key={index}>
-              {renderCombinationAvailability(
-                comb.combination,
-                comb.availability
-              )}
-            </div>
+            <div key={index}>{renderCombinationAvailability(comb.combination, comb.availability)}</div>
           ))}
           {availabilityVisible && (
             <div>
               <strong>Ilość w magazynie: </strong>
               <AvailabilityText $available={sumAvailability(product) > 0}>
-                {sumAvailability(product) > 0
-                  ? sumAvailability(product)
-                  : "brak"}
+                {sumAvailability(product) > 0 ? sumAvailability(product) : "brak"}
               </AvailabilityText>
             </div>
           )}
@@ -268,12 +229,7 @@ export default function ProductPage({
       </Head>
       <Layout>
         {showAlert && (
-          <Alert
-            message={alertMessage}
-            onClose={() => setShowAlert(false)}
-            duration={alertDuration}
-            type="success"
-          />
+          <Alert message={alertMessage} onClose={() => setShowAlert(false)} duration={alertDuration} type="success" />
         )}
         {showDangerAlert && (
           <Alert
@@ -303,12 +259,7 @@ export default function ProductPage({
               <Price>
                 <b>Cena:</b> {product.price} zł
               </Price>
-              <Button
-                onClick={handleAddToCartClick}
-                $size="m"
-                $usage="primary"
-                disabled={!allPropertiesSelected}
-              >
+              <Button onClick={handleAddToCartClick} $size="m" $usage="primary" disabled={!allPropertiesSelected}>
                 <IconCart />
                 Dodaj do koszyka
               </Button>
@@ -320,9 +271,7 @@ export default function ProductPage({
                 <h3>Opis produktu</h3>
               </div>
               <DescriptionWrapper>
-                <StyledDescriptionBox>
-                  {product.description}
-                </StyledDescriptionBox>
+                <StyledDescriptionBox>{product.description}</StyledDescriptionBox>
               </DescriptionWrapper>
             </>
           )}
@@ -340,15 +289,11 @@ export async function getServerSideProps(context) {
   const availabilitySetting = await Setting.findOne({
     name: "availabilityVisible",
   });
-  const isAvailabilityVisible = availabilitySetting
-    ? availabilitySetting.value
-    : false;
+  const isAvailabilityVisible = availabilitySetting ? availabilitySetting.value : false;
   const additionalAvailabilityVisible = await Setting.findOne({
     name: "additionalAvailabilityVisible",
   });
-  const isAdditionalAvailabilityVisible = additionalAvailabilityVisible
-    ? additionalAvailabilityVisible.value
-    : false;
+  const isAdditionalAvailabilityVisible = additionalAvailabilityVisible ? additionalAvailabilityVisible.value : false;
   const idToCategory = categories.reduce((acc, category) => {
     acc[category._id.toString()] = category;
     return acc;
@@ -360,17 +305,13 @@ export async function getServerSideProps(context) {
 
     while (currentCategory) {
       path.unshift(currentCategory);
-      currentCategory = currentCategory.parent
-        ? idToCategory[currentCategory.parent.toString()]
-        : null;
+      currentCategory = currentCategory.parent ? idToCategory[currentCategory.parent.toString()] : null;
     }
 
     return path;
   };
 
-  const categoryPath = product.category
-    ? getCategoryPath(product.category._id.toString())
-    : [];
+  const categoryPath = product.category ? getCategoryPath(product.category._id.toString()) : [];
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),

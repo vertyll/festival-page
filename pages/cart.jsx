@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import styled from "styled-components";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 import { CartContext } from "@/components/organism/CartContext";
 import axios from "axios";
 import Layout from "@/components/templates/Layout";
@@ -111,15 +111,8 @@ const SelectedPropertiesDiv = styled.div`
 
 export default function CartPage() {
   const { data: session } = useSession();
-  const {
-    cartProducts,
-    addProduct,
-    removeProduct,
-    clearCart,
-    finalizePurchase,
-  } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart, finalizePurchase } = useContext(CartContext);
   const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
@@ -130,7 +123,16 @@ export default function CartPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
 
+  // Obliczanie totalPrice za pomocą useMemo zamiast useEffect
+  const totalPrice = useMemo(() => {
+    return cartProducts.reduce((sum, cartItem) => {
+      const product = products.find((p) => p._id === cartItem.productId);
+      return product ? sum + cartItem.quantity * product.price : sum;
+    }, 0);
+  }, [cartProducts, products]);
+
   const router = useRouter();
+
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios
@@ -142,9 +144,15 @@ export default function CartPage() {
           console.error("Error fetching products:", error);
         });
     } else {
-      setProducts([]);
+      // Używamy queueMicrotask zamiast setTimeout dla lepszej wydajności
+      queueMicrotask(() => {
+        if (products.length > 0) {
+          setProducts([]);
+        }
+      });
     }
-  }, [cartProducts]);
+  }, [cartProducts, products.length]);
+
   useEffect(() => {
     axios.get("/api/settings?name=shippingPrice").then((response) => {
       setShippingPrice(response.data.value);
@@ -155,8 +163,10 @@ export default function CartPage() {
       return;
     }
     if (window?.location.href.includes("success")) {
-      setIsSuccess(true);
-      clearCart();
+      setTimeout(() => {
+        setIsSuccess(true);
+        clearCart();
+      }, 0);
     }
   }, [clearCart]);
   useEffect(() => {
@@ -178,22 +188,9 @@ export default function CartPage() {
         }
       })
       .catch((error) => {
-        console.error(
-          "Wystąpił błąd podczas pobierania danych adresowych:",
-          error
-        );
+        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
       });
   }, [session]);
-  useEffect(() => {
-    let newTotal = 0;
-    cartProducts.forEach((cartItem) => {
-      const product = products.find((p) => p._id === cartItem.productId);
-      if (product) {
-        newTotal += cartItem.quantity * product.price;
-      }
-    });
-    setTotalPrice(newTotal);
-  }, [cartProducts, products]);
 
   function quantityAdd(cartItem) {
     addProduct(cartItem.productId, cartItem.selectedProperties);
@@ -208,10 +205,14 @@ export default function CartPage() {
   }
 
   async function goToPayment() {
-    const errors = validateFormValues(
-      { name, email, city, postalCode, streetAddress, country },
-      ["name", "email", "city", "postalCode", "streetAddress", "country"]
-    );
+    const errors = validateFormValues({ name, email, city, postalCode, streetAddress, country }, [
+      "name",
+      "email",
+      "city",
+      "postalCode",
+      "streetAddress",
+      "country",
+    ]);
     setValidationErrors(errors);
 
     if (Object.keys(errors).length > 0) {
@@ -245,13 +246,8 @@ export default function CartPage() {
             <MarginTopWrapper>
               <Box>
                 <h1>Dziękujemy za złożone zamówienie</h1>
-                <p>
-                  Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie
-                  gotowe
-                </p>
-                <AnimatedThanksImage
-                  style={{ maxWidth: "200px", height: "200px" }}
-                />
+                <p>Wyślemy Ci powiadomienie email, kiedy twoje zamówienie będzie gotowe</p>
+                <AnimatedThanksImage style={{ maxWidth: "200px", height: "200px" }} />
                 <Button $usage="primary" $size="m" onClick={goToShop}>
                   Wróć do sklepu &#8617;
                 </Button>
@@ -291,9 +287,7 @@ export default function CartPage() {
                   <tbody>
                     {cartProducts.map((cartItem) => {
                       // Używaj uniqueKey z cartItem do znalezienia pełnych danych produktu
-                      const fullProductData = products.find(
-                        (product) => product._id === cartItem.productId
-                      );
+                      const fullProductData = products.find((product) => product._id === cartItem.productId);
 
                       // Jeśli nie znaleziono pełnych danych produktu, nie renderuj wiersza
                       if (!fullProductData) {
@@ -306,9 +300,7 @@ export default function CartPage() {
                         return null;
                       }
 
-                      const selectedPropertiesString = Object.entries(
-                        cartItem.selectedProperties
-                      )
+                      const selectedPropertiesString = Object.entries(cartItem.selectedProperties)
                         .map(([key, value]) => `${key}: ${value}`)
                         .join(", ");
 
@@ -317,40 +309,25 @@ export default function CartPage() {
                           <td>
                             <ProductImage>
                               <img
-                                src={
-                                  fullProductData.images[0] ||
-                                  "/images/no-image-found.webp"
-                                }
+                                src={fullProductData.images[0] || "/images/no-image-found.webp"}
                                 alt={fullProductData.name}
                               />
                             </ProductImage>
                           </td>
                           <td>
                             {fullProductData.name}
-                            <SelectedPropertiesDiv>
-                              {selectedPropertiesString}
-                            </SelectedPropertiesDiv>
+                            <SelectedPropertiesDiv>{selectedPropertiesString}</SelectedPropertiesDiv>
                           </td>
                           <td>
-                            <Button
-                              $size="s"
-                              $usage="quantity"
-                              onClick={() => quantitySub(cartItem)}
-                            >
+                            <Button $size="s" $usage="quantity" onClick={() => quantitySub(cartItem)}>
                               -
                             </Button>
                             <QuantityLabel>{cartItem.quantity}</QuantityLabel>
-                            <Button
-                              $size="s"
-                              $usage="quantity"
-                              onClick={() => quantityAdd(cartItem)}
-                            >
+                            <Button $size="s" $usage="quantity" onClick={() => quantityAdd(cartItem)}>
                               +
                             </Button>
                           </td>
-                          <td>
-                            {cartItem.quantity * fullProductData.price} zł
-                          </td>
+                          <td>{cartItem.quantity * fullProductData.price} zł</td>
                         </tr>
                       );
                     })}
@@ -384,9 +361,7 @@ export default function CartPage() {
                   name="name"
                   onChange={(e) => setName(e.target.value)}
                 />
-                {validationErrors["name"] && (
-                  <ErrorDiv>{validationErrors["name"]}</ErrorDiv>
-                )}
+                {validationErrors["name"] && <ErrorDiv>{validationErrors["name"]}</ErrorDiv>}
                 <FieldInput
                   labelText="Email"
                   type="text"
@@ -395,9 +370,7 @@ export default function CartPage() {
                   name="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                {validationErrors["email"] && (
-                  <ErrorDiv>{validationErrors["email"]}</ErrorDiv>
-                )}
+                {validationErrors["email"] && <ErrorDiv>{validationErrors["email"]}</ErrorDiv>}
                 <CityHolder>
                   <FieldInput
                     labelText="Miasto"
@@ -407,9 +380,7 @@ export default function CartPage() {
                     name="city"
                     onChange={(e) => setCity(e.target.value)}
                   />
-                  {validationErrors["city"] && (
-                    <ErrorDiv>{validationErrors["city"]}</ErrorDiv>
-                  )}
+                  {validationErrors["city"] && <ErrorDiv>{validationErrors["city"]}</ErrorDiv>}
                   <FieldInput
                     labelText="Kod pocztowy"
                     type="text"
@@ -418,9 +389,7 @@ export default function CartPage() {
                     name="postalCode"
                     onChange={(e) => setPostalCode(e.target.value)}
                   />
-                  {validationErrors["postalCode"] && (
-                    <ErrorDiv>{validationErrors["postalCode"]}</ErrorDiv>
-                  )}
+                  {validationErrors["postalCode"] && <ErrorDiv>{validationErrors["postalCode"]}</ErrorDiv>}
                 </CityHolder>
                 <FieldInput
                   labelText="Ulica"
@@ -430,9 +399,7 @@ export default function CartPage() {
                   name="streetAddress"
                   onChange={(e) => setStreetAddress(e.target.value)}
                 />
-                {validationErrors["streetAddress"] && (
-                  <ErrorDiv>{validationErrors["streetAddress"]}</ErrorDiv>
-                )}
+                {validationErrors["streetAddress"] && <ErrorDiv>{validationErrors["streetAddress"]}</ErrorDiv>}
                 <FieldInput
                   labelText="Państwo"
                   type="text"
@@ -441,9 +408,7 @@ export default function CartPage() {
                   name="country"
                   onChange={(e) => setCountry(e.target.value)}
                 />
-                {validationErrors["country"] && (
-                  <ErrorDiv>{validationErrors["country"]}</ErrorDiv>
-                )}
+                {validationErrors["country"] && <ErrorDiv>{validationErrors["country"]}</ErrorDiv>}
                 <Button $size="m" $usage="primary" onClick={goToPayment}>
                   <IconCreditCart />
                   Zapłać

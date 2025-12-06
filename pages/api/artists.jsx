@@ -9,10 +9,7 @@ export default async function handle(req, res) {
 
   let artistsQuery = {};
   if (term) {
-    artistsQuery["$or"] = [
-      { name: { $regex: term, $options: "i" } },
-      { description: { $regex: term, $options: "i" } },
-    ];
+    artistsQuery["$or"] = [{ name: { $regex: term, $options: "i" } }, { description: { $regex: term, $options: "i" } }];
   }
 
   console.log(artistsQuery);

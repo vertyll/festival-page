@@ -62,17 +62,13 @@ export default function SearchPage() {
               placeholder="Wyszukaj produkt ..."
             />
           </SearchWrapper>
-          {!isLoading && term !== "" && products.length === 0 && (
-            <h2>Brak wyników dla &ldquo;{term}&rdquo;</h2>
-          )}
+          {!isLoading && term !== "" && products.length === 0 && <h2>Brak wyników dla &ldquo;{term}&rdquo;</h2>}
           {isLoading && <Spinner />}
           {!isLoading &&
             (products.length > 0 ? (
               <ProductContainer products={products} />
             ) : (
-              <AnimatedSearchIcon
-                style={{ maxWidth: "450px", height: "450px" }}
-              />
+              <AnimatedSearchIcon style={{ maxWidth: "450px", height: "450px" }} />
             ))}
         </DivCenter>
       </Layout>

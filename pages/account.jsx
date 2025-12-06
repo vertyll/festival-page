@@ -1,6 +1,5 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import styled from "styled-components";
-import { RevealWrapper } from "next-reveal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "@/components/templates/Layout";
@@ -15,6 +14,7 @@ import DivCenter from "@/components/atoms/DivCenter";
 import AnimatedLoginImage from "@/components/atoms/AnimatedLoginImage";
 import Head from "next/head";
 import WishedProductBox from "@/components/organism/WishedProductBox";
+import RevealWrapper from "@/components/atoms/RevealWrapper";
 
 const Wrapper = styled.div`
   display: flex;
@@ -201,10 +201,14 @@ export default function AccountPage() {
     await signIn("google");
   }
   function saveAddress() {
-    const errors = validateFormValues(
-      { name, email, city, postalCode, streetAddress, country },
-      ["name", "email", "city", "postalCode", "streetAddress", "country"]
-    );
+    const errors = validateFormValues({ name, email, city, postalCode, streetAddress, country }, [
+      "name",
+      "email",
+      "city",
+      "postalCode",
+      "streetAddress",
+      "country",
+    ]);
     setValidationErrors(errors);
 
     if (Object.keys(errors).length > 0) {
@@ -218,12 +222,13 @@ export default function AccountPage() {
     if (!session) {
       return;
     }
-    setAddressLoaded(false);
-    setWishlistLoaded(false);
-    setOrderLoaded(false);
+
+    let isMounted = true;
+
     axios
       .get("/api/address")
       .then((response) => {
+        if (!isMounted) return;
         if (response.data) {
           setName(response.data.name || "");
           setEmail(response.data.email || "");
@@ -237,20 +242,23 @@ export default function AccountPage() {
         }
       })
       .catch((error) => {
-        console.error(
-          "Wystąpił błąd podczas pobierania danych adresowych:",
-          error
-        );
+        console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
       });
 
     axios.get("/api/wishlist").then((response) => {
+      if (!isMounted) return;
       setWishedProducts(response.data.map((wp) => wp.product));
       setWishlistLoaded(true);
     });
     axios.get("/api/orders").then((response) => {
+      if (!isMounted) return;
       setOrders(response.data);
       setOrderLoaded(true);
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, [session]);
 
   function productRemovedFromWishlist(idToRemove) {
@@ -287,18 +295,15 @@ export default function AccountPage() {
                       <b>I zgarnij korzyśći jakie daje Ci konto</b>
                     </p>
                     <p>
-                      Logując się, możesz dodać swoje produkty do listy
-                      ulubionych, zapisać dane do kolejnych płatności i
-                      sprawdzić stan swojego zamówienia
+                      Logując się, możesz dodać swoje produkty do listy ulubionych, zapisać dane do kolejnych płatności
+                      i sprawdzić stan swojego zamówienia
                     </p>
                     <Button $usage="primary" $size="m" onClick={login}>
                       Logowanie Google &#8618;
                     </Button>
                   </LoginInfo>
                   <div>
-                    <AnimatedLoginImage
-                      style={{ maxWidth: "350px", height: "350px" }}
-                    />
+                    <AnimatedLoginImage style={{ maxWidth: "350px", height: "350px" }} />
                   </div>
                 </LoginWrapper>
               </>
@@ -308,30 +313,18 @@ export default function AccountPage() {
               <RightPanel>
                 <RevealWrapper delay={0}>
                   <InfoBox>
-                    <Tabs
-                      tabs={["Zamówienia", "Ulubione", "Konto"]}
-                      active={activeTab}
-                      onChange={setActiveTab}
-                    />
+                    <Tabs tabs={["Zamówienia", "Ulubione", "Konto"]} active={activeTab} onChange={setActiveTab} />
                     {activeTab === "Zamówienia" && (
                       <>
                         {!orderLoaded && <Spinner />}
                         {orderLoaded && (
                           <StyledOrderDiv
                             style={{
-                              visibility:
-                                orders.length > 0 ? "visible" : "hidden",
+                              visibility: orders.length > 0 ? "visible" : "hidden",
                             }}
                           >
-                            {orders.length === 0 && (
-                              <p style={{ visibility: "visible" }}>
-                                Brak zamówień
-                              </p>
-                            )}
-                            {orders.length > 0 &&
-                              orders.map((o) => (
-                                <SingleOrder key={o._id} {...o} />
-                              ))}
+                            {orders.length === 0 && <p style={{ visibility: "visible" }}>Brak zamówień</p>}
+                            {orders.length > 0 && orders.map((o) => <SingleOrder key={o._id} {...o} />)}
                           </StyledOrderDiv>
                         )}
                       </>
@@ -342,16 +335,11 @@ export default function AccountPage() {
                         {wishlistLoaded && (
                           <StyledWishedDiv
                             style={{
-                              visibility:
-                                wishedProducts.length > 0
-                                  ? "visible"
-                                  : "hidden",
+                              visibility: wishedProducts.length > 0 ? "visible" : "hidden",
                             }}
                           >
                             {wishedProducts.length === 0 && (
-                              <p style={{ visibility: "visible" }}>
-                                Brak polubionych produktów
-                              </p>
+                              <p style={{ visibility: "visible" }}>Brak polubionych produktów</p>
                             )}
                             {wishedProducts.length > 0 &&
                               wishedProducts.map(
@@ -361,9 +349,7 @@ export default function AccountPage() {
                                       key={wp._id}
                                       {...wp}
                                       wished={true}
-                                      onRemoveFromWishlist={
-                                        productRemovedFromWishlist
-                                      }
+                                      onRemoveFromWishlist={productRemovedFromWishlist}
                                     />
                                   )
                               )}
@@ -385,9 +371,7 @@ export default function AccountPage() {
                               onChange={(e) => setName(e.target.value)}
                             />
                             {validationErrors["name"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["name"]}
-                              </ErrorDiv>
+                              <ErrorDiv className="error-div-class">{validationErrors["name"]}</ErrorDiv>
                             )}
                             <FieldInput
                               labelText="Email"
@@ -398,9 +382,7 @@ export default function AccountPage() {
                               onChange={(e) => setEmail(e.target.value)}
                             />
                             {validationErrors["email"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["email"]}
-                              </ErrorDiv>
+                              <ErrorDiv className="error-div-class">{validationErrors["email"]}</ErrorDiv>
                             )}
                             <CityHolder>
                               <FieldInput
@@ -412,9 +394,7 @@ export default function AccountPage() {
                                 onChange={(e) => setCity(e.target.value)}
                               />
                               {validationErrors["city"] && (
-                                <ErrorDiv className="error-div-class">
-                                  {validationErrors["city"]}
-                                </ErrorDiv>
+                                <ErrorDiv className="error-div-class">{validationErrors["city"]}</ErrorDiv>
                               )}
                               <FieldInput
                                 labelText="Kod pocztowy"
@@ -425,9 +405,7 @@ export default function AccountPage() {
                                 onChange={(e) => setPostalCode(e.target.value)}
                               />
                               {validationErrors["postalCode"] && (
-                                <ErrorDiv className="error-div-class">
-                                  {validationErrors["postalCode"]}
-                                </ErrorDiv>
+                                <ErrorDiv className="error-div-class">{validationErrors["postalCode"]}</ErrorDiv>
                               )}
                             </CityHolder>
                             <FieldInput
@@ -439,9 +417,7 @@ export default function AccountPage() {
                               onChange={(e) => setStreetAddress(e.target.value)}
                             />
                             {validationErrors["streetAddress"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["streetAddress"]}
-                              </ErrorDiv>
+                              <ErrorDiv className="error-div-class">{validationErrors["streetAddress"]}</ErrorDiv>
                             )}
                             <FieldInput
                               labelText="Państwo"
@@ -452,15 +428,9 @@ export default function AccountPage() {
                               onChange={(e) => setCountry(e.target.value)}
                             />
                             {validationErrors["country"] && (
-                              <ErrorDiv className="error-div-class">
-                                {validationErrors["country"]}
-                              </ErrorDiv>
+                              <ErrorDiv className="error-div-class">{validationErrors["country"]}</ErrorDiv>
                             )}
-                            <Button
-                              $usage="primary"
-                              onClick={saveAddress}
-                              $size="m"
-                            >
+                            <Button $usage="primary" onClick={saveAddress} $size="m">
                               Zapisz &#x2714;
                             </Button>
                           </StyledDataDiv>

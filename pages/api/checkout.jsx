@@ -12,15 +12,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const {
-    name,
-    email,
-    city,
-    postalCode,
-    streetAddress,
-    country,
-    cartProducts,
-  } = req.body;
+  const { name, email, city, postalCode, streetAddress, country, cartProducts } = req.body;
 
   await mongooseConnect();
 
@@ -32,16 +24,11 @@ export default async function handler(req, res) {
 
   let line_items = [];
   for (const productDetail of cartProducts) {
-    const productInfo = productsInfos.find(
-      (p) => p._id.toString() === productDetail.productId
-    );
+    const productInfo = productsInfos.find((p) => p._id.toString() === productDetail.productId);
 
     if (productInfo) {
       let description = "Brak właściwości";
-      if (
-        productDetail.selectedProperties &&
-        Object.keys(productDetail.selectedProperties).length > 0
-      ) {
+      if (productDetail.selectedProperties && Object.keys(productDetail.selectedProperties).length > 0) {
         description = Object.entries(productDetail.selectedProperties)
           .map(([key, value]) => `${key}: ${value}`)
           .join(", ");

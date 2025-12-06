@@ -15,7 +15,7 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   padding: 0 20px;
-  font-family: 'Almendra', serif;
+  font-family: "Almendra", serif;
   font-size: 1.2em;
 `;
 
@@ -40,21 +40,25 @@ const LogoWrapper = styled.div`
 
 const Name = styled.span`
   font-size: 1.2em;
-`
+`;
 
 const Place = styled.span`
   font-size: 0.9em;
-`
+`;
 
 export default function Header() {
   return (
     <StyledHeader>
       <Wrapper>
-          <LogoWrapper>
-              <Logo href={"/"}><Name>SUNSET FESTIVAL</Name></Logo>
-              <span>4 - 7.07.2024, <b>WARSZAWA</b></span>
-              <Place>TOR WYŚCIGÓW KONNYCH SŁUŻEWIEC</Place>
-          </LogoWrapper>
+        <LogoWrapper>
+          <Logo href={"/"}>
+            <Name>SUNSET FESTIVAL</Name>
+          </Logo>
+          <span>
+            4 - 7.07.2024, <b>WARSZAWA</b>
+          </span>
+          <Place>TOR WYŚCIGÓW KONNYCH SŁUŻEWIEC</Place>
+        </LogoWrapper>
         <SecondaryWrapper>
           <Navbar />
         </SecondaryWrapper>

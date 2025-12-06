@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ArtistBox from "./ArtistBox";
-import { RevealWrapper } from "next-reveal";
+import RevealWrapper from "@/components/atoms/RevealWrapper";
 
 const ArtistGrid = styled.div`
   display: grid;

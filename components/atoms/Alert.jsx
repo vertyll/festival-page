@@ -10,8 +10,8 @@ const AlertWrapper = styled.div`
     props.type === "success"
       ? "var(--alert-success-color)"
       : props.type === "danger"
-      ? "var(--alert-danger-color)"
-      : "var(--alert-default-color)"};
+        ? "var(--alert-danger-color)"
+        : "var(--alert-default-color)"};
   color: var(--dark-text-color);
   display: flex;
   align-items: center;
