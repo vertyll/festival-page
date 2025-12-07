@@ -22,12 +22,6 @@ export const authOptions = {
       }
       return session;
     },
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
-      }
-      return token;
-    },
   },
   pages: {
     signIn: "/account",

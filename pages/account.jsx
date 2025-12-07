@@ -194,7 +194,7 @@ export default function AccountPage() {
 
   async function logout() {
     await signOut({
-      callbackUrl: process.env.NEXT_PUBLIC_URL,
+      callbackUrl: process.env.PUBLIC_URL,
     });
   }
   async function login() {
