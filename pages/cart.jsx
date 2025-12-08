@@ -15,6 +15,7 @@ import ErrorDiv from "@/components/atoms/ErrorDiv";
 import IconCreditCart from "@/components/atoms/IconCreditCart";
 import AnimatedThanksImage from "@/components/atoms/AnimatedThanksImage";
 import AnimatedCartIcon from "@/components/atoms/AnimatedCartIcon";
+import Spinner from "@/components/atoms/Spinner";
 import Head from "next/head";
 
 const Wrapper = styled.div`
@@ -115,7 +116,7 @@ const EMPTY_CART = [];
 export default function CartPage() {
   const { data: session } = useSession();
   const { cartProducts, addProduct, removeProduct, clearCart, finalizePurchase } = useContext(CartContext);
-  const [products, setProducts] = useState([]);
+  const [fetchedProducts, setFetchedProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
@@ -134,6 +135,12 @@ export default function CartPage() {
     () => EMPTY_CART // getServerSnapshot dla SSR - używamy cachowanej stałej
   );
 
+  const products = useMemo(() => {
+    return clientCartProducts.length === 0 ? [] : fetchedProducts;
+  }, [clientCartProducts.length, fetchedProducts]);
+
+  const isLoadingProducts = clientCartProducts.length > 0 && products.length === 0;
+
   // Obliczanie totalPrice za pomocą useMemo zamiast useEffect
   const totalPrice = useMemo(() => {
     return clientCartProducts.reduce((sum, cartItem) => {
@@ -149,7 +156,7 @@ export default function CartPage() {
       axios
         .post("/api/cart", { ids: clientCartProducts })
         .then((response) => {
-          setProducts(response.data);
+          setFetchedProducts(response.data);
         })
         .catch((error) => {
           console.error("Error fetching products:", error);
@@ -269,7 +276,8 @@ export default function CartPage() {
           <Wrapper>
             <Box>
               <Title>Koszyk</Title>
-              {!clientCartProducts?.length && (
+              {isLoadingProducts && <Spinner size="2.5em" borderWidth="0.4em" />}
+              {!isLoadingProducts && !clientCartProducts?.length && (
                 <div>
                   <h2>Twój koszyk jest pusty</h2>
                   <p>Zapraszamy do zakupów, kupuj szybko i wygodnie</p>
@@ -278,7 +286,7 @@ export default function CartPage() {
                   </Button>
                 </div>
               )}
-              {products?.length > 0 && clientCartProducts?.length > 0 && (
+              {!isLoadingProducts && products?.length > 0 && clientCartProducts?.length > 0 && (
                 <Table>
                   <thead>
                     <tr>
@@ -347,14 +355,14 @@ export default function CartPage() {
                 </Table>
               )}
             </Box>
-            {!clientCartProducts?.length && (
+            {!isLoadingProducts && !clientCartProducts?.length && (
               <Box>
                 <ImageWrapper>
                   <AnimatedCartIcon />
                 </ImageWrapper>
               </Box>
             )}
-            {!!clientCartProducts?.length && (
+            {!isLoadingProducts && !!clientCartProducts?.length && (
               <Box>
                 <Title>Informacje o płatności</Title>
                 <FieldInput

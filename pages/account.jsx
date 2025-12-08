@@ -184,9 +184,9 @@ export default function AccountPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
-  const [addressLoaded, setAddressLoaded] = useState(true);
-  const [wishlistLoaded, setWishlistLoaded] = useState(true);
-  const [orderLoaded, setOrderLoaded] = useState(true);
+  const [addressLoaded, setAddressLoaded] = useState(false);
+  const [wishlistLoaded, setWishlistLoaded] = useState(false);
+  const [orderLoaded, setOrderLoaded] = useState(false);
   const [wishedProducts, setWishedProducts] = useState([]);
   const [activeTab, setActiveTab] = useState("Orders");
   const [orders, setOrders] = useState([]);
@@ -316,7 +316,7 @@ export default function AccountPage() {
                     <Tabs tabs={["Zamówienia", "Ulubione", "Konto"]} active={activeTab} onChange={setActiveTab} />
                     {activeTab === "Zamówienia" && (
                       <>
-                        {!orderLoaded && <Spinner />}
+                        {!orderLoaded && <Spinner size="2.5em" borderWidth="0.4em" />}
                         {orderLoaded && (
                           <StyledOrderDiv
                             style={{
@@ -331,7 +331,7 @@ export default function AccountPage() {
                     )}
                     {activeTab === "Ulubione" && (
                       <>
-                        {!wishlistLoaded && <Spinner />}
+                        {!wishlistLoaded && <Spinner size="2.5em" borderWidth="0.4em" />}
                         {wishlistLoaded && (
                           <StyledWishedDiv
                             style={{
@@ -359,7 +359,7 @@ export default function AccountPage() {
                     )}
                     {activeTab === "Konto" && (
                       <>
-                        {!addressLoaded && <Spinner />}
+                        {!addressLoaded && <Spinner size="2.5em" borderWidth="0.4em" />}
                         {addressLoaded && session && (
                           <StyledDataDiv>
                             <FieldInput

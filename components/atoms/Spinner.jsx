@@ -9,21 +9,22 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: ${(props) => props.$padding || "20px 0"};
 `;
 
 const StyledSpinner = styled.div`
-  border: 0.7em solid var(--main-medium-slate-blue-color);
-  border-top: 0.7em solid var(--nav-color);
+  border: ${(props) => props.$borderWidth || "0.7em"} solid var(--main-medium-slate-blue-color);
+  border-top: ${(props) => props.$borderWidth || "0.7em"} solid var(--nav-color);
   border-radius: 50%;
-  width: 4em;
-  height: 4em;
+  width: ${(props) => props.$size || "4em"};
+  height: ${(props) => props.$size || "4em"};
   animation: ${spin} 0.6s linear infinite;
 `;
 
-export default function Spinner() {
+export default function Spinner({ size, borderWidth, padding }) {
   return (
-    <Wrapper>
-      <StyledSpinner />
+    <Wrapper $padding={padding}>
+      <StyledSpinner $size={size} $borderWidth={borderWidth} />
     </Wrapper>
   );
 }
