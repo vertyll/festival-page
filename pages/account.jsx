@@ -236,8 +236,8 @@ export default function AccountPage() {
           setPostalCode(response.data.postalCode || "");
           setStreetAddress(response.data.streetAddress || "");
           setCountry(response.data.country || "");
-          setAddressLoaded(true);
         }
+        setAddressLoaded(true);
       })
       .catch((error) => {
         console.error("Wystąpił błąd podczas pobierania danych adresowych:", error);
