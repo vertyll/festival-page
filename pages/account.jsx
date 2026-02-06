@@ -237,8 +237,6 @@ export default function AccountPage() {
           setStreetAddress(response.data.streetAddress || "");
           setCountry(response.data.country || "");
           setAddressLoaded(true);
-        } else {
-          console.error("Brak danych zwróconych z /api/address");
         }
       })
       .catch((error) => {

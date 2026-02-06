@@ -166,7 +166,9 @@ export default function CartPage() {
 
   useEffect(() => {
     axios.get("/api/settings?name=shippingPrice").then((response) => {
-      setShippingPrice(response.data.value);
+      if (response.data?.value != null) {
+        setShippingPrice(response.data.value);
+      }
     });
   }, []);
 
@@ -193,8 +195,6 @@ export default function CartPage() {
           setPostalCode(response.data.postalCode || "");
           setStreetAddress(response.data.streetAddress || "");
           setCountry(response.data.country || "");
-        } else {
-          console.error("Brak danych zwróconych z /api/address");
         }
       })
       .catch((error) => {
@@ -241,7 +241,7 @@ export default function CartPage() {
 
     if (response.data.url) {
       await finalizePurchase();
-      window.location = response.data.url;
+      globalThis.location = response.data.url;
     }
   }
 
