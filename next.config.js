@@ -9,7 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "nextjs-festival.s3.amazonaws.com",
+        hostname: process.env.S3_ENDPOINT || "",
         port: "",
         pathname: "/**",
       },
