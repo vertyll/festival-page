@@ -9,7 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: process.env.S3_HOSTNAME || "localhost",
+        hostname: "minio.vertyll.dev",
         port: "",
         pathname: "/**",
       },
