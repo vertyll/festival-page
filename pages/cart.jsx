@@ -130,6 +130,8 @@ export default function CartPage() {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("default");
 
+  const alertDuration = 6000;
+
   const clientCartProducts = useSyncExternalStore(
     () => () => {},
     () => cartProducts, // getSnapshot dla klienta
@@ -278,7 +280,9 @@ export default function CartPage() {
 
   return (
     <>
-      {alertMessage && <Alert message={alertMessage} type={alertType} onClose={() => setAlertMessage("")} />}
+      {alertMessage && (
+        <Alert message={alertMessage} duration={alertDuration} type={alertType} onClose={() => setAlertMessage("")} />
+      )}
       <Layout>
         <DivCenter>
           <Wrapper>
