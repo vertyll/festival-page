@@ -19,7 +19,6 @@ Aplikacja internetowa wymyślonego festiwalu muzycznego - Sunset Festival. Jest 
 - Node.js
 - Next-auth do uwierzytelniania użytkowników
 - MongoDB jako baza danych NoSQL za pomocą Mongoose
-- Stripe do obsługi płatności
 - Axios do wykonywania żądań HTTP do serwera
 
 ### Uwierzytelnianie:
