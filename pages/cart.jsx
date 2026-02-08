@@ -17,6 +17,7 @@ import AnimatedThanksImage from "@/components/atoms/AnimatedThanksImage";
 import AnimatedCartIcon from "@/components/atoms/AnimatedCartIcon";
 import Spinner from "@/components/atoms/Spinner";
 import Head from "next/head";
+import { Alert } from "@/components/atoms/Alert";
 
 const Wrapper = styled.div`
   display: grid;
@@ -110,7 +111,6 @@ const SelectedPropertiesDiv = styled.div`
   font-size: 0.9em;
 `;
 
-// Stała pusta tablica dla SSR - musi być poza komponentem aby była cachowana
 const EMPTY_CART = [];
 
 export default function CartPage() {
@@ -127,10 +127,11 @@ export default function CartPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const hasProcessedSuccess = useRef(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("default");
 
-  // Użyj useSyncExternalStore dla bezpiecznej hydratacji cartProducts
   const clientCartProducts = useSyncExternalStore(
-    () => () => {}, // subscribe - nie potrzebujemy subskrypcji bo Context już to robi
+    () => () => {},
     () => cartProducts, // getSnapshot dla klienta
     () => EMPTY_CART // getServerSnapshot dla SSR - używamy cachowanej stałej
   );
@@ -141,7 +142,6 @@ export default function CartPage() {
 
   const isLoadingProducts = clientCartProducts.length > 0 && products.length === 0;
 
-  // Obliczanie totalPrice za pomocą useMemo zamiast useEffect
   const totalPrice = useMemo(() => {
     return clientCartProducts.reduce((sum, cartItem) => {
       const product = products.find((p) => p._id === cartItem.productId);
@@ -229,19 +229,26 @@ export default function CartPage() {
       return;
     }
 
-    const response = await axios.post("/api/checkout", {
-      name,
-      email,
-      city,
-      postalCode,
-      streetAddress,
-      country,
-      cartProducts: clientCartProducts,
-    });
-
-    if (response.data.url) {
-      await finalizePurchase();
-      globalThis.location = response.data.url;
+    try {
+      const response = await axios.post("/api/checkout", {
+        name,
+        email,
+        city,
+        postalCode,
+        streetAddress,
+        country,
+        cartProducts: clientCartProducts,
+      });
+      if (response.data.url) {
+        await finalizePurchase();
+        globalThis.location = response.data.url;
+      } else if (response.data.message) {
+        setAlertMessage(response.data.message);
+        setAlertType("danger");
+      }
+    } catch (err) {
+      setAlertMessage("Wystąpił błąd podczas płatności.");
+      setAlertType("danger");
     }
   }
 
@@ -271,6 +278,7 @@ export default function CartPage() {
 
   return (
     <>
+      {alertMessage && <Alert message={alertMessage} type={alertType} onClose={() => setAlertMessage("")} />}
       <Layout>
         <DivCenter>
           <Wrapper>
@@ -298,10 +306,8 @@ export default function CartPage() {
                   </thead>
                   <tbody>
                     {clientCartProducts.map((cartItem) => {
-                      // Używaj uniqueKey z cartItem do znalezienia pełnych danych produktu
+                      // ...existing code...
                       const fullProductData = products.find((product) => product._id === cartItem.productId);
-
-                      // Jeśli nie znaleziono pełnych danych produktu, nie renderuj wiersza
                       if (!fullProductData) {
                         console.log(
                           "Nie znaleziono produktu dla productId:",
@@ -311,11 +317,9 @@ export default function CartPage() {
                         );
                         return null;
                       }
-
                       const selectedPropertiesString = Object.entries(cartItem.selectedProperties)
                         .map(([key, value]) => `${key}: ${value}`)
                         .join(", ");
-
                       return (
                         <tr key={cartItem.uniqueKey}>
                           <td>
