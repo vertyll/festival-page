@@ -129,6 +129,7 @@ export default function CartPage() {
   const hasProcessedSuccess = useRef(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("default");
+  const [showAlert, setShowAlert] = useState(false);
 
   const alertDuration = 6000;
 
@@ -247,10 +248,12 @@ export default function CartPage() {
       } else if (response.data.message) {
         setAlertMessage(response.data.message);
         setAlertType("danger");
+        setShowAlert(true);
       }
     } catch (err) {
       setAlertMessage("Wystąpił błąd podczas płatności.");
       setAlertType("danger");
+      setShowAlert(true);
     }
   }
 
@@ -280,8 +283,8 @@ export default function CartPage() {
 
   return (
     <>
-      {alertMessage && (
-        <Alert message={alertMessage} duration={alertDuration} type={alertType} onClose={() => setAlertMessage("")} />
+      {showAlert && (
+        <Alert message={alertMessage} duration={alertDuration} type={alertType} onClose={() => setShowAlert(false)} />
       )}
       <Layout>
         <DivCenter>
