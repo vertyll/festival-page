@@ -5,6 +5,6 @@ export default async function handler(req, res) {
   }
 
   res.json({
-    message: "Strona przygotowana pod panel płatności. (Aplikacja pokazowa, płatności nie są aktywne)",
+    message: "Aplikacja pokazowa, płatności nie są aktywne",
   });
 }
