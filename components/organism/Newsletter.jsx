@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import Title from "../atoms/Title";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 import Link from "next/link";
-import { validateFormValues } from "@/utils/validation/validation";
 import ErrorDiv from "../atoms/ErrorDiv";
 import { Alert } from "../atoms/Alert";
+import axios from "axios";
 
 const NewsletterContainer = styled.div`
   display: flex;
@@ -39,46 +38,27 @@ const StyledLink = styled(Link)`
 export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
-  const [showDangerAlert, setShowDangerAlert] = useState(false);
-  const [alertDangerMessage, setAlertDangerMessage] = useState("");
   const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("default");
+  const [showAlert, setShowAlert] = useState(false);
   const alertDuration = 3000;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const errors = validateFormValues({ email }, ["email"]);
-    setValidationErrors(errors);
-
-    if (Object.keys(errors).length > 0) {
-      return;
-    }
-
     try {
       const response = await axios.post("/api/newsletter", { email });
-
-      if (response.status === 200) {
-        setEmail("");
-        setAlertMessage("Pomyślnie zapisano się do newslettera.");
+      if (response.data?.message) {
+        setAlertMessage(response.data.message);
+        setAlertType("danger");
         setShowAlert(true);
-        setShowDangerAlert(false);
-      } else if (response.status === 409) {
-        setAlertDangerMessage("Ten adres email jest już zapisany na listę.");
-        setShowDangerAlert(true);
-        setShowAlert(false);
       }
     } catch (error) {
-      if (error.response && error.response.status === 409) {
-        setAlertDangerMessage("Ten adres email jest już zapisany na listę.");
-        setShowDangerAlert(true);
-        setShowAlert(false);
-      } else {
-        setAlertDangerMessage("Wystąpił błąd. Spróbuj ponownie później.");
-        setShowDangerAlert(true);
-        setShowAlert(false);
-      }
+      setAlertMessage("Wystąpił błąd. Spróbuj ponownie później.");
+      setAlertType("danger");
+      setShowAlert(true);
     }
+    setValidationErrors({});
+    setEmail("");
   };
 
   return (
@@ -98,15 +78,7 @@ export default function Newsletter() {
         {validationErrors["email"] && <ErrorDiv>{validationErrors["email"]}</ErrorDiv>}
       </form>
       {showAlert && (
-        <Alert message={alertMessage} duration={alertDuration} onClose={() => setShowAlert(false)} type="success" />
-      )}
-      {showDangerAlert && (
-        <Alert
-          message={alertDangerMessage}
-          duration={alertDuration}
-          onClose={() => setShowDangerAlert(false)}
-          type="danger"
-        />
+        <Alert message={alertMessage} duration={alertDuration} onClose={() => setShowAlert(false)} type={alertType} />
       )}
     </NewsletterContainer>
   );
