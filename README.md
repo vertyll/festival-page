@@ -1,8 +1,8 @@
-## Link: https://festival-page.vertyll.dev
-
 ## Założenia projektu
 
 Aplikacja internetowa wymyślonego festiwalu muzycznego – Sunset Festival. Jest to strona e-commerce na której można również przeglądać informacje o festiwalu muzycznym. Wszystkim zarządza dedykowany do strony panel administacyjny, któy również znajduje się w repozytorium na GitHub.
+
+## Link: https://festival-page.vertyll.dev
 
 ## Stos technologiczny
 
