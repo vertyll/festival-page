@@ -67,7 +67,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      news: JSON.parse(JSON.stringify(news)),
+      news: structuredClone(news),
     },
   };
 }

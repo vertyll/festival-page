@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import styled, { keyframes } from "styled-components";
 import Link from "next/link";
-import { useContext, useState } from "react";
-import { CartContext } from "../organism/CartContext";
+import { useState } from "react";
 import IconHeart from "../atoms/IconHeart";
 import IconHeartOutline from "../atoms/IconHeartOutline";
 import axios from "axios";

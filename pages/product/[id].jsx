@@ -164,7 +164,7 @@ export default function ProductPage({ product, categoryPath, availabilityVisible
           </PropertyContainer>
         </div>
       ));
-    } else if (product.properties && product.properties.length === 0 && product.availability) {
+    } else if (product.properties?.length === 0 && product.availability) {
       return <div>Brak właściwości dla tego produktu.</div>;
     }
   };
@@ -314,8 +314,8 @@ export async function getServerSideProps(context) {
   const categoryPath = product.category ? getCategoryPath(product.category._id.toString()) : [];
   return {
     props: {
-      product: JSON.parse(JSON.stringify(product)),
-      categoryPath: JSON.parse(JSON.stringify(categoryPath)),
+      product: structuredClone(product),
+      categoryPath: structuredClone(categoryPath),
       availabilityVisible: isAvailabilityVisible,
       additionalAvailabilityVisible: isAdditionalAvailabilityVisible,
     },

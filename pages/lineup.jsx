@@ -29,7 +29,7 @@ export async function getServerSideProps(ctx) {
   const artists = await Artist.find({}, null, { sort: { _id: -1 } });
   return {
     props: {
-      artists: JSON.parse(JSON.stringify(artists)),
+      artists: structuredClone(artists),
     },
   };
 }

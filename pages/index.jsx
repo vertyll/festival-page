@@ -74,10 +74,10 @@ export async function getServerSideProps(ctx) {
     : [];
   return {
     props: {
-      newProducts: JSON.parse(JSON.stringify(newProducts)),
+      newProducts: structuredClone(newProducts),
       wishedNewProducts: wishedNewProducts.map((i) => i.product.toString()),
-      newArtists: JSON.parse(JSON.stringify(newArtists)),
-      newNews: JSON.parse(JSON.stringify(newNews)),
+      newArtists: structuredClone(newArtists),
+      newNews: structuredClone(newNews),
     },
   };
 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useContext, useEffect, useSyncExternalStore } from "react";
+import { useState, useContext, useSyncExternalStore } from "react";
 import styled, { css } from "styled-components";
 import { CartContext } from "../organism/CartContext";
 import IconHamburger from "../atoms/IconHamburger";

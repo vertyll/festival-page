@@ -35,12 +35,12 @@ export default function SponsorsPage({ sponsors }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps() {
   await mongooseConnect();
   const sponsors = await Sponsor.find({}, null, { sort: { _id: -1 } });
   return {
     props: {
-      sponsors: JSON.parse(JSON.stringify(sponsors)),
+      sponsors: structuredClone(sponsors),
     },
   };
 }

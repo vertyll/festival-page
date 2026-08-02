@@ -24,12 +24,12 @@ export default function NewsPage({ news }) {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps() {
   await mongooseConnect();
   const news = await News.find({}, null, { sort: { _id: -1 } });
   return {
     props: {
-      news: JSON.parse(JSON.stringify(news)),
+      news: structuredClone(news),
     },
   };
 }

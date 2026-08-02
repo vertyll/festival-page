@@ -285,26 +285,24 @@ export default function AccountPage() {
                 </Button>
               </LeftPanel>
             ) : (
-              <>
-                <LoginWrapper>
-                  <LoginInfo>
-                    <h2>Zaloguj się na swoje konto</h2>
-                    <p>
-                      <b>I zgarnij korzyści jakie daje Ci konto</b>
-                    </p>
-                    <p>
-                      Logując się, możesz dodać swoje produkty do listy ulubionych, zapisać dane do kolejnych płatności
-                      i sprawdzić stan swojego zamówienia
-                    </p>
-                    <Button $usage="primary" $size="m" onClick={login}>
-                      Logowanie Google &#8618;
-                    </Button>
-                  </LoginInfo>
-                  <div>
-                    <AnimatedLoginImage style={{ maxWidth: "350px", height: "350px" }} />
-                  </div>
-                </LoginWrapper>
-              </>
+              <LoginWrapper>
+                <LoginInfo>
+                  <h2>Zaloguj się na swoje konto</h2>
+                  <p>
+                    <b>I zgarnij korzyści jakie daje Ci konto</b>
+                  </p>
+                  <p>
+                    Logując się, możesz dodać swoje produkty do listy ulubionych, zapisać dane do kolejnych płatności i
+                    sprawdzić stan swojego zamówienia
+                  </p>
+                  <Button $usage="primary" $size="m" onClick={login}>
+                    Logowanie Google &#8618;
+                  </Button>
+                </LoginInfo>
+                <div>
+                  <AnimatedLoginImage style={{ maxWidth: "350px", height: "350px" }} />
+                </div>
+              </LoginWrapper>
             )}
 
             {session && (
