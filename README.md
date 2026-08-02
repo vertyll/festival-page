@@ -1,7 +1,7 @@
 ## Założenia projektu
 
-Aplikacja internetowa wymyślonego festiwalu muzycznego – Sunset Festival. Jest to strona e-commerce, na której można 
-również przeglądać informacje o festiwalu muzycznym. Wszystkim zarządza dedykowany do strony panel administracyjny, 
+Aplikacja internetowa wymyślonego festiwalu muzycznego – Sunset Festival. Jest to strona e-commerce, na której można
+również przeglądać informacje o festiwalu muzycznym. Wszystkim zarządza dedykowany do strony panel administracyjny,
 który również znajduje się w repozytorium na platformie GitHub.
 
 ## Link: https://festival-page.vertyll.dev
@@ -46,11 +46,11 @@ Do przechowywania zdjęć wrzucanych za pomocą panelu administracyjnego został
 
 ### Google Cloud Platform:
 
-Kolejną usługą chmurową wykorzystaną w projekcie jest Google Cloud Platform. W kontekście autoryzacji została użyta 
-usługa Google Cloud Console, umożliwiająca zarządzanie tożsamościami i uprawnieniami. Logowanie zostało rozdzielone na 
+Kolejną usługą chmurową wykorzystaną w projekcie jest Google Cloud Platform. W kontekście autoryzacji została użyta
+usługa Google Cloud Console, umożliwiająca zarządzanie tożsamościami i uprawnieniami. Logowanie zostało rozdzielone na
 dwa projekty, panel administracyjny i stronę festiwalu ze sklepem wykorzystując identyfikatory klienta OAuth 2.0.
 
-Dzięki wykorzystaniu tych usług chmurowych projekt zyskał skalowalność, niezawodność oraz zaawansowane funkcje 
+Dzięki wykorzystaniu tych usług chmurowych projekt zyskał skalowalność, niezawodność oraz zaawansowane funkcje
 bezpieczeństwa, co znacznie zwiększyło jego funkcjonalność i atrakcyjność dla użytkowników.
 
 ## Zdjęcia poglądowe
@@ -69,8 +69,8 @@ Aplikacja łączy się z panelem administracyjnym festiwalu, który również je
 ## Instrukcja instalacji projektu
 
 1. Pobieramy projekt na lokalne środowisko.
-2. Tworzymy plik `.env` i kopiujemy do niego zawartość `.env.example`, po czym definiujemy swoje własne klucze API i 
-dane konfiguracyjne.
+2. Tworzymy plik `.env` i kopiujemy do niego zawartość `.env.example`, po czym definiujemy swoje własne klucze API i
+   dane konfiguracyjne.
 3. Instalujemy pakiety npm za pomocą komendy:
    ```bash
    npm install
