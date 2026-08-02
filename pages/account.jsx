@@ -290,7 +290,7 @@ export default function AccountPage() {
                   <LoginInfo>
                     <h2>Zaloguj się na swoje konto</h2>
                     <p>
-                      <b>I zgarnij korzyśći jakie daje Ci konto</b>
+                      <b>I zgarnij korzyści jakie daje Ci konto</b>
                     </p>
                     <p>
                       Logując się, możesz dodać swoje produkty do listy ulubionych, zapisać dane do kolejnych płatności
